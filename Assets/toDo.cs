@@ -1,5 +1,7 @@
 ﻿/*
 to do list:
-camera: scroll! (transform.forward)
+clickposition:
+- get terrain width/height
+- ignore other colliders then the ground
 
 */
