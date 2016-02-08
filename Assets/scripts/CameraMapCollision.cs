@@ -13,7 +13,7 @@ public class CameraMapCollision : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision col){
-		if(col.gameObject.Equals(map)){
+		if(col.gameObject!=null){
 			obj=col.gameObject;
 			float x=0f,y=0f,z=0f,cc=0f;
 			int c=0;
