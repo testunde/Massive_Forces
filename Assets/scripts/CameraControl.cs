@@ -6,13 +6,19 @@ public class CameraControl : MonoBehaviour {
 	
 	private Vector3 input;
 	private GameObject mainCamera;
+	private Transform camTr;
 	public GameObject ground;
+	public GameObject highCollider;
+	private Transform hCTransform;
 	private GameObject cube;
 	private float x=0f,y=0f,z=0f;
 	public MouseLook mouseLook = new MouseLook();
 	
 	void Start () {
 		mainCamera=gameObject;
+		camTr=mainCamera.transform;
+		highCollider=GameObject.Find("camHigh");
+		hCTransform=highCollider.transform;
 		ground=GameObject.Find("Terrain");
 		cube=GameObject.CreatePrimitive(PrimitiveType.Cube);
 		cube.layer=2;
@@ -21,7 +27,6 @@ public class CameraControl : MonoBehaviour {
 	
 	void Update () {
 		//input = new Vector3(Input.GetAxis("Horizontal"),0f,Input.GetAxis("Vertical"));
-		Transform camTr=mainCamera.transform;
 		float sinX=Mathf.Pow(Mathf.Sin(Mathf.Deg2Rad*camTr.eulerAngles.x),2f);	//already multiplied with it self
 		float sinY=Mathf.Sin(Mathf.Deg2Rad*camTr.eulerAngles.y);
 		float cosY=Mathf.Cos(Mathf.Deg2Rad*camTr.eulerAngles.y);
@@ -31,7 +36,7 @@ public class CameraControl : MonoBehaviour {
 			cosY*(Mathf.Sqrt(Mathf.Pow(transform.forward.z,2f)+sinX)));	//for-/backwards
 		input=Input.GetAxis("Horizontal")*transform.right+	//sidewards
 			Input.GetAxis("Vertical")*forw+	//for-/backwards
-			+Input.GetAxis("Mouse ScrollWheel")*Vector3.up;	//zoom in worlds y axis
+			-Input.GetAxis("Mouse ScrollWheel")*Vector3.up;	//zoom in worlds y axis
 			//Input.GetAxis("Mouse ScrollWheel")*transform.forward;	//zoom in view direction
 		camTr.position+=input*.5f;
 		
@@ -56,5 +61,11 @@ public class CameraControl : MonoBehaviour {
 		if(Input.GetMouseButton(2)){
 			mouseLook.LookRotation (mainCamera.transform);
 		}
+		
+		//move the high identifier
+		hCTransform.position=mainCamera.transform.position - (new Vector3(0f,hCTransform.localScale.y/2f,0f));
+	}
+	
+	void FixedUpdate(){
 	}
 }

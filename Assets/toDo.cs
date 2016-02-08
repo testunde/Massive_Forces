@@ -9,4 +9,9 @@ recycliong of wrecks
 clickposition:
 - get terrain width/height
 
+camera:
+- slower movement when zoomed in
+- limits
+- vertical rotation
+
 */
