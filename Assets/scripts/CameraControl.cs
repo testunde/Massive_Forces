@@ -10,6 +10,7 @@ public class CameraControl : MonoBehaviour {
 	public GameObject ground;
 	public GameObject highCollider;
 	private Transform hCTransform;
+	private Vector3 highPoint;
 	private GameObject cube;
 	private float x=0f,y=0f,z=0f;
 	public MouseLook mouseLook = new MouseLook();
@@ -19,6 +20,7 @@ public class CameraControl : MonoBehaviour {
 		camTr=mainCamera.transform;
 		highCollider=GameObject.Find("camHigh");
 		hCTransform=highCollider.transform;
+		highPoint=highCollider.GetComponent<CameraMapCollision>().colPoint;
 		ground=GameObject.Find("Terrain");
 		cube=GameObject.CreatePrimitive(PrimitiveType.Cube);
 		cube.layer=2;
@@ -67,5 +69,6 @@ public class CameraControl : MonoBehaviour {
 	}
 	
 	void FixedUpdate(){
+		Debug.Log(highCollider.GetComponent<CameraMapCollision>().colPoint);
 	}
 }

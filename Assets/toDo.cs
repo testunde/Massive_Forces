@@ -13,5 +13,6 @@ camera:
 - slower movement when zoomed in
 - limits
 - vertical rotation
+- high identification
 
 */
