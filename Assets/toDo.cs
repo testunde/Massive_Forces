@@ -8,6 +8,5 @@ recycliong of wrecks
 
 clickposition:
 - get terrain width/height
-- ignore other colliders as the ground
 
 */

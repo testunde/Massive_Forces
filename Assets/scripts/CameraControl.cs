@@ -13,6 +13,7 @@ public class CameraControl : MonoBehaviour {
 		camera=gameObject;
 		ground=GameObject.Find("Terrain");
 		cube=GameObject.CreatePrimitive(PrimitiveType.Cube);
+		cube.layer=2;
 	}
 	
 	void Update () {
