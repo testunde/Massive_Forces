@@ -29,15 +29,8 @@ namespace Scripts.Control
             float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
             float xRot = 0f;//CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
 			
-			float yCam = m_CameraTargetRot.y+yRot;
-            //m_CameraTargetRot = new Vector3(m_CameraTargetRot.x-xRot, yCam, m_CameraTargetRot.z);
             camera.eulerAngles += new Vector3(0f,yRot,0f);
 			Debug.Log(yRot);
-
-			//camera.RotateAround(camera.position,Vector3.up,m_CameraTargetRot.y);
-            if(clampVerticalRotation){
-				//m_CameraTargetRot = ClampRotationAroundXAxis (m_CameraTargetRot);
-			}
         }
 
     }
