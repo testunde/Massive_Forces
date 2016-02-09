@@ -9,17 +9,14 @@ namespace Scripts.Control
     {
         public float XSensitivity = 2f;
         public float YSensitivity = 2f;
-        public float MinimumX = -90F;
-        public float MaximumX = 90F;
-        public float smoothTime = 5f;
 
 
-        private Vector3 m_CameraTargetRot;
+        //private Vector3 m_CameraTargetRot;
 
 
         public void Init(Transform camera)
         {
-            m_CameraTargetRot = camera.eulerAngles;
+            //m_CameraTargetRot = camera.eulerAngles;
         }
 
 

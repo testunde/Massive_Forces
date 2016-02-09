@@ -11,7 +11,7 @@ public class CameraControl : MonoBehaviour {
 	private float minHigh=5f,maxHigh=15f;
 	public GameObject ground;
 	private GameObject cube;
-	private float x=0f,y=0f,z=0f;
+	//private float x=0f,y=0f,z=0f;
 	public MouseLook mouseLook = new MouseLook();
 	
 	float pokeForce;
@@ -55,7 +55,7 @@ public class CameraControl : MonoBehaviour {
 		//#>height identifier
 		Vector3 rayPos=new Vector3(camTr.position.x,-16f,camTr.position.z);	//raycast looks up form -16 if a collider is in the x/z coord
 		RaycastHit height;
-		//Physics.Raycast NEEDED! to perform the raycast calculations
+		//Physics.Raycast NEEDED! to perform the raycast calculations; enters 'if' only if the hitted object was the ground
 		if(Physics.Raycast(rayPos,Vector3.up,out height)&&height.transform.Equals(ground.transform)){
 			//#>height control and limit
 			float high=currentHigh;
