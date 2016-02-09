@@ -49,8 +49,9 @@ public class CameraControl : MonoBehaviour {
 			//+Input.GetAxis("Mouse ScrollWheel")*transform.forward;	//zoom in view direction
 		camTr.position+=input*.5f*(currentHigh/maxHigh);
 		//#>rotate view
-		if(Input.GetMouseButton(2)){
-			mouseLook.LookRotation(camTr);
+		if(Input.GetMouseButton(2)||(Input.GetAxis("Mouse ScrollWheel"))!=0f){
+			float factor=.3f;
+			mouseLook.LookRotation(camTr,80f,35f*(currentHigh*factor/maxHigh+(1f-factor)));
 		}
 		//#>height identifier
 		Vector3 rayPos=new Vector3(camTr.position.x,-16f,camTr.position.z);	//raycast looks up form -16 if a collider is in the x/z coord
@@ -59,11 +60,15 @@ public class CameraControl : MonoBehaviour {
 		if(Physics.Raycast(rayPos,Vector3.up,out height)&&height.transform.Equals(ground.transform)){
 			//#>height control and limit
 			float high=currentHigh;
-			//Debug.Log(high+"#"+Input.GetAxis("Mouse ScrollWheel")*Vector3.down);
 			float inputValue=(Input.GetAxis("Mouse ScrollWheel")*Vector3.down).y;
 			if(high>minHigh&&inputValue<0||high<maxHigh&&inputValue>0){	//min/max limit of height
 				high+=inputValue;
 			}
+			//cut overlaps over min/max
+			if(high<minHigh)
+				high=minHigh;
+			else if(high>maxHigh)
+				high=maxHigh;
 			float targetHigh=camTr.position.y+(height.point.y-oldMapHigh)+(high-currentHigh);
 			camTr.position=new Vector3(camTr.position.x,targetHigh,camTr.position.z);
 			oldMapHigh=height.point.y;
