@@ -6,4 +6,8 @@ recycliong of wrecks
 
 put units, buildings and objects NOT in raycast ignore layer, so you can usw the raycast with left-/rightclick
 
+MouseReaciton.cs
+- set hover/select materials
+> how to select??
+
 */

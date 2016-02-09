@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-namespace Scripts.Control {
+namespace Scripts.MouseLook {
 	[Serializable]
 	public class MouseLook {
 		public float XSensitivity = 2f;

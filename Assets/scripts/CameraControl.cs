@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Scripts.Control;
+using Scripts.MouseLook;
 
 public class CameraControl : MonoBehaviour {
 	
@@ -15,8 +15,14 @@ public class CameraControl : MonoBehaviour {
 	public MouseLook mouseLook = new MouseLook();
 	public Vector3 Pointer;
 	
-	public Vector3 getCoordsAtXZ(float x,float z){
-		
+	//set y-coord bolow zero! decrement y by 1 when terrain wasn't hittet
+	public Vector3 getCoordsAtXZ(Vector3 where){
+		RaycastHit height;
+		Vector3 result=where-(new Vector3(0f,1f,0f));
+		if(Physics.Raycast(where,Vector3.up,out height)&&height.transform.Equals(ground.transform)){
+			result=height.point;
+		}
+		return result;
 	}
 	
 	void Start () {
@@ -27,10 +33,10 @@ public class CameraControl : MonoBehaviour {
 		cube.layer=2;
 		
 		//correction, if the mainCamera not starts over map-y-coord 0
-		Vector3 rayPos=new Vector3(camTr.position.x,-16f,camTr.position.z);	//raycast looks up form -16 if a collider is in the x/z coord
-		RaycastHit height;
-		if(Physics.Raycast(rayPos,Vector3.up,out height)&&height.transform.Equals(ground.transform)){
-			oldMapHigh=height.point.y;
+		Vector3 rayPos=new Vector3(camTr.position.x,-15f,camTr.position.z);	//raycast looks up form -15 if a collider is in the x/z coord
+		Vector3 rayPosNew=getCoordsAtXZ(rayPos);
+		if(rayPosNew.y>rayPos.y){
+			oldMapHigh=rayPosNew.y;
 			currentHigh=camTr.position.y-oldMapHigh;
 		}
 	}
@@ -56,10 +62,10 @@ public class CameraControl : MonoBehaviour {
 			mouseLook.LookRotation(camTr,80f,35f*(currentHigh*factor/maxHigh+(1f-factor)));
 		}
 		//#>height identifier
-		Vector3 rayPos=new Vector3(camTr.position.x,-16f,camTr.position.z);	//raycast looks up form -16 if a collider is in the x/z coord
-		RaycastHit height;
+		Vector3 rayPos=new Vector3(camTr.position.x,-15f,camTr.position.z);	//raycast looks up form -15 if a collider is in the x/z coord
+		Vector3 rayPosNew=getCoordsAtXZ(rayPos);
 		//Physics.Raycast NEEDED! to perform the raycast calculations; enters 'if' only if the hitted object was the ground
-		if(Physics.Raycast(rayPos,Vector3.up,out height)&&height.transform.Equals(ground.transform)){
+		if(rayPosNew.y>rayPos.y){
 			//#>height control and limit
 			float high=currentHigh;
 			float inputValue=(Input.GetAxis("Mouse ScrollWheel")*Vector3.down).y;
@@ -71,9 +77,9 @@ public class CameraControl : MonoBehaviour {
 				high=minHigh;
 			else if(high>maxHigh)
 				high=maxHigh;
-			float targetHigh=camTr.position.y+(height.point.y-oldMapHigh)+(high-currentHigh);
+			float targetHigh=camTr.position.y+(rayPosNew.y-oldMapHigh)+(high-currentHigh);
 			camTr.position=new Vector3(camTr.position.x,targetHigh,camTr.position.z);
-			oldMapHigh=height.point.y;
+			oldMapHigh=rayPosNew.y;
 			currentHigh=camTr.position.y-oldMapHigh;
 		}
 		
