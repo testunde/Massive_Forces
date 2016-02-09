@@ -13,8 +13,11 @@ public class CameraControl : MonoBehaviour {
 	private GameObject cube;
 	//private float x=0f,y=0f,z=0f;
 	public MouseLook mouseLook = new MouseLook();
+	public Vector3 Pointer;
 	
-	float pokeForce;
+	public Vector3 getCoordsAtXZ(float x,float z){
+		
+	}
 	
 	void Start () {
 		mainCamera=gameObject;
@@ -22,7 +25,6 @@ public class CameraControl : MonoBehaviour {
 		ground=GameObject.Find("Terrain");
 		cube=GameObject.CreatePrimitive(PrimitiveType.Cube);
 		cube.layer=2;
-		mouseLook.Init(camTr);
 		
 		//correction, if the mainCamera not starts over map-y-coord 0
 		Vector3 rayPos=new Vector3(camTr.position.x,-16f,camTr.position.z);	//raycast looks up form -16 if a collider is in the x/z coord
@@ -48,7 +50,7 @@ public class CameraControl : MonoBehaviour {
 			//+Input.GetAxis("Mouse ScrollWheel")*Vector3.down;	//zoom in worlds y axis
 			//+Input.GetAxis("Mouse ScrollWheel")*transform.forward;	//zoom in view direction
 		camTr.position+=input*.5f*(currentHigh/maxHigh);
-		//#>rotate view
+		//#>rotate view & auto adjust when scroll back
 		if(Input.GetMouseButton(2)||(Input.GetAxis("Mouse ScrollWheel"))!=0f){
 			float factor=.3f;
 			mouseLook.LookRotation(camTr,80f,35f*(currentHigh*factor/maxHigh+(1f-factor)));
@@ -79,9 +81,12 @@ public class CameraControl : MonoBehaviour {
 		//Input.GetButtonDown("Fire1")once true if hitted
 		//Input.GetMouseButton(0) true of hold down
 		RaycastHit hit;
-		if (Input.GetMouseButton(0)&&Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit)&&hit.transform.Equals(ground.transform)){
-			cube.transform.position=hit.point;
-			Debug.Log(hit.point);
+		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit)&&hit.transform.Equals(ground.transform)){
+			Pointer=hit.point;
+			if(Input.GetMouseButton(0)){
+				//cube.transform.position=hit.point;
+				Debug.Log(hit.point);
+			}
 			/* transform the positions to material coordinates
 			Renderer renderer = hit.transform.GetComponent<Renderer>();
 			Collider collider = hit.collider as Collider;
