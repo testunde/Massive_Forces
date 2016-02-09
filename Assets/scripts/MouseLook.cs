@@ -26,7 +26,7 @@ namespace Scripts.Control
         public void LookRotation(Transform camera)
         {
             float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
-            float xRot = 0f;//CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
+            float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
 			
             camera.eulerAngles += new Vector3(-xRot,yRot*3.2f,0f);
         }
