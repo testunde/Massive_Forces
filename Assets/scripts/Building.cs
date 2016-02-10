@@ -5,13 +5,15 @@ using Scripts;
 namespace Scripts {
 	//create the building (TODO: hand over the mesh of the building)
 	public class Building : MonoBehaviour {
-		public CameraControl camCtrl;
+		private CameraControl camCtrl;
 		private GameObject Map,preview,building;
 		private int state=0;
+		private State buildControllerState;
 		private float down=2f,growSpeed=.03f;
 		
-		public void Init(CameraControl cC){
+		public void Init(CameraControl cC,State s){
 			camCtrl=cC;
+			buildControllerState=s;
 			gameObject.name="Building";
 		}
 		void OnDestroy(){
@@ -49,10 +51,10 @@ namespace Scripts {
 			gameObject.transform.position-=new Vector3(0f,down,0f);
 			cube.transform.localPosition=new Vector3(0f,0f,0f);
 			cube.transform.localEulerAngles=new Vector3(0f,0f,0f);
-			//TODO: include MouseReaction.cs
-			//buildMat=cube.GetComponent<Renderer>().material;	//to able to reverse to the old material
+			
 			MouseReaction mR=cube.AddComponent<MouseReaction>();
-			mR.Init(camCtrl);
+			mR.Init(camCtrl,buildControllerState);
+			
 			state=1;
 			Destroy(preview);
 		}

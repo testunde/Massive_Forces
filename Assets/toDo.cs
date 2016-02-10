@@ -7,8 +7,7 @@ recycliong of wrecks
 put units, buildings and objects NOT in raycast ignore layer, so you can usw the raycast with left-/rightclick
 
 MouseReaciton.cs
-- set hover/select materials
-> how to select??
+> select list in BuildingExample.cs (#>also turn BuildingArray into list)
 > serveral object selection with double click or marking area
 
 units:

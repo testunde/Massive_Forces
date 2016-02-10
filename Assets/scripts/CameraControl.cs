@@ -14,6 +14,8 @@ public class CameraControl : MonoBehaviour {
 	//private float x=0f,y=0f,z=0f;
 	public MouseLook mouseLook = new MouseLook();
 	public Vector3 Pointer;
+	public bool leftClick=false;
+	public bool shiftPress=false;
 	
 	//set y-coord bolow zero! method decrement y by 1 when terrain wasn't hittet
 	public Vector3 getCoordsAtXZ(Vector3 where){
@@ -43,6 +45,8 @@ public class CameraControl : MonoBehaviour {
 	}
 	
 	void Update () {
+		leftClick=Input.GetButtonDown("Fire1");
+		shiftPress=Input.GetKey(KeyCode.LeftShift);
 		//#>CAMERA MOVEMENT
 		//input = new Vector3(Input.GetAxis("Horizontal"),0f,Input.GetAxis("Vertical"));
 		float sinX=Mathf.Pow(Mathf.Sin(Mathf.Deg2Rad*camTr.eulerAngles.x),2f);	//already multiplied with it self

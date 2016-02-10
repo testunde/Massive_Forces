@@ -9,7 +9,7 @@ public class BuildExample : MonoBehaviour {
 	public Material previewMat;
 	private Building[] buildings=new Building[0];	//so it's easier to get all building references
 	private Building currentBuild;
-	private int state=0;
+	private State state=new State();
 	
 	void increaseBuildingArray(){
 		Building[] tempBuildings=new Building[buildings.Length+1];
@@ -31,11 +31,11 @@ public class BuildExample : MonoBehaviour {
 	
 	void Update(){
 		coords=camCtrl.Pointer;
-		switch(state){
+		switch(state.Get()){
 			case 0:{
 				//start building process
 				if(Input.GetKeyDown("f")){
-					state=1;
+					state.Set(1);
 					goto case 1;
 				}
 				break;
@@ -43,10 +43,10 @@ public class BuildExample : MonoBehaviour {
 				increaseBuildingArray();
 				buildings[buildings.Length-1]=(new GameObject()).AddComponent<Building>();
 				currentBuild=buildings[buildings.Length-1];
-				currentBuild.Init(camCtrl);
+				currentBuild.Init(camCtrl,state);
 				currentBuild.createPreview(previewMat);
 				currentBuild.setCoords(coords);
-				state=2;
+				state.Set(2);
 				break;
 			}case 2:{
 				if(Input.GetButton("Fire2"))
@@ -58,18 +58,18 @@ public class BuildExample : MonoBehaviour {
 					currentBuild.createBuilding();
 					//repeat if shift is hold while clicked
 					if(Input.GetKey(KeyCode.LeftShift))
-						state=1;
+						state.Set(1);
 					else
-						state=3;
+						state.Set(3);
 				}else if(Input.GetButtonDown("Cancel")){
 					//abort building process when pressed esc or mouse2
 					Destroy(currentBuild.getParent());
 					decreaseBuildingArray();
-					state=0;
+					state.Set(0);
 				}
 				break;
 			}default:{
-				state=0;
+				state.Set(0);
 				break;
 			}
 		}
