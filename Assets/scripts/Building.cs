@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Scripts;
 
 namespace Scripts {
-	//create the building (later hand over the mesh of the building)
+	//create the building (TODO: hand over the mesh of the building)
 	public class Building : MonoBehaviour {
 		public CameraControl camCtrl;
 		private GameObject Map,preview,building;
@@ -14,11 +15,10 @@ namespace Scripts {
 			gameObject.name="Building";
 		}
 		void OnDestroy(){
-			if(state==0){
+			if(state==0)
 				Destroy(preview);
-			}else{
+			else
 				Destroy(building);
-			}
 		}
 		public GameObject getParent(){
 			return gameObject;
@@ -32,21 +32,29 @@ namespace Scripts {
 			cube.layer=2;
 			cube.GetComponent<Renderer>().material=previewMat;
 		}
-		public void setPreview(Vector3 coords){
-			preview.transform.position=coords;
+		public void setCoords(Vector3 coords){
+			gameObject.transform.position=coords;
 		}
-		public void createBuilding(Vector3 coords){	//create cube
+		public void rotateTo(Vector3 coords){
+			Vector3 targetRot=new Vector3(coords.x,gameObject.transform.position.y,coords.z);
+			gameObject.transform.LookAt(targetRot,Vector3.forward);
+			//Vector3 rot=gameObject.transform.eulerAngles;
+			//rot=new Vector3(0f,rot.y,0f);
+		}
+		public void createBuilding(){	//create cube
 			GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 			building=cube;
 			cube.transform.parent=gameObject.transform;
 			cube.name="House";
-			Destroy(preview);
-			state=1;
-			cube.transform.position=coords-(new Vector3(0f,down,0f));
-			//insert MouseReaction.cs ...
+			gameObject.transform.position-=new Vector3(0f,down,0f);
+			cube.transform.localPosition=new Vector3(0f,0f,0f);
+			cube.transform.localEulerAngles=new Vector3(0f,0f,0f);
+			//TODO: include MouseReaction.cs
 			//buildMat=cube.GetComponent<Renderer>().material;	//to able to reverse to the old material
 			MouseReaction mR=cube.AddComponent<MouseReaction>();
 			mR.Init(camCtrl);
+			state=1;
+			Destroy(preview);
 		}
 		
 		void Start(){
@@ -56,15 +64,13 @@ namespace Scripts {
 		void FixedUpdate(){
 			switch(state){
 				case 1:{
-					building.transform.position+=new Vector3(0f,growSpeed,0f);
+					gameObject.transform.position+=new Vector3(0f,growSpeed,0f);
 					down-=growSpeed;
-					if(down<=0){
+					if(down<=0)
 						state=2;
-					}
 					break;
-				}default:{
+				}default:
 					break;
-				}
 			}
 		}
 	}

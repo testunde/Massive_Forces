@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Scripts.MouseLook;
+using Scripts;
 
 public class CameraControl : MonoBehaviour {
 	
@@ -15,7 +15,7 @@ public class CameraControl : MonoBehaviour {
 	public MouseLook mouseLook = new MouseLook();
 	public Vector3 Pointer;
 	
-	//set y-coord bolow zero! decrement y by 1 when terrain wasn't hittet
+	//set y-coord bolow zero! method decrement y by 1 when terrain wasn't hittet
 	public Vector3 getCoordsAtXZ(Vector3 where){
 		RaycastHit height;
 		Vector3 result=where-(new Vector3(0f,1f,0f));
@@ -31,6 +31,7 @@ public class CameraControl : MonoBehaviour {
 		ground=GameObject.Find("Terrain");
 		cube=GameObject.CreatePrimitive(PrimitiveType.Cube);
 		cube.layer=2;
+		cube.transform.localScale=new Vector3(.3f,.3f,.3f);
 		
 		//correction, if the mainCamera not starts over map-y-coord 0
 		Vector3 rayPos=new Vector3(camTr.position.x,-15f,camTr.position.z);	//raycast looks up form -15 if a collider is in the x/z coord
@@ -90,8 +91,8 @@ public class CameraControl : MonoBehaviour {
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit)&&hit.transform.Equals(ground.transform)){
 			Pointer=hit.point;
 			if(Input.GetMouseButton(0)){
-				//cube.transform.position=hit.point;
-				Debug.Log(hit.point);
+				cube.transform.position=hit.point;
+				Debug.Log("last click: "+hit.point);
 			}
 			/* transform the positions to material coordinates
 			Renderer renderer = hit.transform.GetComponent<Renderer>();

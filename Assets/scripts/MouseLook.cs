@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-namespace Scripts.MouseLook {
+namespace Scripts {
 	[Serializable]
 	public class MouseLook {
 		public float XSensitivity = 2f;
@@ -16,11 +16,10 @@ namespace Scripts.MouseLook {
 			float targetXRot=camera.eulerAngles.x-xRot;
 			
 			if(targetXRot<180){
-				if(targetXRot>downMax){
+				if(targetXRot>downMax)
 					targetXRot=downMax;
-				}else if(upMax<180&&targetXRot<upMax){
+				else if(upMax<180&&targetXRot<upMax)
 					targetXRot=upMax;
-				}
 			}else if(targetXRot>180&&targetXRot<upMax){
 				targetXRot=upMax;
 			}
