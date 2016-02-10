@@ -7,7 +7,7 @@ public class BuildExample : MonoBehaviour {
 	public CameraControl camCtrl;
 	public GameObject Map;
 	public Material previewMat;
-	private Building[] buildings=new Building[0];
+	private Building[] buildings=new Building[0];	//so it's easier to get all building references
 	private Building currentBuild;
 	private int state=0;
 
@@ -62,7 +62,8 @@ public class BuildExample : MonoBehaviour {
 				if(Input.GetButton("Fire1")){
 					currentBuild.createBuilding(coords);
 					state=2;
-				}else if(Input.GetButton("Cancel")){
+				}else if(Input.GetButton("Cancel")||Input.GetButton("Fire2")){
+					//abort building process when pressed esc or mouse2
 					Destroy(currentBuild.getParent());
 					decreaseBuildingArray();
 					state=0;

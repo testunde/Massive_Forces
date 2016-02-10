@@ -7,7 +7,9 @@ recycliong of wrecks
 put units, buildings and objects NOT in raycast ignore layer, so you can usw the raycast with left-/rightclick
 
 Buildings:
+- multiple building while holding shift
 - smooth rotate with q & e (pressed at same time sets rotation speed to zero)
+  > better: right click -> position freezes, then point to the direction
 MouseReaciton.cs
 - set hover/select materials
 > how to select??
