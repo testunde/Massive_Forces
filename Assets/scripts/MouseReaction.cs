@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Scripts;
 
 namespace Scripts {
 	//sets material if mousehover or selected

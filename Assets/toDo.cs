@@ -6,12 +6,10 @@ recycliong of wrecks
 
 put units, buildings and objects NOT in raycast ignore layer, so you can usw the raycast with left-/rightclick
 
-BuildingExample.cd
-- rename, no 'example' anymore!
-- Resources.Load the previewMat
+!method to call the build of a buildings
 
 MouseReaciton.cs
-> select list in BuildingExample.cs (#>also turn BuildingArray into list)
+> select list in BuildMain.cs (#>also turn BuildingArray into list)
 > serveral object selection with double click or marking area
 
 units:

@@ -16,7 +16,7 @@ namespace Scripts {
 			buildControllerState=s;
 			gameObject.name="Building";
 		}
-		void OnDestroy(){
+		void OnDestroy(){	//destroy all GameObjects when the Building gets destroyed
 			if(state==0)
 				Destroy(preview);
 			else
