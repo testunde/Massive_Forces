@@ -8,7 +8,7 @@ namespace Scripts {
 		private CameraControl camCtrl;
 		private GameObject Map;
 		private Material previewMat;
-		public Building[] buildings=new Building[0];	//all currently builded and alive buildings
+		private Building[] buildings=new Building[0];	//all currently builded and alive buildings
 		private Building currentBuild;
 		private int targetBuilding=0;
 		private State state=new State();
@@ -27,7 +27,11 @@ namespace Scripts {
 		}
 		
 		public void startBuild(int nr){
-			targetBuilding=nr;
+			if(state.Equal(0))
+				targetBuilding=nr;
+		}
+		public Building[] getAliveBuildings(){	//when as list: return copy of the list!!!
+			return buildings;
 		}
 		
 		void Start(){
@@ -38,15 +42,19 @@ namespace Scripts {
 		
 		void Update(){
 			coords=camCtrl.Pointer;
-			if(Input.GetKeyDown("f")
+			//ATTENTION:	Make sure the switchcase leaves the last update routine after
+			//				it has finishes NOT with 0. Use an code state instead!
+			if(Input.GetKeyDown("f")&&state.Equal(0))
 				startBuild(1);
 			
 			switch(state.Get()){
 				case 0:{
 					//start building process if building number is set
-					if(targetBuilding>0)){
+					if(targetBuilding>0){
 						state.Set(1);
 						goto case 1;
+					}else{
+						targetBuilding=0;
 					}
 					break;
 				}case 1:{	//seperat case, so its possible to repeat this state immediately
@@ -55,10 +63,12 @@ namespace Scripts {
 					currentBuild=buildings[buildings.Length-1];
 					currentBuild.Init(camCtrl,state);
 					currentBuild.createPreview(previewMat);
-					currentBuild.setCoords(coords);
 					state.Set(2);
+					//set here the coords, so if shift and right-click is hold down it spawns at the mouse pointer
+					currentBuild.setCoords(coords);
 					break;
 				}case 2:{
+					//rotate if right click, else just follow the mouse pointer
 					if(Input.GetButton("Fire2"))
 						currentBuild.rotateTo(coords);
 					else
@@ -79,7 +89,7 @@ namespace Scripts {
 					}
 					break;
 				}default:{	//mostly for state reset
-					startBuild(0);
+					targetBuilding=0;
 					state.Set(0);
 					break;
 				}

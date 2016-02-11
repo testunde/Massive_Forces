@@ -18,7 +18,8 @@ d.h. das Transform des Parentobjekts wird gesetzt.
 Manuelle Initialisireung. Damit kann das Stateobject (siehe State.cs) und der aktuelle Kameracontroller übergeben werden.
 
 @createPreview(Material previewMat) > void
-Erstellt das Vorschauobject zum Gebäudebau. Später kann das #previewMat auch direkt mittels Resources.Load geladen werden.
+Erstellt das Vorschauobject zum Gebäudebau. Später kann das #previewMat auch direkt
+mittels Resources.Load geladen werden.
 
 @setCoords(Vector3 coords) > void
 Verschiebt das Gebäude an die Position #coords.
@@ -33,7 +34,8 @@ Im moment wird es um -2f in y-Richtung versetzt für die Aufbauanimation verscho
 MouseReaction.cs wird als Komponente in das Gebäudeobjekt eingefügt, welches u.a. Selektionen verwaltet.
 
 FixedUpdate()
-Wenn Gebäudeobjekt gesetzt wurde, wird die down-Variable abgearbeitet (Gebäudeobjekt genau derselbe Wert in y-Richtung verschoben)
+Wenn Gebäudeobjekt gesetzt wurde, wird die down-Variable abgearbeitet.
+(Gebäudeobjekt genau um selben Wert in y-Richtung verschoben)
 --->
 
 
@@ -42,6 +44,15 @@ Hauptskritp zur Verwaltung aller Gebäude.
 Entsprechende Tasten oder Befehle zur Auslösung von Gebäudeerstellung müssen hier definiert werden.
 Wird ein Gebäude erstellt, so wird ein neues leeres GameObject erstellt und das jeweilige Gebäudeskript eingefügt,
 welches als Schnitstelle dienen sollte.
+
+@startBuild(int nr) > void
+Startet den Bauprozess, bzw. man kann dann das Gebäude setzen. Wird nur ausgeführt, wenn kein anderer Prozess läuft.
+Die übergebene #nr ist die ID des zu bauenden Gebäudes. Nur ID's größer 0 erlaubt!
+Aktuelle Gebäude-ID's:
+1- nur ein Würfel als Test
+
+@getAliveBuildings() > Building[]
+Gibt die aktuellen (lebenden) Gebäude in einem Array zurück. (später eine Kopie als Liste)
 --->
 
 
@@ -66,7 +77,8 @@ x,y,z					(auskommentiert) Koordinaten, genutzt für einen auskommentierten Code
 
 @getCoordsAtXZ(Vector3 where) > {Vector3}
 Gibt die y-Koordinate auf dem Terrain #ground bei x und z des #where-Vectors.
-Übergebene y-Koordinate muss unter 0 liegen (bzw unter dem Terrain), da von diesem Punkt nach oben "geschaut" wird bis das Terrain getroffen wird.
+Übergebene y-Koordinate muss unter 0 liegen (bzw unter dem Terrain), da von diesem Punkt nach
+oben "geschaut" wird bis das Terrain getroffen wird.
 Gibt die y-Koordinate als Vector3 mit den alten x und z zurück.
 Y-Koordinate wird um ein dekrementiert wenn das Terrain nicht getroffen wurde. (bleibt daher negativ)
 
@@ -86,7 +98,8 @@ Sensitivität NUR bzgl. der Kameraschwenkung kann hier nachträglich eingebracht
 @LookRotation(Transform camera, float downMax, float upMax) > void
 camera					zu kontrollierende Kamera
 downMax,downMax			maximaler/minimaler Grad (in Gradmaß) der vertikalen Kameraschwenkung
-Wenn Methode aufgerufen wird, wird die Kamera in Richtung der akuellen Mausbewegung geschwenkt (nur Rotation, keine Translation).
+Wenn Methode aufgerufen wird, wird die Kamera in Richtung der akuellen Mausbewegung
+geschwenkt (nur Rotation, keine Translation).
 --->
 
 
@@ -102,7 +115,8 @@ Manuelle Initialisireung. Damit kann das Stateobject (siehe State.cs) und der ak
 
 
 <--State.cs---
-Für die Statusverwaltung in Form von Integer. Damit ein Status übergeben werden kann und dieser auch von anderen Klassen darauf in Echtzeit abgerufen werden kann,
+Für die Statusverwaltung in Form von Integer. Damit ein Status übergeben werden kann und
+dieser auch von anderen Klassen darauf in Echtzeit abgerufen werden kann,
 dient diese Klasse als Refernzobjekt auf dessen Status.
 
 @State() > Kontruktor
