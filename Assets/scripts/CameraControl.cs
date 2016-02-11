@@ -4,7 +4,6 @@ using Scripts;
 
 public class CameraControl : MonoBehaviour {
 	
-	private Vector3 input;
 	private GameObject mainCamera;
 	private Transform camTr;
 	private float oldMapHigh,currentHigh;
@@ -48,7 +47,6 @@ public class CameraControl : MonoBehaviour {
 		leftClick=Input.GetButtonDown("Fire1");
 		shiftPress=Input.GetKey(KeyCode.LeftShift);
 		//#>CAMERA MOVEMENT
-		//input = new Vector3(Input.GetAxis("Horizontal"),0f,Input.GetAxis("Vertical"));
 		float sinX=Mathf.Pow(Mathf.Sin(Mathf.Deg2Rad*camTr.eulerAngles.x),2f);	//already multiplied with it self
 		float sinY=Mathf.Sin(Mathf.Deg2Rad*camTr.eulerAngles.y);
 		float cosY=Mathf.Cos(Mathf.Deg2Rad*camTr.eulerAngles.y);
@@ -56,7 +54,7 @@ public class CameraControl : MonoBehaviour {
 			sinY*(Mathf.Sqrt(Mathf.Pow(transform.forward.x,2f)+sinX)),	//sidewards
 			0f,	//eliminate the up/down movement of the transform.forward Verctor3
 			cosY*(Mathf.Sqrt(Mathf.Pow(transform.forward.z,2f)+sinX)));	//for-/backwards
-		input=Input.GetAxis("Horizontal")*transform.right+	//sidewards
+		Vector3 input=Input.GetAxis("Horizontal")*transform.right+	//sidewards
 			Input.GetAxis("Vertical")*forw;	//for-/backwards
 			//+Input.GetAxis("Mouse ScrollWheel")*Vector3.down;	//zoom in worlds y axis
 			//+Input.GetAxis("Mouse ScrollWheel")*transform.forward;	//zoom in view direction
@@ -98,8 +96,8 @@ public class CameraControl : MonoBehaviour {
 				cube.transform.position=hit.point;
 				Debug.Log("last click: "+hit.point);
 			}
-			/* transform the positions to material coordinates
-			Renderer renderer = hit.transform.GetComponent<Renderer>();
+			// transform the positions to material coordinates
+			/*Renderer renderer = hit.transform.GetComponent<Renderer>();
 			Collider collider = hit.collider as Collider;
 			if(!(renderer == null || renderer.sharedMaterial == null || renderer.sharedMaterial.mainTexture == null || collider == null)){
 				//Texture2D tex = (Texture2D)renderer.material.mainTexture;
@@ -111,8 +109,5 @@ public class CameraControl : MonoBehaviour {
 				//Debug.Log(x + " / " + y + " / " + z);
 			}*/
 		}
-	}
-	
-	void FixedUpdate(){
 	}
 }
