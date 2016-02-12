@@ -3,18 +3,23 @@ using System.Collections;
 using Scripts;
 
 namespace Scripts {
-	//create the building (TODO: hand over the mesh of the building)
+	//create the building (TODO: hand over the mesh of the building / building ID)
+	//it's an example script for the interfaces
 	public class Building : MonoBehaviour {
 		private CameraControl camCtrl;
 		private GameObject Map,preview,building;
 		private int state=0;
 		private State buildControllerState;
 		private float down=2f,growSpeed=.03f;
+		private int HP=0,fraction=0;
+		private const int baseHP=1000;
+		private int maxHP=baseHP;	//later here it's possible to set factors
 		
-		public void Init(CameraControl cC,State s){
+		public void Init(CameraControl cC,State s,int frac){
 			camCtrl=cC;
 			buildControllerState=s;
 			gameObject.name="Building";
+			fraction=frac;
 		}
 		void OnDestroy(){	//destroy all GameObjects when the Building gets destroyed
 			if(state==0)
@@ -24,6 +29,27 @@ namespace Scripts {
 		}
 		public GameObject getParent(){
 			return gameObject;
+		}
+		public string getName(){
+			return gameObject.name;
+		}
+		public int getHP(){
+			return HP;
+		}
+		public int getMaxHP(){
+			return maxHP;
+		}
+		public void changeHPBy(int chHP){
+			chHP+=HP;
+			if(chHP>maxHP)
+				chHP=maxHP;
+			HP=chHP;
+		}
+		public int getFraction(){
+			return fraction;
+		}
+		public void setFraction(int frac){
+			fraction=frac;
 		}
 		
 		public void createPreview(Material previewMat){	//create cube for building preview
@@ -65,11 +91,13 @@ namespace Scripts {
 		
 		void FixedUpdate(){
 			switch(state){
-				case 1:{
+				case 1:{	//build process
 					gameObject.transform.position+=new Vector3(0f,growSpeed,0f);
 					down-=growSpeed;
-					if(down<=0)
+					if(down<=0){
+						HP=maxHP;
 						state=2;
+					}
 					break;
 				}default:
 					break;

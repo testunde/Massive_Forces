@@ -14,8 +14,27 @@ Eine simple Aufbauanimation ist enthalten (Gebäude wächst aus Boden) - siehe F
 Rotationen und Translationen werden für alle Objecte, daher sowohl Vorschau als auch dem richtigen Gebäudeobjekt gesetzt,
 d.h. das Transform des Parentobjekts wird gesetzt.
 
-@Init(CameraControl cC, State s) > void
-Manuelle Initialisireung. Damit kann das Stateobject (siehe State.cs) und der aktuelle Kameracontroller übergeben werden.
+@Init(CameraControl cC, State s, int fraction) > void
+Manuelle Initialisireung. Damit kann das Stateobject (siehe State.cs) und der aktuelle Kameracontroller übergeben werden. Die zugehörige Fraction wird hier zugeteilt.
+
+@getParent() > GameObject
+Gibt das Gruppenobjekt zurück, welches die Buildskripts und Gebäudeobjekte enthält.
+
+@getName() > String
+Gibt Gebäudenamen zurück, welches dem Objekt von zurückgegebenen #getParent() gleicht.
+
+@getHP() > int
+Gibt die aktuellen Lebenpunkte zurück.
+
+@getMaxHP() > int
+Gibt Obergrenze der Lebenpunkte zurück.
+
+@changeHPBy(int HP) > void
+Änder die aktuellen Lebenpunkte um den übergebenen Betrag. Kann d.h. auch negativ sein.
+Ist die Änderung größer als #getMaxHP(), dann wird sie auf #getMaxHP() gesetzt.
+
+@getFraction() > int | @setFraction(int fraction) > void
+Gibt die aktuell zugewiesene Fraktion als ID zurück. | Setzt Fraktions-ID.
 
 @createPreview(Material previewMat) > void
 Erstellt das Vorschauobject zum Gebäudebau. Später kann das #previewMat auch direkt
@@ -73,7 +92,7 @@ cube					der kleine süße Würfel, der später an die Stelle #pointer gesetzt w
 x,y,z					(auskommentiert) Koordinaten, genutzt für einen auskommentierten Code im Update-Teil
 @mouseLook {MouseLook}	Objekt der eigenen MouseLook Klasse (siehe MouseLook.cs)
 @pointer {Vector3}		aktuelle Position, auf den der Mauszeiger auf dem Terrain zeigt; wird bei jeder Updateroutine aktualisiert
-@leftClick,shiftPress	{bool} true, wenn linke Maustaste (up-Flanke) bzw. LeftShift (holdDown)
+@leftClick,shiftPress,ctrlPress {bool}	true, wenn linke Maustaste (up-Flanke); LeftShift (holdDown); LeftCtrl (holdDown)
 
 @getCoordsAtXZ(Vector3 where) > {Vector3}
 Gibt die y-Koordinate auf dem Terrain #ground bei x und z des #where-Vectors.

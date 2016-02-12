@@ -61,7 +61,7 @@ namespace Scripts {
 					increaseBuildingArray();
 					buildings[buildings.Length-1]=(new GameObject()).AddComponent<Building>();
 					currentBuild=buildings[buildings.Length-1];
-					currentBuild.Init(camCtrl,state);
+					currentBuild.Init(camCtrl,state,1);	//fraction ID 1 as player fraction
 					currentBuild.createPreview(previewMat);
 					state.Set(2);
 					//set here the coords, so if shift and right-click is hold down it spawns at the mouse pointer

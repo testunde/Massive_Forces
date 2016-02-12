@@ -9,6 +9,7 @@ namespace Scripts {
 		private CameraControl camCtrl;
 		private GameObject Map;
 		private int state=0;	//0-nothing; 1-hover; 2-selected; 3-selected&hover
+		private bool freshSelected=false;	//to make it possible to inverse selection
 		private State buildControllerState;
 		private Material buildMat,hoverMat,selectMat,selectHoverMat;
 		private Material[] MatList;
@@ -21,11 +22,12 @@ namespace Scripts {
 		void OnMouseOver(){
 			if(state==0){
 				state=1;
-			}else if(state==2){
+			}else if(state==2||state==4){
 				state=3;
 			}
 		}
 		void OnMouseExit(){
+			freshSelected=false;
 			if(state==1){
 				state=0;
 			}else if(state==3){
@@ -34,9 +36,13 @@ namespace Scripts {
 		}
 		void OnMouseDown(){
 			if(state==1){
-				state=2;
+				state=3;
+				freshSelected=true;
 				//CALL SELECT COMMAND
 			}
+		}
+		void OnMouseUpAsButton(){
+			freshSelected=false;
 		}
 		
 		void Start(){
@@ -49,12 +55,12 @@ namespace Scripts {
 		}
 		void Update(){
 			//deselect condisitons
-			if(state==2&&camCtrl.leftClick&& !camCtrl.shiftPress){
+			if(camCtrl.leftClick&& (state==2&& !(camCtrl.shiftPress||camCtrl.ctrlPress) || camCtrl.ctrlPress&&state==3&& !freshSelected)){
 				state=0;
 				//CALL DESELECT COMMAND
 			}
 			
-			//set material
+			//set material. make shure the material list fits with the states here
 			if(buildControllerState.Equal(0))
 				gameObject.GetComponent<Renderer>().material=MatList[state];
 		}

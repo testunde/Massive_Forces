@@ -13,7 +13,7 @@ namespace Scripts {
 		//private float x=0f,y=0f,z=0f;
 		public MouseLook mouseLook = new MouseLook();
 		public Vector3 Pointer;
-		public bool leftClick=false,shiftPress=false;
+		public bool leftClick=false,shiftPress=false,ctrlPress=false;
 		
 		//set y-coord bolow zero! method decrement y by 1 when terrain wasn't hittet
 		public Vector3 getCoordsAtXZ(Vector3 where){
@@ -36,6 +36,7 @@ namespace Scripts {
 		void Update () {
 			leftClick=Input.GetButtonDown("Fire1");
 			shiftPress=Input.GetKey(KeyCode.LeftShift);
+			ctrlPress=Input.GetKey(KeyCode.LeftControl);
 			
 			//#>height identifier
 			Vector3 rayPos=new Vector3(camTr.position.x,-15f,camTr.position.z);	//raycast looks up form -15 if a collider is in the x/z coord
