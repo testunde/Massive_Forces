@@ -70,8 +70,9 @@ Die übergebene #nr ist die ID des zu bauenden Gebäudes. Nur ID's größer 0 er
 Aktuelle Gebäude-ID's:
 1- nur ein Würfel als Test
 
-@getAliveBuildings() > Building[]
-Gibt die aktuellen (lebenden) Gebäude in einem Array zurück. (später eine Kopie als Liste)
+@getAliveBuildings() > List<Building>
+Gibt die aktuellen (lebenden) Gebäude als seperate Liste des Typs Building zurück.
+Seperat heißt: Es wird intern eine Kopie als Rückgabeliste erstellt, damit die intern geführte Gebäudeliste nicht zerstört werden kann. (da Listen Referenzobjekte sind)
 --->
 
 

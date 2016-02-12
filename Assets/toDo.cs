@@ -11,12 +11,10 @@ Documentation.cs:
 - add key/button/shortcut functions
 
 CameraControl.cs
-- manage HERE all keys (e.g. BuildMain.cs are seperate Inputs.~)
+- manage HERE all keys (e.g. in BuildMain.cs are seperate Inputs.~)
 
 MouseReaciton.cs
-- deselect with ctrl holded down if the object is already selected (priority: shift higher than ctrl?)
-- ctrl ONLY deselect; shift ONLY select
-> select list in BuildMain.cs (#>also turn BuildingArray into list)
+> 'selected' list in BuildMain.cs
 > serveral object selection with double click or marking area
 
 units:
@@ -24,4 +22,5 @@ units:
 > NO!! ObjectControl.cs as only control script für all objects (so, also buildings and units!)
 
 ###COMMIT CLIPBOARD###
+
 */

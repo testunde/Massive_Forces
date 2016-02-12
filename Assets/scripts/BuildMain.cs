@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Scripts;
 
 namespace Scripts {
@@ -8,30 +9,17 @@ namespace Scripts {
 		private CameraControl camCtrl;
 		private GameObject Map;
 		private Material previewMat;
-		private Building[] buildings=new Building[0];	//all currently builded and alive buildings
+		private List<Building> buildings=new List<Building>();	//all currently builded and alive buildings
 		private Building currentBuild;
 		private int targetBuilding=0;
 		private State state=new State();
-		
-		void increaseBuildingArray(){
-			Building[] tempBuildings=new Building[buildings.Length+1];
-			for(int i=0;i<buildings.Length;i++)
-				tempBuildings[i]=buildings[i];
-			buildings=tempBuildings;
-		}
-		void decreaseBuildingArray(){
-			Building[] tempBuildings=new Building[buildings.Length-1];
-			for(int i=0;i<tempBuildings.Length;i++)
-				tempBuildings[i]=buildings[i];
-			buildings=tempBuildings;
-		}
 		
 		public void startBuild(int nr){
 			if(state.Equal(0))
 				targetBuilding=nr;
 		}
-		public Building[] getAliveBuildings(){	//when as list: return copy of the list!!!
-			return buildings;
+		public List<Building> getAliveBuildings(){	//return copy of buiildings list
+			return new List<Building>(buildings);
 		}
 		
 		void Start(){
@@ -58,9 +46,8 @@ namespace Scripts {
 					}
 					break;
 				}case 1:{	//seperat case, so its possible to repeat this state immediately
-					increaseBuildingArray();
-					buildings[buildings.Length-1]=(new GameObject()).AddComponent<Building>();
-					currentBuild=buildings[buildings.Length-1];
+					currentBuild=(new GameObject()).AddComponent<Building>();
+					buildings.Add(currentBuild);
 					currentBuild.Init(camCtrl,state,1);	//fraction ID 1 as player fraction
 					currentBuild.createPreview(previewMat);
 					state.Set(2);
@@ -84,7 +71,7 @@ namespace Scripts {
 					}else if(Input.GetButtonDown("Cancel")){
 						//abort building process when pressed esc or mouse2
 						Destroy(currentBuild.getParent());
-						decreaseBuildingArray();
+						buildings.Remove(currentBuild);
 						state.Set(99);	//set state to 99 as cancel code
 					}
 					break;
