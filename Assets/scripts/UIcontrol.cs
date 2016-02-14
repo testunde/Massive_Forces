@@ -1,24 +1,24 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Scripts;
 
 public class UIcontrol : MonoBehaviour {
 
 	public Canvas buildingMenu;
 	public Button building1;
-	public Text Button_pressed;
+	private BuildMain BuildingScript;
 	
 	// Use this for initialization
 	void Start () 
 	{
 		buildingMenu = buildingMenu.GetComponent<Canvas> ();
 		building1 = building1.GetComponent<Button> ();
-		Button_pressed = Button_pressed.GetComponent<Text> ();
-		Button_pressed.enabled = false;
+		BuildingScript = GameObject.Find("Main Camera").GetComponent<BuildMain>();
 	}
+	
 	public void building1_click ()
 	{
-		Button_pressed.enabled = true;
-		
+		BuildingScript.startBuild(1);
 	}
 }
