@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.1.1">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>270</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>ObjectControl : MonoBehavior
+--
+Selection instance
+List&lt;Building&gt;
+List&lt;Unit&gt;
+List&lt;Neutral&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>81</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>CameraControl : MonoBehavior
+(Kamerasteuerung)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>639</x>
+      <y>495</y>
+      <w>234</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>/IngameObject/
+--
+_-IDflow: int_
+-ID: int
+-HP + MaxHP/BaseHP: int
+-Name: string
+-Fraction: int (0=neutral)
+minimapObject
+--
+IngameObject()
+|  load dataset from database (itemID)
+|  ID=IDflow
+|_IDflow++
+AddComponent&lt;MouseReaction&gt;
+moveTo(Vector3)
+rotateTo(Vector3) (only y-axis)
+..get/set/change methods for data
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>558</x>
+      <y>36</y>
+      <w>333</w>
+      <h>432</h>
+    </coordinates>
+    <panel_attributes>Camera
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>774</x>
+      <y>306</y>
+      <w>108</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+add</panel_attributes>
+    <additional_attributes>80.0;210.0;80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>306</x>
+      <y>90</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>ExampleClass : MonoBehavior
+(descripton)
+--
+{class vars}
+-id: Long
+_-staticVar: Long_
+--
+{methods}
+/AbstractMethod()/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>288</x>
+      <y>54</y>
+      <w>216</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>ExampleGameObject
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>387</x>
+      <y>819</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>Building
+--
+ObjectClass
+
+setPreview()
+--
+animations:
+-build
+-destroy/damage</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>657</x>
+      <y>819</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>Unit
+--
+ObjectClass
+
+
+--
+animations:
+-kill
+-fight
+-move</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>936</x>
+      <y>819</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>Neutral
+--
+ObjectClass
+
+
+--
+animations:
+-cut down
+additional data:
+-resources
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>747</x>
+      <y>720</y>
+      <w>99</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>747</x>
+      <y>756</y>
+      <w>306</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=.
+</panel_attributes>
+    <additional_attributes>320.0;70.0;320.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>477</x>
+      <y>756</y>
+      <w>297</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=.
+</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0;310.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>45</x>
+      <y>954</y>
+      <w>207</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Database
+--
+bg=gray
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>846</y>
+      <w>1098</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+points to
+
+(maybe not needed after
+ full data was loaded
+ into objbect)
+</panel_attributes>
+    <additional_attributes>10.0;190.0;1050.0;190.0;1050.0;10.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>189</x>
+      <y>756</y>
+      <w>315</w>
+      <h>261</h>
+    </coordinates>
+    <panel_attributes>lt=.
+</panel_attributes>
+    <additional_attributes>10.0;270.0;10.0;10.0;330.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>144</x>
+      <y>621</y>
+      <w>513</w>
+      <h>369</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;
+load
+data</panel_attributes>
+    <additional_attributes>10.0;390.0;10.0;10.0;550.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>774</x>
+      <y>315</y>
+      <w>90</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>774</x>
+      <y>333</y>
+      <w>90</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1053</x>
+      <y>261</y>
+      <w>360</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>_Selection_
+--
+List&lt;IngameObject&gt;
+--
+{get methods}
+AreOnlyUnits(): bool
+AreOnlyBuildings(): bool
+IsOnlyOneFraction(): int (fraction ID, if serveral, then -1)
+IsOnlyOne(): IngameObject (null pointer of empty or serveral)
+--
+{set methods}
+AddItem(IngameObject)
+RemoveItem(IngameObject)
+ClearList()
+LeaveSameObjectsSelected(IngameObject)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>774</x>
+      <y>279</y>
+      <w>297</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+new static instance</panel_attributes>
+    <additional_attributes>310.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1098</x>
+      <y>0</y>
+      <w>189</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>InputModul : Monobehavior
+(manages ALL inputs)
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1161</x>
+      <y>540</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>MouseReaction : MonoBehavior
+(Verhalten bei Mauseingabe)
+--
+select: Selection
+--
+MouseReaction(Selection, ...)
+OnMouse...()
+Selection-methods
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>837</x>
+      <y>657</y>
+      <w>342</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;
+copy</panel_attributes>
+    <additional_attributes>10.0;20.0;360.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>666</y>
+      <w>99</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;
+to</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1314</x>
+      <y>450</y>
+      <w>153</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+points to
+static instance</panel_attributes>
+    <additional_attributes>60.0;10.0;60.0;150.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>378</x>
+      <y>783</y>
+      <w>756</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>all objects
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>63</x>
+      <y>999</y>
+      <w>162</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Classes of each object
+
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1098</x>
+      <y>126</y>
+      <w>189</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>State
+(state int as reference)
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
