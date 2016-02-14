@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
-using Scripts;
+using Scripts_o;
 
-namespace Scripts {
+namespace Scripts_o {
 	[Serializable]
 	public class MouseLook {
 		private float XSensitivity,YSensitivity;

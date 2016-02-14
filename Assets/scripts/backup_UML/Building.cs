@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Scripts;
+using Scripts_o;
 
-namespace Scripts {
+namespace Scripts_o {
 	//create the building (TODO: hand over the mesh of the building / building ID)
 	//it's an example script for the interfaces
 	public class Building : MonoBehaviour {
@@ -67,8 +67,6 @@ namespace Scripts {
 		public void rotateTo(Vector3 coords){
 			Vector3 targetRot=new Vector3(coords.x,gameObject.transform.position.y,coords.z);
 			gameObject.transform.LookAt(targetRot,Vector3.forward);
-			//Vector3 rot=gameObject.transform.eulerAngles;
-			//rot=new Vector3(0f,rot.y,0f);
 		}
 		public void createBuilding(){	//create cube
 			GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -79,8 +77,7 @@ namespace Scripts {
 			cube.transform.localPosition=new Vector3(0f,0f,0f);
 			cube.transform.localEulerAngles=new Vector3(0f,0f,0f);
 			
-			MouseReaction mR=cube.AddComponent<MouseReaction>();
-			mR.Init(camCtrl,buildControllerState);
+			cube.AddComponent<MouseReaction>().Init(camCtrl,buildControllerState);
 			
 			state=1;
 			Destroy(preview);

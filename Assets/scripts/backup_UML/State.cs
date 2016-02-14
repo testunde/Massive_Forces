@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Scripts;
+using Scripts_o;
 
-namespace Scripts {
+namespace Scripts_o {
 	public class State {
 		//just the current state can over hand to other script as reference
 		private int st;

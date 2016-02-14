@@ -11,7 +11,7 @@ namespace Scripts {
 		private float minHigh=5f,maxHigh=15f;
 		private GameObject ground,cube;
 		//private float x=0f,y=0f,z=0f;
-		public MouseLook mouseLook = new MouseLook();
+		public static MouseLook mouseLook = new MouseLook();
 		public Vector3 Pointer;
 		public bool leftClick=false,shiftPress=false,ctrlPress=false;
 		

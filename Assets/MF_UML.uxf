@@ -1,43 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.1.1">
-  <zoom_level>9</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
-      <y>270</y>
-      <w>189</w>
-      <h>171</h>
+      <x>606</x>
+      <y>408</y>
+      <w>180</w>
+      <h>156</h>
     </coordinates>
     <panel_attributes>ObjectControl : MonoBehavior
 --
 Selection instance
+State state
 List&lt;Building&gt;
 List&lt;Unit&gt;
 List&lt;Neutral&gt;
-</panel_attributes>
+--
+IngameObject.mouseReact.Init()
+
+UI commands:
+startBild(String name)
+makeUnit(String building, String name)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
-      <y>81</y>
-      <w>189</w>
-      <h>171</h>
+      <x>606</x>
+      <y>282</y>
+      <w>180</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>CameraControl : MonoBehavior
-(Kamerasteuerung)
+--
+
+--
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>639</x>
-      <y>495</y>
-      <w>234</w>
-      <h>234</h>
+      <x>642</x>
+      <y>630</y>
+      <w>156</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>/IngameObject/
 --
@@ -46,14 +54,17 @@ _-IDflow: int_
 -HP + MaxHP/BaseHP: int
 -Name: string
 -Fraction: int (0=neutral)
+-mouseReact: MouseReact
+resource costs
 minimapObject
 --
 IngameObject()
-|  load dataset from database (itemID)
-|  ID=IDflow
-|_IDflow++
+  Selection, InputModul...
+  ID=IDflow
+  IDflow++
+
 AddComponent&lt;MouseReaction&gt;
-moveTo(Vector3)
+setCoords(Vector3)
 rotateTo(Vector3) (only y-axis)
 ..get/set/change methods for data
 </panel_attributes>
@@ -62,12 +73,12 @@ rotateTo(Vector3) (only y-axis)
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>558</x>
-      <y>36</y>
-      <w>333</w>
-      <h>432</h>
+      <x>588</x>
+      <y>252</y>
+      <w>222</w>
+      <h>330</h>
     </coordinates>
-    <panel_attributes>Camera
+    <panel_attributes>Camera object
 --
 bg=orange</panel_attributes>
     <additional_attributes/>
@@ -75,22 +86,22 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>774</x>
-      <y>306</y>
-      <w>108</w>
-      <h>207</h>
+      <x>366</x>
+      <y>450</y>
+      <w>252</w>
+      <h>552</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
+    <panel_attributes>lt=-&gt;&gt;&gt;
 add</panel_attributes>
-    <additional_attributes>80.0;210.0;80.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;900.0;10.0;10.0;400.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>306</x>
-      <y>90</y>
-      <w>189</w>
-      <h>171</h>
+      <x>330</x>
+      <y>288</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>ExampleClass : MonoBehavior
 (descripton)
@@ -107,10 +118,10 @@ _-staticVar: Long_
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>288</x>
-      <y>54</y>
-      <w>216</w>
-      <h>234</h>
+      <x>318</x>
+      <y>264</y>
+      <w>150</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>ExampleGameObject
 --
@@ -120,15 +131,15 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>387</x>
-      <y>819</y>
-      <w>189</w>
-      <h>171</h>
+      <x>498</x>
+      <y>960</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
-    <panel_attributes>Building
+    <panel_attributes>[virtual] Building
 --
-ObjectClass
 
+--
 setPreview()
 --
 animations:
@@ -139,16 +150,16 @@ animations:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>657</x>
-      <y>819</y>
-      <w>189</w>
-      <h>171</h>
+      <x>654</x>
+      <y>960</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
-    <panel_attributes>Unit
+    <panel_attributes>[virtual] Unit
 --
-ObjectClass
 
-
+--
+moveTo(Vector3)
 --
 animations:
 -kill
@@ -159,67 +170,67 @@ animations:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>936</x>
-      <y>819</y>
-      <w>189</w>
-      <h>171</h>
+      <x>810</x>
+      <y>960</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
-    <panel_attributes>Neutral
+    <panel_attributes>[virtual] Neutral
 --
-ObjectClass
-
 
 --
-animations:
--cut down
+
+--
 additional data:
 -resources
+animations:
+-cut down
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>747</x>
-      <y>720</y>
-      <w>99</w>
-      <h>117</h>
+      <x>714</x>
+      <y>804</y>
+      <w>60</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
-&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+instance of</panel_attributes>
+    <additional_attributes>10.0;260.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>747</x>
-      <y>756</y>
-      <w>306</w>
-      <h>81</h>
+      <x>732</x>
+      <y>804</y>
+      <w>156</w>
+      <h>168</h>
     </coordinates>
-    <panel_attributes>lt=.
-</panel_attributes>
-    <additional_attributes>320.0;70.0;320.0;10.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=.&gt;
+instance of</panel_attributes>
+    <additional_attributes>240.0;260.0;240.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>477</x>
-      <y>756</y>
-      <w>297</w>
-      <h>81</h>
+      <x>558</x>
+      <y>804</y>
+      <w>156</w>
+      <h>168</h>
     </coordinates>
-    <panel_attributes>lt=.
-</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0;310.0;10.0</additional_attributes>
+    <panel_attributes>lt=.&gt;
+instance of</panel_attributes>
+    <additional_attributes>10.0;260.0;10.0;100.0;240.0;100.0;240.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>45</x>
-      <y>954</y>
-      <w>207</w>
-      <h>90</h>
+      <x>282</x>
+      <y>966</y>
+      <w>132</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>Database
 --
@@ -228,78 +239,12 @@ bg=gray
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>216</x>
-      <y>846</y>
-      <w>1098</w>
-      <h>189</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.
-points to
-
-(maybe not needed after
- full data was loaded
- into objbect)
-</panel_attributes>
-    <additional_attributes>10.0;190.0;1050.0;190.0;1050.0;10.0;190.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>189</x>
-      <y>756</y>
-      <w>315</w>
-      <h>261</h>
-    </coordinates>
-    <panel_attributes>lt=.
-</panel_attributes>
-    <additional_attributes>10.0;270.0;10.0;10.0;330.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>144</x>
-      <y>621</y>
-      <w>513</w>
-      <h>369</h>
-    </coordinates>
-    <panel_attributes>lt=-&gt;&gt;
-load
-data</panel_attributes>
-    <additional_attributes>10.0;390.0;10.0;10.0;550.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>774</x>
-      <y>315</y>
-      <w>90</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>774</x>
-      <y>333</y>
-      <w>90</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1053</x>
-      <y>261</y>
-      <w>360</w>
-      <h>198</h>
+      <x>960</x>
+      <y>402</y>
+      <w>240</w>
+      <h>132</h>
     </coordinates>
     <panel_attributes>_Selection_
 --
@@ -322,43 +267,51 @@ LeaveSameObjectsSelected(IngameObject)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>774</x>
-      <y>279</y>
-      <w>297</w>
-      <h>36</h>
+      <x>780</x>
+      <y>414</y>
+      <w>192</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 new static instance</panel_attributes>
-    <additional_attributes>310.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>300.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1098</x>
-      <y>0</y>
-      <w>189</w>
-      <h>108</h>
+      <x>936</x>
+      <y>264</y>
+      <w>150</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>InputModul : Monobehavior
-(manages ALL inputs)
+(manages all key inputs)
 --
+key variables
+--
+Update()
+&gt; checks keys inputs
+--
+
+REFERNCE MUST OVERHANDED
+FROM CONTROLLERS TO ALL
+CLASSES!
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1161</x>
-      <y>540</y>
-      <w>189</w>
-      <h>171</h>
+      <x>990</x>
+      <y>588</y>
+      <w>162</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>MouseReaction : MonoBehavior
-(Verhalten bei Mauseingabe)
 --
 select: Selection
 --
-MouseReaction(Selection, ...)
+MouseReaction(Selection, InputModul ...)
 OnMouse...()
 Selection-methods
 </panel_attributes>
@@ -367,49 +320,49 @@ Selection-methods
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>837</x>
-      <y>657</y>
-      <w>342</w>
-      <h>36</h>
+      <x>792</x>
+      <y>672</y>
+      <w>210</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;
 copy</panel_attributes>
-    <additional_attributes>10.0;20.0;360.0;20.0</additional_attributes>
+    <additional_attributes>10.0;170.0;330.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1080</x>
-      <y>666</y>
-      <w>99</w>
-      <h>153</h>
+      <x>930</x>
+      <y>672</y>
+      <w>72</w>
+      <h>288</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;
 to</panel_attributes>
-    <additional_attributes>90.0;10.0;10.0;150.0</additional_attributes>
+    <additional_attributes>100.0;10.0;10.0;460.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1314</x>
-      <y>450</y>
-      <w>153</w>
-      <h>153</h>
+      <x>1104</x>
+      <y>528</y>
+      <w>120</w>
+      <h>90</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.
+    <panel_attributes>lt=&lt;&lt;..
 points to
 static instance</panel_attributes>
-    <additional_attributes>60.0;10.0;60.0;150.0;10.0;150.0</additional_attributes>
+    <additional_attributes>90.0;10.0;90.0;130.0;10.0;130.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>378</x>
-      <y>783</y>
-      <w>756</w>
-      <h>216</h>
+      <x>474</x>
+      <y>936</y>
+      <w>486</w>
+      <h>150</h>
     </coordinates>
-    <panel_attributes>all objects
+    <panel_attributes>all objects ingame
 --
 bg=orange</panel_attributes>
     <additional_attributes/>
@@ -417,10 +370,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>63</x>
-      <y>999</y>
-      <w>162</w>
-      <h>27</h>
+      <x>294</x>
+      <y>990</y>
+      <w>108</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>Classes of each object
 
@@ -430,15 +383,207 @@ layer=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1098</x>
-      <y>126</y>
-      <w>189</w>
-      <h>108</h>
+      <x>828</x>
+      <y>594</y>
+      <w>126</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>State
 (state int as reference)
 --
+st: int
+--
+Get(): int
+Set(int): void
+Equal(int): bool
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>60</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>placeholer
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>366</x>
+      <y>1002</y>
+      <w>204</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+type of</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;220.0;320.0;220.0;320.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>552</x>
+      <y>1068</y>
+      <w>180</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+</panel_attributes>
+    <additional_attributes>10.0;110.0;280.0;110.0;280.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>714</x>
+      <y>1068</y>
+      <w>180</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+</panel_attributes>
+    <additional_attributes>10.0;110.0;280.0;110.0;280.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1386</x>
+      <y>1434</y>
+      <w>60</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>placeholer
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>948</x>
+      <y>642</y>
+      <w>54</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-&gt;&gt;</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>336</y>
+      <w>168</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+reference</panel_attributes>
+    <additional_attributes>10.0;20.0;260.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>342</y>
+      <w>168</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+reference</panel_attributes>
+    <additional_attributes>10.0;110.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>840</x>
+      <y>732</y>
+      <w>138</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>Object model has to
+be ONE object, so the
+selection can be handled with
+ONE MouseReaction.cs copy
+lt=.
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>432</y>
+      <w>132</w>
+      <h>174</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+new instance</panel_attributes>
+    <additional_attributes>120.0;270.0;120.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>510</y>
+      <w>108</w>
+      <h>438</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..
+commands</panel_attributes>
+    <additional_attributes>10.0;710.0;10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>702</x>
+      <y>144</y>
+      <w>210</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>_Mouselook_
+--
+sensitivites: float
+--
+LookRotation(camera transform,downMax,minMax)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>216</y>
+      <w>138</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+new static instance</panel_attributes>
+    <additional_attributes>90.0;10.0;90.0;170.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>480</x>
+      <y>192</y>
+      <w>84</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>UserInterface
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>228</y>
+      <w>60</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..
+UI-
+commands</panel_attributes>
+    <additional_attributes>10.0;480.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

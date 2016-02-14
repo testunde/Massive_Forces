@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Scripts;
+using Scripts_o;
 
-namespace Scripts {
+namespace Scripts_o {
 	public class BuildMain : MonoBehaviour {
 		private Vector3 coords;
 		private CameraControl camCtrl;

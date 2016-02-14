@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Scripts;
+using Scripts_o;
 
-namespace Scripts {
+namespace Scripts_o {
 	//sets material if mousehover or selected
 	//must be imported as component in the to its refered object!
 	public class MouseReaction : MonoBehaviour {
