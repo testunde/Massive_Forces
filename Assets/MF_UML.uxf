@@ -34,9 +34,10 @@ makeUnit(String building, String name)</panel_attributes>
     </coordinates>
     <panel_attributes>CameraControl : MonoBehavior
 --
-
+pointer: Vector3
 --
-</panel_attributes>
+getCoordsArXZ(Vector3): Vector3
+Update() ..most things done here</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -45,7 +46,7 @@ makeUnit(String building, String name)</panel_attributes>
       <x>642</x>
       <y>630</y>
       <w>156</w>
-      <h>180</h>
+      <h>186</h>
     </coordinates>
     <panel_attributes>/IngameObject/
 --
@@ -78,7 +79,8 @@ rotateTo(Vector3) (only y-axis)
       <w>222</w>
       <h>330</h>
     </coordinates>
-    <panel_attributes>Camera object
+    <panel_attributes>*Camera object*
+fontsize=18
 --
 bg=orange</panel_attributes>
     <additional_attributes/>
@@ -192,37 +194,37 @@ animations:
     <id>Relation</id>
     <coordinates>
       <x>714</x>
-      <y>804</y>
+      <y>810</y>
       <w>60</w>
-      <h>168</h>
+      <h>162</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 instance of</panel_attributes>
-    <additional_attributes>10.0;260.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;250.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>732</x>
-      <y>804</y>
+      <y>810</y>
       <w>156</w>
-      <h>168</h>
+      <h>162</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 instance of</panel_attributes>
-    <additional_attributes>240.0;260.0;240.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
+    <additional_attributes>240.0;250.0;240.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>558</x>
-      <y>804</y>
+      <y>810</y>
       <w>156</w>
-      <h>168</h>
+      <h>162</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 instance of</panel_attributes>
-    <additional_attributes>10.0;260.0;10.0;100.0;240.0;100.0;240.0;10.0</additional_attributes>
+    <additional_attributes>10.0;250.0;10.0;90.0;240.0;90.0;240.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
@@ -232,7 +234,8 @@ instance of</panel_attributes>
       <w>132</w>
       <h>54</h>
     </coordinates>
-    <panel_attributes>Database
+    <panel_attributes>*Database*
+fontsize=18
 --
 bg=gray
 </panel_attributes>
@@ -272,7 +275,7 @@ LeaveSameObjectsSelected(IngameObject)
       <w>192</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
+    <panel_attributes>lt=&lt;&lt;-
 new static instance</panel_attributes>
     <additional_attributes>300.0;20.0;10.0;20.0</additional_attributes>
   </element>
@@ -321,25 +324,25 @@ Selection-methods
     <id>Relation</id>
     <coordinates>
       <x>792</x>
-      <y>672</y>
+      <y>696</y>
       <w>210</w>
-      <h>114</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;
 copy</panel_attributes>
-    <additional_attributes>10.0;170.0;330.0;10.0</additional_attributes>
+    <additional_attributes>10.0;130.0;330.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>930</x>
-      <y>672</y>
-      <w>72</w>
-      <h>288</h>
+      <x>954</x>
+      <y>696</y>
+      <w>48</w>
+      <h>264</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;
 to</panel_attributes>
-    <additional_attributes>100.0;10.0;10.0;460.0</additional_attributes>
+    <additional_attributes>60.0;10.0;10.0;420.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -349,8 +352,8 @@ to</panel_attributes>
       <w>120</w>
       <h>90</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;..
-points to
+    <panel_attributes>lt=&lt;..
+reference to
 static instance</panel_attributes>
     <additional_attributes>90.0;10.0;90.0;130.0;10.0;130.0</additional_attributes>
   </element>
@@ -362,7 +365,8 @@ static instance</panel_attributes>
       <w>486</w>
       <h>150</h>
     </coordinates>
-    <panel_attributes>all objects ingame
+    <panel_attributes>*all objects ingame*
+fontsize=16
 --
 bg=orange</panel_attributes>
     <additional_attributes/>
@@ -498,7 +502,7 @@ reference</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>840</x>
-      <y>732</y>
+      <y>744</y>
       <w>138</w>
       <h>66</h>
     </coordinates>
@@ -518,7 +522,7 @@ fg=red</panel_attributes>
       <w>132</w>
       <h>174</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
+    <panel_attributes>lt=&lt;&lt;-
 new instance</panel_attributes>
     <additional_attributes>120.0;270.0;120.0;10.0;10.0;10.0</additional_attributes>
   </element>
@@ -538,7 +542,7 @@ commands</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>702</x>
-      <y>144</y>
+      <y>120</y>
       <w>210</w>
       <h>78</h>
     </coordinates>
@@ -553,13 +557,13 @@ LookRotation(camera transform,downMax,minMax)</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>780</x>
-      <y>216</y>
+      <y>192</y>
       <w>138</w>
-      <h>114</h>
+      <h>138</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
+    <panel_attributes>lt=&lt;&lt;-
 new static instance</panel_attributes>
-    <additional_attributes>90.0;10.0;90.0;170.0;10.0;170.0</additional_attributes>
+    <additional_attributes>90.0;10.0;90.0;210.0;10.0;210.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -569,8 +573,9 @@ new static instance</panel_attributes>
       <w>84</w>
       <h>42</h>
     </coordinates>
-    <panel_attributes>UserInterface
-bg=blue</panel_attributes>
+    <panel_attributes>*UserInterface*
+bg=blue
+fontsize=18</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -579,11 +584,56 @@ bg=blue</panel_attributes>
       <x>510</x>
       <y>228</y>
       <w>60</w>
-      <h>300</h>
+      <h>294</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 UI-
-commands</panel_attributes>
-    <additional_attributes>10.0;480.0;10.0;10.0</additional_attributes>
+commands
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes>10.0;470.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>300</y>
+      <w>78</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+coords</panel_attributes>
+    <additional_attributes>110.0;210.0;10.0;210.0;10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>558</x>
+      <y>222</y>
+      <w>666</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>lt=..&gt;
+selections</panel_attributes>
+    <additional_attributes>1030.0;300.0;1030.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
