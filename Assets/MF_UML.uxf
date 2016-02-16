@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.1.1">
-  <zoom_level>5</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>995</x>
-      <y>335</y>
-      <w>160</w>
-      <h>180</h>
+      <x>1592</x>
+      <y>536</y>
+      <w>256</w>
+      <h>288</h>
     </coordinates>
     <panel_attributes>ObjectControl : MonoBehaviour
 --
@@ -36,10 +36,10 @@ makeUnit(int IDbuilding, String name): bool
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>995</x>
-      <y>115</y>
-      <w>150</w>
-      <h>95</h>
+      <x>1592</x>
+      <y>184</y>
+      <w>240</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>CameraControl : MonoBehaviour
 --
@@ -58,10 +58,10 @@ Update() ..most things done here
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1060</x>
-      <y>1005</y>
-      <w>130</w>
-      <h>235</h>
+      <x>1696</x>
+      <y>1608</y>
+      <w>208</w>
+      <h>376</h>
     </coordinates>
     <panel_attributes>[abstract] IngameObject
 --
@@ -71,11 +71,11 @@ _-IDflow: int_
 -type: string
 -model: GameObject
 -HP,maxHP: int
--buildTime,timeRemaining: float
+-buildTime,timeRemaining: int
 -fraction: int (0=neutral;1=player)
 -selectReact: SelectReact
 -actions: new ActionMatrix();
--costs: double[4]
+-costs: long[4]
 -minimap: new MinimapProjection()
 --
 IngameObject()
@@ -98,10 +98,10 @@ rotateTo(Vector3) (only y-axis)
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>980</x>
-      <y>95</y>
-      <w>185</w>
-      <h>430</h>
+      <x>1568</x>
+      <y>152</y>
+      <w>296</w>
+      <h>688</h>
     </coordinates>
     <panel_attributes>*MainCamera object*
 fontsize=18
@@ -112,10 +112,10 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>955</x>
-      <y>370</y>
-      <w>50</w>
-      <h>240</h>
+      <x>1528</x>
+      <y>592</y>
+      <w>80</w>
+      <h>384</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;
 add</panel_attributes>
@@ -124,10 +124,10 @@ add</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1075</x>
-      <y>835</y>
-      <w>105</w>
-      <h>95</h>
+      <x>1720</x>
+      <y>1336</y>
+      <w>168</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>[abstract] IO_Building
 --
@@ -144,10 +144,10 @@ animations:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>945</x>
-      <y>835</y>
-      <w>105</w>
-      <h>95</h>
+      <x>1512</x>
+      <y>1336</y>
+      <w>168</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>[abstract] IO_Unit
 --
@@ -164,10 +164,10 @@ animations:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1205</x>
-      <y>835</y>
-      <w>115</w>
-      <h>95</h>
+      <x>1928</x>
+      <y>1336</y>
+      <w>184</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>[abstract] IO_Neutral
 --
@@ -176,7 +176,7 @@ animations:
 
 --
 additional data:
--resources (positive costs: double)
+-resources (positive costs: long)
 animations:
 -cut down
 </panel_attributes>
@@ -185,10 +185,10 @@ animations:
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1120</x>
-      <y>925</y>
-      <w>35</w>
-      <h>90</h>
+      <x>1792</x>
+      <y>1480</y>
+      <w>56</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 type of</panel_attributes>
@@ -197,10 +197,10 @@ type of</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>995</x>
-      <y>925</y>
-      <w>275</w>
-      <h>65</h>
+      <x>1592</x>
+      <y>1480</y>
+      <w>440</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=.
 </panel_attributes>
@@ -209,10 +209,10 @@ type of</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>970</x>
-      <y>575</y>
-      <w>175</w>
-      <h>80</h>
+      <x>1552</x>
+      <y>920</y>
+      <w>280</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>*Database*
 fontsize=18
@@ -224,10 +224,10 @@ bg=gray
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1385</x>
-      <y>345</y>
-      <w>200</w>
-      <h>150</h>
+      <x>2216</x>
+      <y>552</y>
+      <w>320</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>_SelectionControl_
 --
@@ -254,10 +254,10 @@ leaveSameObjectsSelected(IngameObject)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1150</x>
-      <y>355</y>
-      <w>245</w>
-      <h>20</h>
+      <x>1840</x>
+      <y>568</y>
+      <w>392</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;..
 static ref.</panel_attributes>
@@ -266,10 +266,10 @@ static ref.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>995</x>
-      <y>235</y>
-      <w>150</w>
-      <h>75</h>
+      <x>1592</x>
+      <y>376</y>
+      <w>240</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>InputFetch : MonoBehaviour
 (manages all key inputs)
@@ -286,10 +286,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1395</x>
-      <y>630</y>
-      <w>135</w>
-      <h>60</h>
+      <x>2232</x>
+      <y>1008</y>
+      <w>216</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>SelectReact : MonoBehaviour
 --
@@ -298,16 +298,16 @@ public connectedObject: IngameObject
 select()
 deselect()
 &gt;turn projection on/off
-</panel_attributes>
+&gt;set MinimapProjection</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1185</x>
-      <y>685</y>
-      <w>240</w>
-      <h>450</h>
+      <x>1896</x>
+      <y>1096</y>
+      <w>384</w>
+      <h>720</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;
 copy</panel_attributes>
@@ -316,10 +316,10 @@ copy</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1325</x>
-      <y>685</y>
-      <w>95</w>
-      <h>150</h>
+      <x>2120</x>
+      <y>1096</y>
+      <w>152</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;
 
@@ -330,10 +330,10 @@ parent</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>925</x>
-      <y>815</y>
-      <w>405</w>
-      <h>125</h>
+      <x>1480</x>
+      <y>1304</y>
+      <w>648</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>*all objects ingame*
 fontsize=16
@@ -344,10 +344,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>990</x>
-      <y>595</y>
-      <w>145</w>
-      <h>25</h>
+      <x>1584</x>
+      <y>952</y>
+      <w>232</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>Class of each object
 prefix: IOb_;IOu_;IOn_
@@ -358,10 +358,10 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>995</x>
-      <y>760</y>
-      <w>270</w>
-      <h>85</h>
+      <x>1592</x>
+      <y>1216</y>
+      <w>432</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>lt=&lt;.&gt;
 </panel_attributes>
@@ -370,10 +370,10 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>420</y>
-      <w>105</w>
-      <h>425</h>
+      <x>1440</x>
+      <y>672</y>
+      <w>168</w>
+      <h>680</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 commands
@@ -407,10 +407,10 @@ to
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1255</x>
-      <y>85</y>
-      <w>175</w>
-      <h>65</h>
+      <x>2008</x>
+      <y>136</y>
+      <w>280</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>Mouselook
 --
@@ -422,10 +422,10 @@ lookRotation(camera transform,downMax,minMax)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>130</y>
-      <w>125</w>
-      <h>25</h>
+      <x>1824</x>
+      <y>208</y>
+      <w>200</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 new static
@@ -435,10 +435,10 @@ instance</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>855</x>
-      <y>40</y>
-      <w>90</w>
-      <h>35</h>
+      <x>1368</x>
+      <y>64</y>
+      <w>144</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>*UserInterface*
 bg=blue
@@ -450,10 +450,10 @@ fontsize=18
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>70</y>
-      <w>105</w>
-      <h>355</h>
+      <x>1440</x>
+      <y>112</y>
+      <w>168</w>
+      <h>568</h>
     </coordinates>
     <panel_attributes>lt=..&gt;
 UI-
@@ -463,10 +463,10 @@ commands</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>175</y>
-      <w>125</w>
-      <h>20</h>
+      <x>1824</x>
+      <y>280</y>
+      <w>200</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 coords</panel_attributes>
@@ -475,10 +475,10 @@ coords</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>940</x>
-      <y>55</y>
-      <w>615</w>
-      <h>300</h>
+      <x>1504</x>
+      <y>88</y>
+      <w>984</w>
+      <h>480</h>
     </coordinates>
     <panel_attributes>lt=&lt;..&gt;
 selection
@@ -488,10 +488,10 @@ selection
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>685</x>
-      <y>495</y>
-      <w>385</w>
-      <h>585</h>
+      <x>1096</x>
+      <y>792</y>
+      <w>616</w>
+      <h>936</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 </panel_attributes>
@@ -500,10 +500,10 @@ selection
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>985</x>
-      <y>625</y>
-      <w>120</w>
-      <h>25</h>
+      <x>1576</x>
+      <y>1000</y>
+      <w>192</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>Actions
 prefix: Aem_;Acom_;Aup_;Are_;Acr
@@ -514,10 +514,10 @@ layer=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>335</x>
-      <y>415</y>
-      <w>150</w>
-      <h>100</h>
+      <x>536</x>
+      <y>664</y>
+      <w>240</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>[abstract] Action
 --
@@ -537,10 +537,10 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>505</x>
-      <y>645</y>
-      <w>545</w>
-      <h>70</h>
+      <x>808</x>
+      <y>1032</y>
+      <w>872</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 type of</panel_attributes>
@@ -549,10 +549,10 @@ type of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>115</x>
-      <y>585</y>
-      <w>105</w>
-      <h>65</h>
+      <x>184</x>
+      <y>936</y>
+      <w>168</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>[abstract] A_Command
 --
@@ -564,10 +564,10 @@ command methods</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>345</x>
-      <y>585</y>
-      <w>105</w>
-      <h>65</h>
+      <x>552</x>
+      <y>936</y>
+      <w>168</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>[abstract] A_Research
 --
@@ -579,10 +579,10 @@ call reseach methods</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>585</y>
-      <w>110</w>
-      <h>65</h>
+      <x>736</x>
+      <y>936</y>
+      <w>176</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>[abstract] A_Create
 --
@@ -596,10 +596,10 @@ build time (from object class)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>395</x>
-      <y>510</y>
-      <w>35</w>
-      <h>85</h>
+      <x>632</x>
+      <y>816</y>
+      <w>56</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 type of
@@ -613,10 +613,10 @@ type of
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>530</y>
-      <w>245</w>
-      <h>65</h>
+      <x>448</x>
+      <y>848</y>
+      <w>392</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=.
 </panel_attributes>
@@ -625,10 +625,10 @@ type of
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>50</x>
-      <y>645</y>
-      <w>130</w>
-      <h>70</h>
+      <x>80</x>
+      <y>1032</y>
+      <w>208</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 fg=gray
@@ -638,10 +638,10 @@ fg=gray
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>565</x>
-      <y>595</y>
-      <w>435</w>
-      <h>20</h>
+      <x>904</x>
+      <y>952</y>
+      <w>696</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 points  to</panel_attributes>
@@ -650,10 +650,10 @@ points  to</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>695</x>
-      <y>70</y>
-      <w>205</w>
-      <h>365</h>
+      <x>1112</x>
+      <y>112</y>
+      <w>328</w>
+      <h>584</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 show
@@ -664,10 +664,10 @@ matrix</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>455</y>
-      <w>100</w>
-      <h>25</h>
+      <x>768</x>
+      <y>728</y>
+      <w>160</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 contents are
@@ -678,9 +678,9 @@ contents are
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>585</y>
-      <w>105</w>
-      <h>65</h>
+      <y>936</y>
+      <w>168</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>[abstract] A_Empty
 fg=gray
@@ -695,10 +695,10 @@ fg=gray
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>50</x>
-      <y>535</y>
-      <w>130</w>
-      <h>60</h>
+      <x>80</x>
+      <y>856</y>
+      <w>208</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=.
 fg=gray
@@ -708,10 +708,10 @@ fg=gray
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>395</x>
-      <y>645</y>
-      <w>125</w>
-      <h>70</h>
+      <x>632</x>
+      <y>1032</y>
+      <w>200</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 </panel_attributes>
@@ -720,23 +720,23 @@ fg=gray
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>625</x>
-      <y>230</y>
-      <w>145</w>
-      <h>120</h>
+      <x>1000</x>
+      <y>368</y>
+      <w>232</w>
+      <h>192</h>
     </coordinates>
     <panel_attributes>_Res_
 --
 f: int (amount of fractions)
-res: double[f,4]
-maxRes: double[f,4]
+res: long[f,4]
+maxRes: long[f,4]
 --
 _getInstance(): Res_
-changeBy(int f, double[4])
-set(int f, double[4])
-get(int f): double[4]
+changeBy(int f, long[4])
+set(int f, long[4])
+get(int f): long[4]
 &gt;same with maxRes
-isAvailable(int f,int res,double amount): bool
+isAvailable(int f,int res,long amount): bool
 
 *[4] is amount of resource types*
 *startValues are set in constructor!*
@@ -746,10 +746,10 @@ isAvailable(int f,int res,double amount): bool
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>115</x>
-      <y>260</y>
-      <w>125</w>
-      <h>85</h>
+      <x>184</x>
+      <y>416</y>
+      <w>200</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>Research System
 (seperate for each fraction?)
@@ -762,10 +762,10 @@ with global variables
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>235</x>
-      <y>340</y>
-      <w>130</w>
-      <h>255</h>
+      <x>376</x>
+      <y>544</y>
+      <w>208</w>
+      <h>408</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-&gt;&gt;
 ???</panel_attributes>
@@ -774,10 +774,10 @@ with global variables
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1255</x>
-      <y>170</y>
-      <w>175</w>
-      <h>55</h>
+      <x>2008</x>
+      <y>272</y>
+      <w>280</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>_InputModul_
 --
@@ -792,10 +792,10 @@ _getInstance(): InputModul_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>570</x>
-      <y>405</y>
-      <w>130</w>
-      <h>95</h>
+      <x>912</x>
+      <y>648</y>
+      <w>208</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>ActionMatrix
 --
@@ -814,10 +814,10 @@ get(): Action[5,3]
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>165</x>
-      <y>645</y>
-      <w>130</w>
-      <h>70</h>
+      <x>264</x>
+      <y>1032</y>
+      <w>208</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 </panel_attributes>
@@ -826,10 +826,10 @@ get(): Action[5,3]
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>565</x>
-      <y>600</y>
-      <w>435</w>
-      <h>30</h>
+      <x>904</x>
+      <y>960</y>
+      <w>696</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 
@@ -840,10 +840,10 @@ costs &amp; build time</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>190</y>
-      <w>125</w>
-      <h>20</h>
+      <x>1824</x>
+      <y>304</y>
+      <w>200</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;..
 static ref.</panel_attributes>
@@ -852,10 +852,10 @@ static ref.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1150</x>
-      <y>275</y>
-      <w>65</w>
-      <h>90</h>
+      <x>1840</x>
+      <y>440</y>
+      <w>104</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=..</panel_attributes>
     <additional_attributes>110.0;10.0;110.0;160.0;10.0;160.0</additional_attributes>
@@ -863,10 +863,10 @@ static ref.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1120</x>
-      <y>615</y>
-      <w>35</w>
-      <h>230</h>
+      <x>1792</x>
+      <y>984</y>
+      <w>56</w>
+      <h>368</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 type of</panel_attributes>
@@ -875,10 +875,10 @@ type of</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>50</y>
-      <w>135</w>
-      <h>190</h>
+      <x>1168</x>
+      <y>80</y>
+      <w>216</w>
+      <h>304</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 for resource display
@@ -888,10 +888,10 @@ for resource display
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>345</y>
-      <w>275</w>
-      <h>105</h>
+      <x>1168</x>
+      <y>552</y>
+      <w>440</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 change</panel_attributes>
@@ -900,10 +900,10 @@ change</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>330</x>
-      <y>105</y>
-      <w>125</w>
-      <h>65</h>
+      <x>528</x>
+      <y>168</y>
+      <w>200</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>*AI*
 bg=green
@@ -915,10 +915,10 @@ fontsize=18
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>230</x>
-      <y>585</y>
-      <w>105</w>
-      <h>65</h>
+      <x>368</x>
+      <y>936</y>
+      <w>168</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>[abstract] A_Update
 --
@@ -930,10 +930,10 @@ set modifiers / factors</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>165</x>
-      <y>535</y>
-      <w>130</w>
-      <h>60</h>
+      <x>264</x>
+      <y>856</y>
+      <w>208</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=.
 </panel_attributes>
@@ -942,10 +942,10 @@ set modifiers / factors</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>645</y>
-      <w>130</w>
-      <h>70</h>
+      <x>448</x>
+      <y>1032</y>
+      <w>208</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 </panel_attributes>
@@ -954,10 +954,10 @@ set modifiers / factors</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>395</x>
-      <y>340</y>
-      <w>125</w>
-      <h>50</h>
+      <x>632</x>
+      <y>544</y>
+      <w>200</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>Produce-/Timeline
 (for each IO_Building)
@@ -969,10 +969,10 @@ fg=red
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>235</x>
-      <y>280</y>
-      <w>400</w>
-      <h>20</h>
+      <x>376</x>
+      <y>448</y>
+      <w>640</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-&gt;&gt;
 maybe connect to one class</panel_attributes>
@@ -981,10 +981,10 @@ maybe connect to one class</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>355</x>
-      <y>165</y>
-      <w>15</w>
-      <h>260</h>
+      <x>568</x>
+      <y>264</y>
+      <w>24</w>
+      <h>416</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;500.0;10.0;10.0</additional_attributes>
@@ -992,10 +992,10 @@ maybe connect to one class</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>865</x>
-      <y>1290</y>
-      <w>125</w>
-      <h>120</h>
+      <x>1384</x>
+      <y>2064</y>
+      <w>200</w>
+      <h>192</h>
     </coordinates>
     <panel_attributes>MinimapProjection : MonoBehaviour
 --
@@ -1009,10 +1009,10 @@ fg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>940</x>
-      <y>1090</y>
-      <w>130</w>
-      <h>210</h>
+      <x>1504</x>
+      <y>1744</y>
+      <w>208</w>
+      <h>336</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 create new</panel_attributes>
@@ -1021,10 +1021,10 @@ create new</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1200</x>
-      <y>440</y>
-      <w>155</w>
-      <h>190</h>
+      <x>1920</x>
+      <y>704</y>
+      <w>248</w>
+      <h>304</h>
     </coordinates>
     <panel_attributes>MarkerControl : MonoBehaviour
 --
@@ -1052,10 +1052,10 @@ OnCollisionExit()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1305</x>
-      <y>360</y>
-      <w>15</w>
-      <h>90</h>
+      <x>2088</x>
+      <y>576</y>
+      <w>24</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=..</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
@@ -1063,10 +1063,10 @@ OnCollisionExit()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
+      <x>864</x>
       <y>0</y>
-      <w>575</w>
-      <h>1370</h>
+      <w>920</w>
+      <h>2192</h>
     </coordinates>
     <panel_attributes>lt=.
 fg=green</panel_attributes>
@@ -1075,10 +1075,10 @@ fg=green</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1190</x>
-      <y>420</y>
-      <w>175</w>
-      <h>220</h>
+      <x>1904</x>
+      <y>672</y>
+      <w>280</w>
+      <h>352</h>
     </coordinates>
     <panel_attributes>*SelectionMarker (cube)*
 fontsize=18
@@ -1089,10 +1089,10 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1485</x>
-      <y>490</y>
-      <w>50</w>
-      <h>150</h>
+      <x>2376</x>
+      <y>784</y>
+      <w>80</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 commands</panel_attributes>
@@ -1101,10 +1101,10 @@ commands</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1150</x>
-      <y>380</y>
-      <w>120</w>
-      <h>50</h>
+      <x>1840</x>
+      <y>608</y>
+      <w>192</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 ref.</panel_attributes>
@@ -1113,10 +1113,10 @@ ref.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>195</y>
-      <w>75</w>
-      <h>95</h>
+      <x>1824</x>
+      <y>312</y>
+      <w>120</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>lt=..</panel_attributes>
     <additional_attributes>130.0;10.0;130.0;170.0;10.0;170.0</additional_attributes>
@@ -1124,10 +1124,10 @@ ref.</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>1455</x>
-      <y>745</y>
-      <w>60</w>
-      <h>20</h>
+      <x>2328</x>
+      <y>1192</y>
+      <w>96</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=.
 TODO!
@@ -1138,10 +1138,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1445</x>
-      <y>670</y>
-      <w>40</w>
-      <h>85</h>
+      <x>2312</x>
+      <y>1072</y>
+      <w>64</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 fg=red</panel_attributes>
@@ -1150,10 +1150,10 @@ fg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>955</x>
-      <y>860</y>
-      <w>50</w>
-      <h>160</h>
+      <x>1528</x>
+      <y>1376</y>
+      <w>80</w>
+      <h>256</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 fg=red</panel_attributes>
@@ -1162,10 +1162,10 @@ fg=red</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>945</x>
-      <y>1010</y>
-      <w>60</w>
-      <h>20</h>
+      <x>1512</x>
+      <y>1616</y>
+      <w>96</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=.
 TODO!
@@ -1176,10 +1176,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1065</x>
-      <y>90</y>
-      <w>200</w>
-      <h>20</h>
+      <x>1704</x>
+      <y>144</y>
+      <w>320</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 controls</panel_attributes>
@@ -1188,10 +1188,10 @@ controls</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1325</x>
-      <y>505</y>
-      <w>70</w>
-      <h>45</h>
+      <x>2120</x>
+      <y>808</y>
+      <w>112</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 fg=red</panel_attributes>
@@ -1200,10 +1200,10 @@ fg=red</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>1385</x>
-      <y>530</y>
-      <w>65</w>
-      <h>30</h>
+      <x>2216</x>
+      <y>848</y>
+      <w>104</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=.
 project the
@@ -1216,10 +1216,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>1310</x>
-      <y>295</y>
-      <w>55</w>
-      <h>25</h>
+      <x>2096</x>
+      <y>472</y>
+      <w>88</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=.
 single click
@@ -1232,10 +1232,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1305</x>
-      <y>310</y>
-      <w>30</w>
-      <h>65</h>
+      <x>2088</x>
+      <y>496</y>
+      <w>48</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 fg=red</panel_attributes>
@@ -1244,26 +1244,27 @@ fg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1110</x>
-      <y>395</y>
-      <w>110</w>
-      <h>85</h>
+      <x>1696</x>
+      <y>544</y>
+      <w>296</w>
+      <h>216</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 fg=red</panel_attributes>
-    <additional_attributes>197.0;15.0;10.0;150.0</additional_attributes>
+    <additional_attributes>347.0;15.0;10.0;250.0</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>1190</x>
-      <y>385</y>
-      <w>60</w>
-      <h>20</h>
+      <x>1944</x>
+      <y>504</y>
+      <w>96</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=.
 TODO!
-(with UI)
+(with UI &amp;
+ActionMatrix)
 fg=red
 bg=yellow</panel_attributes>
     <additional_attributes/>

@@ -9,8 +9,8 @@ namespace Scripts {
 			name="testUnit";
 			type="IOu_testUnit";
 			maxHP=100;
-			buildTime=.8f;
-			costs=new double[]{-2d,-2d,-0d,-0d};
+			buildTime=1;
+			costs=new long[]{-2,-2,-0,-0};
 			//set ActionMatrix
 			//change MinimapProjection
 			model=(GameObject)Resources.Load("objects/Prefabs/Units/IOu_testUnit",typeof(GameObject));

@@ -10,6 +10,8 @@ namespace Scripts {
 		private static Res resources;
 		private MarkerControl marker;
 		private int selectState=0,buildState=0;
+		private float interval;
+		private int c=0;
 		private string targetBuilding=null;
 		private IO_Building currentBuild=null;
 		public List<IngameObject> units=new List<IngameObject>();
@@ -50,6 +52,9 @@ namespace Scripts {
 		}
 		
 		void Update(){
+			interval=1/Time.fixedDeltaTime;	//returns the setted FixedUpdate in Hz [1/0.02s=50Hz]
+			c++;
+			
 			//behavior of selection
 			if(selectState>0&&inputMod.rightDown){
 				marker.abort();
@@ -98,7 +103,7 @@ namespace Scripts {
 					break;
 				}case 1:{	//seperat case, so its possible to repeat this state immediately
 					currentBuild=(IO_Building)Activator.CreateInstance(Type.GetType("Scripts."+targetBuilding));
-					currentBuild.setPreview();
+					currentBuild.setPreview(1);
 					buildState=2;
 					//set here the coords, so if shift and right-click is hold down it spawns at the mouse pointer
 					currentBuild.setCoords(inputMod.pointer);
@@ -110,8 +115,8 @@ namespace Scripts {
 					else
 						currentBuild.setCoords(inputMod.pointer);
 					
-					if(inputMod.leftDown){
-						currentBuild.build(1);
+					if(inputMod.leftDown&&resources.costsAvailable(1,currentBuild.costs)){
+						currentBuild.build();
 						buildings.Add(currentBuild);
 						buildQueue.Add(currentBuild);
 						resources.changeBy(1,currentBuild.costs);	//set resources
@@ -131,6 +136,20 @@ namespace Scripts {
 					currentBuild=null;
 					buildState=0;
 					break;
+				}
+			}
+			
+			if(c%(int)(interval*1f)==0){
+				c-=(int)(interval*1f);
+				//foreach(IO_Building building in buildQueue){
+				for(int i=0;i<buildQueue.Count;i++){
+					IO_Building building=buildQueue[i];
+					if(building.timeRemaining<=0){
+						building.finishedBuild();
+						buildQueue.Remove(building);
+					}else{
+						building.timeRemaining--;
+					}
 				}
 			}
 		}

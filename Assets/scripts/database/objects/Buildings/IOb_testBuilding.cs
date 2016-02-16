@@ -9,8 +9,8 @@ namespace Scripts {
 			name="testBuilding";
 			type="IOb_testBuilding";
 			maxHP=1000;
-			buildTime=3f;
-			costs=new double[]{-10d,-10d,-10d,-10d};
+			buildTime=3;
+			costs=new long[]{-60,-60,-15,-0};
 			//set ActionMatrix
 			//change MinimapProjection
 			model=GameObject.Instantiate((GameObject)Resources.Load("objects/Prefabs/Buildings/IOb_testBuilding",typeof(GameObject)));initAfterModel();

@@ -4,16 +4,16 @@ using Scripts;
 
 namespace Scripts {
 	public abstract class IngameObject {
-		protected static int resAmount=Res.getInstance().a;
+		protected static Res resources=Res.getInstance();
 		protected static int IDflow=1;
 		public int ID;
 		public string name;
 		public string type;
 		public GameObject model;
 		public int HP,maxHP;
-		public float buildTime,timeRemaining;
+		public int buildTime,timeRemaining;
 		public int fraction;
-		public double[] costs=new double[resAmount];
+		public long[] costs=new long[resources.a];
 		public ActionMatrix actions=new ActionMatrix();
 		protected MinimapProjection minimap=new MinimapProjection();
 		public SelectReact selectReact;

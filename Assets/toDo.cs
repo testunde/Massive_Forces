@@ -11,8 +11,6 @@ OR: use the OnMouseEnter() methods
 
 UML:
 -(todo's in uml file)
--set red preview if not enough resources are available
--implement building time
 -fix selection
 -lags on camera?
 
@@ -20,6 +18,4 @@ Documentation.cs:
 - add key/button/shortcut functions
 
 ###COMMIT CLIPBOARD###
--implemented UML
--fixed cam rotation while zoom (and mouse is moved)
 */

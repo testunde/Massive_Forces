@@ -7,22 +7,22 @@ namespace Scripts {
 		private static Res instance=null;
 		public int f=2;	//amount of fractions with player, but without neutral
 		public int a=4;	//amount of resource types
-		private double[,] res;
-		private double[,] maxRes;
+		private long[,] res;
+		private long[,] maxRes;
 		
 		private Res(){
-			res=new double[f,a];
-			maxRes=new double[f,a];
+			res=new long[f,a];
+			maxRes=new long[f,a];
 			
 			//set start values
 			for(int i=0;i<f;i++){
-				res[i,0]=100;
+				res[i,0]=200;
 				maxRes[i,0]=2000;
 				
-				res[i,1]=100;
+				res[i,1]=200;
 				maxRes[i,1]=2000;
 				
-				res[i,2]=50;
+				res[i,2]=80;
 				maxRes[i,2]=2000;
 				
 				res[i,3]=0;
@@ -41,12 +41,12 @@ namespace Scripts {
 			for(int i=0;i<a;i++){
 				if(res[fraction,i]>maxRes[fraction,i])
 					res[fraction,i]=maxRes[fraction,i];
-				//else if(res[fraction,i]<0d)
-				//	res[fraction,i]=0d;
+				//else if(res[fraction,i]<0)
+				//	res[fraction,i]=0;
 			}
 		}
 		
-		public bool isAvailable(int fraction,int r,double amount){
+		public bool isAvailable(int fraction,int r,long amount){
 			bool result=false;
 			if(r<a){
 				result=(res[fraction,r]>=amount);
@@ -54,43 +54,58 @@ namespace Scripts {
 			return result;
 		}
 		
+		public bool costsAvailable(int fraction,long[] costs){
+			bool result=true;
+			if(costs.Length<=a){
+				for(int i=0;i<a;i++){
+					if(res[fraction,i]<Mathf.Abs(costs[i])){
+						result=false;
+						break;
+					}
+				}
+			}else{
+				result=false;
+			}
+			return result;
+		}
+		
 		//CURRENT VALUES
-		public void changeBy(int fraction,double[] amount){
+		public void changeBy(int fraction,long[] amount){
 			if(amount.Length==a){
 				for(int i=0;i<a;i++)
 					res[fraction,i]+=amount[i];
 			}
 			limit(fraction);
 		}
-		public void set(int fraction,double[] amount){
+		public void set(int fraction,long[] amount){
 			if(amount.Length==a){
 				for(int i=0;i<a;i++)
 					res[fraction,i]=amount[i];
 			}
 			limit(fraction);
 		}
-		public double[] get(int fraction){
-			double[] result=new double[a];
+		public long[] get(int fraction){
+			long[] result=new long[a];
 			for(int i=0;i<a;i++)
 				result[i]=res[fraction,i];
 			return result;
 		}
 		
 		//MAX VALUES
-		public void changeByMax(int fraction,double[] amount){
+		public void changeByMax(int fraction,long[] amount){
 			if(amount.Length==a){
 				for(int i=0;i<a;i++)
 					maxRes[fraction,i]+=amount[i];
 			}
 		}
-		public void setMax(int fraction,double[] amount){
+		public void setMax(int fraction,long[] amount){
 			if(amount.Length==a){
 				for(int i=0;i<a;i++)
 					maxRes[fraction,i]=amount[i];
 			}
 		}
-		public double[] getMax(int fraction){
-			double[] result=new double[a];
+		public long[] getMax(int fraction){
+			long[] result=new long[a];
 			for(int i=0;i<a;i++)
 				result[i]=maxRes[fraction,i];
 			return result;
