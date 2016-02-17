@@ -8,10 +8,11 @@ game statistics at the end of a game
 
 UML:
 -lags on camera?
--makeUnit method (with UI & ActionMatrix)
 -moveTo method for IO_Unit
+-makeUnit method (put ActionMatrix on keyboard)
+-selection: click through object? (make Ray from CameraControl public)
 -MinimapProjection
--multi selection (shift+ctrl)
+-selection: double click > leaveSameObjectsSelected(...)
 
 Documentation.cs:
 - add key/button/shortcut functions

@@ -15,15 +15,15 @@ namespace Scripts {
 		public void select(){
 			if(!selected){
 				proj.enabled=true;
+				selected=true;
 			}
-			selected=true;
 		}
 		
 		public void deselect(){
 			if(selected){
 				proj.enabled=false;
+				selected=false;
 			}
-			selected=false;
 		}
 		
 		private void createProjector(){

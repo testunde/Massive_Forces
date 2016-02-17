@@ -64,6 +64,10 @@ namespace Scripts {
 			switch(selectState){
 				case 0:{
 					if(inputMod.leftDown&&buildState==0){
+						if(inputMod.shiftHold)
+							marker.add=true;
+						if(inputMod.ctrlHold)
+							marker.remove=true;
 						marker.begin(inputMod.pointer);
 						selectState=1;
 					}
@@ -74,7 +78,7 @@ namespace Scripts {
 					}else{
 						if(!inputMod.rightHold){
 							marker.finish(inputMod.pointer);
-							selectState=0;
+							goto case 99;
 						}else{
 							marker.setX(inputMod.pointer);
 							selectState=2;
@@ -86,11 +90,14 @@ namespace Scripts {
 						marker.scaleY(inputMod.pointer);
 					}else{
 						marker.finish(inputMod.pointer);
-						selectState=0;
+						goto case 99;
 					}
 					break;
-				}default:{
+				}case 99:	//reset
+				default:{
 					selectState=0;
+					marker.add=false;
+					marker.remove=false;
 					break;
 				}
 			}

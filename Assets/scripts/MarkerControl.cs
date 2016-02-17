@@ -14,8 +14,14 @@ namespace Scripts {
 		private Vector3 xPoint,xMid;
 		//needed, so that the selection() and deseelction() methods don't get called more then one time
 		private Dictionary<IngameObject,GameObject> selObj=new Dictionary<IngameObject,GameObject>();
+		public bool add,remove;
 		
 		public void begin(Vector3 coords){
+			if(!(add||remove)){
+				selection.clearList();
+			}else{
+				selection.copyToTemp();
+			}
 			activate();
 			//set marker cube 2f under terrain
 			markTr.position=new Vector3(coords.x,(height/2f)-2f,coords.z);
@@ -53,14 +59,12 @@ namespace Scripts {
 		
 		public void finish(Vector3 coords){
 			scaleY(coords);
-			markTr.localScale=new Vector3(0f,0f,0f);
 			deactivate();
 		}
 		
 		public void abort(){
-			markTr.localScale=new Vector3(0f,0f,0f);
 			foreach(IngameObject obj in selObj.Keys){
-				selection.removeItem(obj);
+				selection.removeItemMarker(obj);
 			}
 			deactivate();
 		}
@@ -77,6 +81,8 @@ namespace Scripts {
 		}
 		
 		private void deactivate(){
+			markTr.localScale=new Vector3(0f,0f,0f);
+			selection.clearTempList();
 			selObj.Clear();
 			boxCol.enabled=false;
 			meshRender.enabled=false;
@@ -97,6 +103,8 @@ namespace Scripts {
 			markTr=gameObject.transform;
 			boxCol=gameObject.GetComponent<BoxCollider>();
 			meshRender=gameObject.GetComponent<MeshRenderer>();
+			add=false;
+			remove=false;
 		}
 		
 		void OnCollisionStay(Collision col){
@@ -108,8 +116,18 @@ namespace Scripts {
 		private void colIn(Collision col){
 			IngameObject search=searchScript(col.gameObject);
 			if(search!=null && !selObj.ContainsKey(search)){
-				selObj.Add(search,col.gameObject);
-				selection.addItem(search);
+				if(remove){
+					if(selection.tempMarker.Contains(search)){
+						selection.removeItemMarker(search);
+						selObj.Add(search,col.gameObject);
+					}else if(add){
+						selection.invertItemMarker(search);
+						selObj.Add(search,col.gameObject);
+					}
+				}else{
+					selection.addItemMarker(search);
+					selObj.Add(search,col.gameObject);
+				}
 			}
 		}
 		
@@ -117,7 +135,15 @@ namespace Scripts {
 			IngameObject search=searchScript(col.gameObject);
 			if(search!=null && selObj.ContainsValue(col.gameObject)){
 				selObj.Remove(search);
-				selection.removeItem(search);
+				if(remove){
+					if(add){
+						selection.invertItemMarker(search);
+					}else{
+						selection.addItemMarker(search);
+					}
+				}else{
+					selection.removeItemMarker(search);
+				}
 			}
 		}
 	}

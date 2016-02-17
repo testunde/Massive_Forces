@@ -7,7 +7,7 @@ namespace Scripts {
 	public class SelectionControl {
 		private static SelectionControl instance=null;
 		private List<IngameObject> selections=new List<IngameObject>();
-		private List<IngameObject> tempMarker=new List<IngameObject>();
+		public List<IngameObject> tempMarker=new List<IngameObject>();
 		
 		private SelectionControl(){
 		}
@@ -20,15 +20,24 @@ namespace Scripts {
 		}
 		
 		//BASIC SET METHODS
-		public void addItem(IngameObject item){
-			tempMarker.Add(item);
-			processSelect();
+		public void addItemMarker(IngameObject item){
+			if(!tempMarker.Contains(item)){
+				tempMarker.Add(item);
+				processSelect();
+			}
 		}
 		
-		public void removeItem(IngameObject item){
+		public void removeItemMarker(IngameObject item){
 			item.selectReact.deselect();
 			tempMarker.Remove(item);
 			processSelect();
+		}
+		
+		public void invertItemMarker(IngameObject item){
+			if(tempMarker.Contains(item))
+				removeItemMarker(item);
+			else
+				addItemMarker(item);
 		}
 		
 		//ADVANCED REMOVE METHODS
@@ -52,20 +61,6 @@ namespace Scripts {
 			}
 		}
 		
-		//e.g. with double click
-		public void leaveSameObjectsSelected(IngameObject Iobj){
-			for(int i=0;i<selections.Count;i++){
-				IngameObject obj=selections[i];
-				//alternative: if(!obj.type==Iobj.type)
-				if(!(Object.ReferenceEquals(obj.GetType(),Iobj.GetType())))
-					selections.Remove(obj);
-			}
-		}
-		
-		public void clearList(){
-			selections=new List<IngameObject>();
-		}
-		
 		private void processSelect(){
 			selections=new List<IngameObject>(tempMarker);
 			if(areSomeUnits())
@@ -75,6 +70,33 @@ namespace Scripts {
 			
 			foreach(IngameObject obj in selections)
 				obj.selectReact.select();
+		}
+		
+		//e.g. with double click
+		public void leaveSameObjectsSelected(IngameObject Iobj){
+			for(int i=0;i<selections.Count;i++){
+				IngameObject obj=selections[i];
+				//alternative: if(!obj.type==Iobj.type)
+				if(!(Object.ReferenceEquals(obj.GetType(),Iobj.GetType()))){
+					obj.selectReact.deselect();
+					selections.Remove(obj);
+				}
+			}
+		}
+		
+		public void copyToTemp(){
+			tempMarker=new List<IngameObject>(selections);
+		}
+		
+		public void clearList(){
+			foreach(IngameObject obj in selections){
+				obj.selectReact.deselect();
+			}
+			selections.Clear();
+		}
+		
+		public void clearTempList(){
+			tempMarker.Clear();
 		}
 		
 		//GET METHODS

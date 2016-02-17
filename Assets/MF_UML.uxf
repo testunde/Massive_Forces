@@ -250,14 +250,14 @@ leaveSameObjectsSelected(IngameObject)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1380</x>
+      <x>1566</x>
       <y>426</y>
-      <w>294</w>
-      <h>24</h>
+      <w>108</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;..
 static ref.</panel_attributes>
-    <additional_attributes>470.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>160.0;20.0;10.0;20.0;10.0;170.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1047,17 +1047,6 @@ OnCollisionEnter()
 OnCollisionExit()
 &gt;selection.removeItem()</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1566</x>
-      <y>432</y>
-      <w>18</w>
-      <h>108</h>
-    </coordinates>
-    <panel_attributes>lt=..</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
