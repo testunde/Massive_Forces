@@ -10,6 +10,7 @@ namespace Scripts {
 			type="IOu_testUnit";
 			maxHP=100;
 			buildTime=1;
+			markerSize=1f;
 			costs=new long[]{-2,-2,-0,-0};
 			//set ActionMatrix
 			//change MinimapProjection

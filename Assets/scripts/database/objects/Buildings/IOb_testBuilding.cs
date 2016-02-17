@@ -10,10 +10,12 @@ namespace Scripts {
 			type="IOb_testBuilding";
 			maxHP=1000;
 			buildTime=3;
+			markerSize=6.2f;
 			costs=new long[]{-60,-60,-15,-0};
 			//set ActionMatrix
 			//change MinimapProjection
-			model=GameObject.Instantiate((GameObject)Resources.Load("objects/Prefabs/Buildings/IOb_testBuilding",typeof(GameObject)));initAfterModel();
+			model=GameObject.Instantiate((GameObject)Resources.Load("objects/Prefabs/Buildings/IOb_testBuilding",typeof(GameObject)));
+			initAfterModel();
 		}
 	}
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Scripts;
 
 namespace Scripts {
@@ -8,14 +9,17 @@ namespace Scripts {
 		private Transform markTr;
 		private BoxCollider boxCol;
 		private MeshRenderer meshRender;
-		private float rot,height=4f;
-		private Vector3 startPoint,xPoint,xMid;
+		private float rot,height=24f;
+		public Vector3 startPoint;
+		private Vector3 xPoint,xMid;
+		//needed, so that the selection() and deseelction() methods don't get called more then one time
+		private Dictionary<IngameObject,GameObject> selObj=new Dictionary<IngameObject,GameObject>();
 		
 		public void begin(Vector3 coords){
 			activate();
 			//set marker cube 2f under terrain
 			markTr.position=new Vector3(coords.x,(height/2f)-2f,coords.z);
-			markTr.localScale=new Vector3(height,.01f,0.1f);
+			markTr.localScale=new Vector3(.01f,height,0.1f);
 			startPoint=new Vector3(coords.x,markTr.position.y,coords.z);
 		}
 		
@@ -24,9 +28,10 @@ namespace Scripts {
 			float targetScale=Vector3.Distance(startPoint,coords);
 			if(Mathf.Abs(targetScale)<.01f)
 				targetScale=Mathf.Sign(targetScale)*.01f;
-			markTr.localScale=new Vector3(markTr.localScale.x,markTr.localScale.y,Vector3.Distance(startPoint,coords));
+			markTr.localScale=new Vector3(markTr.localScale.x,markTr.localScale.y,Vector3.Distance(startPoint,
+						new Vector3(coords.x,markTr.position.y,coords.z)));
 			Vector3 targetRot=new Vector3(coords.x,gameObject.transform.position.y,coords.z);
-			gameObject.transform.LookAt(targetRot,Vector3.forward);
+			gameObject.transform.LookAt(targetRot,Vector3.up);
 		}
 		
 		public void setX(Vector3 coords){
@@ -43,7 +48,7 @@ namespace Scripts {
 			if(float.IsNaN(diff))
 				diff=.01f;
 			markTr.position=xMid+(new Vector3(diff*Mathf.Cos(rot),0f,-diff*Mathf.Sin(rot)))/2f;
-			markTr.localScale=new Vector3(markTr.localScale.x,diff,markTr.localScale.z);
+			markTr.localScale=new Vector3(diff,markTr.localScale.y,markTr.localScale.z);
 		}
 		
 		public void finish(Vector3 coords){
@@ -54,13 +59,16 @@ namespace Scripts {
 		
 		public void abort(){
 			markTr.localScale=new Vector3(0f,0f,0f);
+			foreach(IngameObject obj in selObj.Keys){
+				selection.removeItem(obj);
+			}
 			deactivate();
 		}
 		
-		private float getPointDiff(Vector3 xO1,Vector3 xO2,Vector3 p){
-			Vector3 x1=xO1-p;
-			Vector3 x2=xO2-p;
-			return (x2.x*x1.z-x1.x*x2.z)/Mathf.Sqrt(Mathf.Pow(x1.z-x2.z,2)+Mathf.Pow(x2.x-x1.x,2));
+		private float getPointDiff(Vector3 aO,Vector3 bO,Vector3 p){
+			Vector3 a=aO-p;
+			Vector3 b=bO-p;
+			return (b.x*a.z-a.x*b.z)/Mathf.Sqrt(Mathf.Pow(a.z-b.z,2)+Mathf.Pow(b.x-a.x,2));
 		}		
 		
 		private void activate(){
@@ -69,6 +77,7 @@ namespace Scripts {
 		}
 		
 		private void deactivate(){
+			selObj.Clear();
 			boxCol.enabled=false;
 			meshRender.enabled=false;
 		}
@@ -90,16 +99,26 @@ namespace Scripts {
 			meshRender=gameObject.GetComponent<MeshRenderer>();
 		}
 		
+		void OnCollisionStay(Collision col){
+			colIn(col);
+		}
 		void OnCollisionEnter(Collision col){
+			colIn(col);
+		}
+		private void colIn(Collision col){
 			IngameObject search=searchScript(col.gameObject);
-			if(search!=null)
+			if(search!=null && !selObj.ContainsKey(search)){
+				selObj.Add(search,col.gameObject);
 				selection.addItem(search);
+			}
 		}
 		
 		void OnCollisionExit(Collision col){
 			IngameObject search=searchScript(col.gameObject);
-			if(search!=null)
+			if(search!=null && selObj.ContainsValue(col.gameObject)){
+				selObj.Remove(search);
 				selection.removeItem(search);
+			}
 		}
 	}
 }

@@ -58,7 +58,7 @@ namespace Scripts {
 			
 			//#>MOUSE POSITION
 			RaycastHit hit;
-			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit)&&hit.transform.Equals(terrain.transform)){
+			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit,Mathf.Infinity,1<<8)&&hit.transform.Equals(terrain.transform)){
 				inputMod.pointer=hit.point;
 				
 				//Input.GetButtonDown("Fire1")once true if hitted

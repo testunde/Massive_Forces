@@ -2,6 +2,8 @@
 using System.Collections;
 using Scripts_o;
 
+#pragma warning disable 0414 //"private field ... assigned but not used."
+
 namespace Scripts_o {
 	//sets material if mousehover or selected
 	//must be imported as component in the to its refered object!

@@ -26,14 +26,15 @@ namespace Scripts {
 		}
 		
 		public void removeItem(IngameObject item){
-			tempMarker.Remove(item);
 			item.selectReact.deselect();
+			tempMarker.Remove(item);
 			processSelect();
 		}
 		
 		//ADVANCED REMOVE METHODS
 		public void removeNonunits(){
-			foreach(IngameObject obj in selections){
+			for(int i=0;i<selections.Count;i++){
+				IngameObject obj=selections[i];
 				if(!(obj is IO_Unit)){
 					obj.selectReact.deselect();
 					selections.Remove(obj);
@@ -42,7 +43,8 @@ namespace Scripts {
 		}
 		
 		public void removeNonbuildings(){
-			foreach(IngameObject obj in selections){
+			for(int i=0;i<selections.Count;i++){
+				IngameObject obj=selections[i];
 				if(!(obj is IO_Building)){
 					obj.selectReact.deselect();
 					selections.Remove(obj);
@@ -52,8 +54,9 @@ namespace Scripts {
 		
 		//e.g. with double click
 		public void leaveSameObjectsSelected(IngameObject Iobj){
-			foreach(IngameObject obj in selections){
-				//alternative: if(!obj.type==Iobj)
+			for(int i=0;i<selections.Count;i++){
+				IngameObject obj=selections[i];
+				//alternative: if(!obj.type==Iobj.type)
 				if(!(Object.ReferenceEquals(obj.GetType(),Iobj.GetType())))
 					selections.Remove(obj);
 			}

@@ -55,11 +55,12 @@ namespace Scripts {
 			interval=1/Time.fixedDeltaTime;	//returns the setted FixedUpdate in Hz [1/0.02s=50Hz]
 			c++;
 			
-			//behavior of selection
-			if(selectState>0&&inputMod.rightDown){
+			//abort selection process
+			if(selectState>0&&inputMod.cancel){
 				marker.abort();
 				selectState=0;
 			}
+			//behavior of selection
 			switch(selectState){
 				case 0:{
 					if(inputMod.leftDown&&buildState==0){
@@ -71,12 +72,17 @@ namespace Scripts {
 					if(!inputMod.leftUp){
 						marker.scaleX(inputMod.pointer);
 					}else{
-						marker.setX(inputMod.pointer);
-						selectState=2;
+						if(!inputMod.rightHold){
+							marker.finish(inputMod.pointer);
+							selectState=0;
+						}else{
+							marker.setX(inputMod.pointer);
+							selectState=2;
+						}
 					}
 					break;
 				}case 2:{
-					if(!inputMod.leftDown){
+					if(!inputMod.rightUp){
 						marker.scaleY(inputMod.pointer);
 					}else{
 						marker.finish(inputMod.pointer);

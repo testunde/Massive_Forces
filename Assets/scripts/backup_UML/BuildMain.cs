@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Scripts_o;
 
+#pragma warning disable 0414 //"private field ... assigned but not used."
+
 namespace Scripts_o {
 	public class BuildMain : MonoBehaviour {
 		private Vector3 coords;

@@ -14,6 +14,7 @@ namespace Scripts {
 		public int buildTime,timeRemaining;
 		public int fraction;
 		public long[] costs=new long[resources.a];
+		public float markerSize;
 		public ActionMatrix actions=new ActionMatrix();
 		protected MinimapProjection minimap=new MinimapProjection();
 		public SelectReact selectReact;
@@ -26,6 +27,14 @@ namespace Scripts {
 		public virtual void initAfterModel(){
 			selectReact=model.AddComponent<SelectReact>();
 			selectReact.connectedObject=this;
+			SetLayerRecursively(model,9);
+		}
+		
+		public virtual void SetLayerRecursively(GameObject obj,int newLayer){
+			obj.layer=newLayer;
+			foreach(Transform child in obj.transform){
+				SetLayerRecursively(child.gameObject,newLayer);
+			}
 		}
 		
 		public virtual void setCoords(Vector3 coords){

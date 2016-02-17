@@ -2,6 +2,8 @@
 using System.Collections;
 using Scripts_o;
 
+#pragma warning disable 0414 //"private field ... assigned but not used."
+
 namespace Scripts_o {
 	//create the building (TODO: hand over the mesh of the building / building ID)
 	//it's an example script for the interfaces

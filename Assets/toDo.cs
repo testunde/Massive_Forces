@@ -6,13 +6,12 @@ recycliong of wrecks
 quit button: destroy user interface :D
 game statistics at the end of a game
 
-put units, buildings and objects NOT in raycast ignore layer, so you can usw the raycast with left-/rightclick
-OR: use the OnMouseEnter() methods
-
 UML:
--(todo's in uml file)
--fix selection
 -lags on camera?
+-makeUnit method (with UI & ActionMatrix)
+-moveTo method for IO_Unit
+-MinimapProjection
+-multi selection (shift+ctrl)
 
 Documentation.cs:
 - add key/button/shortcut functions

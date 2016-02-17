@@ -5,8 +5,9 @@ using Scripts;
 namespace Scripts {
 	public class InputModul {
 		private static InputModul instance=null;
-		public bool leftDown,leftUp,leftHold,rightDown,rightHold,shiftHold,ctrlHold;
-		public bool fDown,cancel;
+		public bool leftDown,leftUp,leftHold,rightDown,rightHold,rightUp;	//mouse keys
+		public bool shiftHold,ctrlHold,cancel;	//control keys
+		public bool fDown;	//alphabetical keys
 		public Vector3 pointer;
 		public GameObject terrain;
 		

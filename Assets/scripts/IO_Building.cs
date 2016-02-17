@@ -38,12 +38,15 @@ namespace Scripts {
 		
 		public virtual void build(){
 			//disable preview; enable all building objects
-			//or: invert all enables
 			timeRemaining=buildTime;
 			Transform modelTr=model.transform;
 			for(int i=0;i<modelTr.childCount;i++){
 				GameObject child=modelTr.GetChild(i).gameObject;
-				child.SetActive(!child.activeSelf);
+				if(child.name!="preview"){
+					child.SetActive(true);
+				}else{
+					child.SetActive(false);
+				}
 			}
 			//PLAY BUILD ANIMATION
 		}
