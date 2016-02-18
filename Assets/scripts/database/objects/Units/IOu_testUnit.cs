@@ -14,7 +14,7 @@ namespace Scripts {
 			costs=new long[]{-2,-2,-0,-0};
 			//set ActionMatrix
 			//change MinimapProjection
-			model=(GameObject)Resources.Load("blender/IOu_testUnit",typeof(GameObject));
+			model=GameObject.Instantiate((GameObject)Resources.Load("blender/IOu_testUnit",typeof(GameObject)));
 			initAfterModel();
 		}
 	}

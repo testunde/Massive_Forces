@@ -8,6 +8,7 @@ namespace Scripts {
 		private static SelectionControl instance=null;
 		private List<IngameObject> selections=new List<IngameObject>();
 		public List<IngameObject> tempMarker=new List<IngameObject>();
+		public List<IngameObject> inView=new List<IngameObject>();
 		
 		private SelectionControl(){
 		}
@@ -28,8 +29,8 @@ namespace Scripts {
 		}
 		
 		public void removeItemMarker(IngameObject item){
-			item.selectReact.deselect();
 			tempMarker.Remove(item);
+			item.selectReact.deselect();
 			processSelect();
 		}
 		
@@ -41,26 +42,6 @@ namespace Scripts {
 		}
 		
 		//ADVANCED REMOVE METHODS
-		public void removeNonunits(){
-			for(int i=0;i<selections.Count;i++){
-				IngameObject obj=selections[i];
-				if(!(obj is IO_Unit)){
-					obj.selectReact.deselect();
-					selections.Remove(obj);
-				}
-			}
-		}
-		
-		public void removeNonbuildings(){
-			for(int i=0;i<selections.Count;i++){
-				IngameObject obj=selections[i];
-				if(!(obj is IO_Building)){
-					obj.selectReact.deselect();
-					selections.Remove(obj);
-				}
-			}
-		}
-		
 		private void processSelect(){
 			selections=new List<IngameObject>(tempMarker);
 			if(areSomeUnits())
@@ -72,14 +53,41 @@ namespace Scripts {
 				obj.selectReact.select();
 		}
 		
-		//e.g. with double click
-		public void leaveSameObjectsSelected(IngameObject Iobj){
-			for(int i=0;i<selections.Count;i++){
+		public void removeNonunits(){
+			//iterate backwards: the index of each element changes when an element before it gets removed or added!
+			for(int i=selections.Count-1;i>=0;i--){
 				IngameObject obj=selections[i];
-				//alternative: if(!obj.type==Iobj.type)
-				if(!(Object.ReferenceEquals(obj.GetType(),Iobj.GetType()))){
+				if(!(obj is IO_Unit)){
 					obj.selectReact.deselect();
 					selections.Remove(obj);
+				}
+			}
+		}
+		
+		public void removeNonbuildings(){
+			//iterate backwards: the index of each element changes when an element before it gets removed or added!
+			for(int i=selections.Count-1;i>=0;i--){
+				IngameObject obj=selections[i];
+				if(!(obj is IO_Building)){
+					obj.selectReact.deselect();
+					selections.Remove(obj);
+				}
+			}
+		}
+		
+		//e.g. with double click
+		public void selectSameObjectsInView(){
+			if(selections.Count>0){
+				IngameObject Sobj=selections[0];
+				tempMarker=new List<IngameObject>(inView);
+				Debug.Log(tempMarker.Count);
+				for(int i=tempMarker.Count-1;i>=0;i--){	//#######DONT REMOVE WHEN ITERATE!!! (see above)
+					IngameObject obj=tempMarker[i];
+					if(obj.type.Equals(Sobj.type)){
+					//if((Object.ReferenceEquals(obj.GetType(),Sobj.GetType()))){
+						obj.selectReact.select();
+						selections.Add(obj);
+					}
 				}
 			}
 		}
@@ -88,11 +96,13 @@ namespace Scripts {
 			tempMarker=new List<IngameObject>(selections);
 		}
 		
-		public void clearList(){
+		public void clearList(IngameObject Iobj){
 			foreach(IngameObject obj in selections){
-				obj.selectReact.deselect();
+				if(obj!=Iobj)
+					obj.selectReact.deselect();
 			}
 			selections.Clear();
+			selections.Add(Iobj);
 		}
 		
 		public void clearTempList(){
@@ -144,11 +154,11 @@ namespace Scripts {
 			return result;
 		}
 		
-		public int isOnlyOneFraction(){
+		public int isOnlyOneFraction(){	//TO USE!
 			int result=selections[0].fraction;
 			foreach(IngameObject obj in selections){
-				if(!(obj is IO_Unit)){
-					result=0;
+				if(obj.fraction!=result){
+					result=-1;
 					break;
 				}
 			}

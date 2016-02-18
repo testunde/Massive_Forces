@@ -11,7 +11,7 @@ namespace Scripts {
 			maxHP=1000;
 			buildTime=10;
 			markerSize=6.2f;
-			costs=new long[]{-60,-60,-15,-0};
+			costs=new long[]{-40,-40,-15,-0};
 			//set ActionMatrix
 			//change MinimapProjection
 			model=GameObject.Instantiate((GameObject)Resources.Load("blender/IOb_testBuilding",typeof(GameObject)));

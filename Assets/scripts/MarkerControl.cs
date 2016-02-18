@@ -12,13 +12,14 @@ namespace Scripts {
 		private float rot,height=24f;
 		public Vector3 startPoint;
 		private Vector3 xPoint,xMid;
-		//needed, so that the selection() and deseelction() methods don't get called more then one time
+		//needed, so that the selection() and deselection() methods don't get called more then one time
 		private Dictionary<IngameObject,GameObject> selObj=new Dictionary<IngameObject,GameObject>();
 		public bool add,remove;
 		
 		public void begin(Vector3 coords){
+			selObj.Clear();
 			if(!(add||remove)){
-				selection.clearList();
+				selection.clearList(null);
 			}else{
 				selection.copyToTemp();
 			}
@@ -81,11 +82,10 @@ namespace Scripts {
 		}
 		
 		private void deactivate(){
-			markTr.localScale=new Vector3(0f,0f,0f);
-			selection.clearTempList();
-			selObj.Clear();
 			boxCol.enabled=false;
 			meshRender.enabled=false;
+			markTr.localScale=new Vector3(0f,0f,0f);
+			selection.clearTempList();
 		}
 		
 		private IngameObject searchScript(GameObject obj){
@@ -108,12 +108,12 @@ namespace Scripts {
 		}
 		
 		void OnCollisionStay(Collision col){
-			colIn(col);
+			collisionIn(col);
 		}
 		void OnCollisionEnter(Collision col){
-			colIn(col);
+			collisionIn(col);
 		}
-		private void colIn(Collision col){
+		private void collisionIn(Collision col){
 			IngameObject search=searchScript(col.gameObject);
 			if(search!=null && !selObj.ContainsKey(search)){
 				if(remove){
@@ -123,6 +123,11 @@ namespace Scripts {
 					}else if(add){
 						selection.invertItemMarker(search);
 						selObj.Add(search,col.gameObject);
+					}
+				}else if(add && !remove){
+					if(!selection.tempMarker.Contains(search)){
+							selObj.Add(search,col.gameObject);
+							selection.addItemMarker(search);
 					}
 				}else{
 					selection.addItemMarker(search);
@@ -134,16 +139,20 @@ namespace Scripts {
 		void OnCollisionExit(Collision col){
 			IngameObject search=searchScript(col.gameObject);
 			if(search!=null && selObj.ContainsValue(col.gameObject)){
-				selObj.Remove(search);
 				if(remove){
 					if(add){
 						selection.invertItemMarker(search);
 					}else{
 						selection.addItemMarker(search);
 					}
+				}else if(add && !remove){
+					if(selObj.ContainsKey(search)){
+						selection.removeItemMarker(search);
+					}
 				}else{
 					selection.removeItemMarker(search);
 				}
+				selObj.Remove(search);
 			}
 		}
 	}

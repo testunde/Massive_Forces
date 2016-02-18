@@ -4,11 +4,13 @@ using Scripts;
 
 namespace Scripts {
 	public class SelectReact : MonoBehaviour {
+		private static SelectionControl selection;
 		public IngameObject connectedObject;
 		private bool selected=false;
 		private Projector proj;
 		
 		void Start(){
+			selection=SelectionControl.getInstance();
 			createProjector();
 		}
 		
@@ -36,10 +38,20 @@ namespace Scripts {
 			proj.enabled=false;
 			proj.orthographic=true;
 			proj.orthographicSize=connectedObject.markerSize;
-			proj.ignoreLayers=1<<9;
+			proj.ignoreLayers=1<<9;	//ignore the IngameObject's layer
 			proj.nearClipPlane=-16f;
 			proj.farClipPlane=24f;
 			proj.material=(Material)Resources.Load("materials/SelectionMarker");
+		}
+		
+		void OnBecameVisible(){
+			Debug.Log("in");
+			selection.inView.Add(connectedObject);
+		}
+		
+		void OnBecameInvisible(){
+			Debug.Log("out");
+			selection.inView.Remove(connectedObject);
 		}
 	}
 }

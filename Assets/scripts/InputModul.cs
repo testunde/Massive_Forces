@@ -7,7 +7,7 @@ namespace Scripts {
 		private static InputModul instance=null;
 		public bool leftDown,leftUp,leftHold,rightDown,rightHold,rightUp;	//mouse keys
 		public bool shiftHold,ctrlHold,cancel;	//control keys
-		public bool fDown;	//alphabetical keys
+		public bool fDown,rDown;	//alphabetical keys
 		public Vector3 pointer;
 		public GameObject terrain;
 		

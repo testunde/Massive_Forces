@@ -20,6 +20,7 @@ namespace Scripts {
 			inputMod.shiftHold=Input.GetKey(KeyCode.LeftShift);
 			inputMod.ctrlHold=Input.GetKey(KeyCode.LeftControl);
 			inputMod.fDown=Input.GetKeyDown(KeyCode.F);
+			inputMod.rDown=Input.GetKeyDown(KeyCode.R);
 			inputMod.cancel=Input.GetButtonDown("Cancel");
 		}
 	}

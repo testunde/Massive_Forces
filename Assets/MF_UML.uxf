@@ -223,27 +223,31 @@ bg=gray
       <x>1662</x>
       <y>414</y>
       <w>240</w>
-      <h>180</h>
+      <h>228</h>
     </coordinates>
     <panel_attributes>_SelectionControl_
 --
 selections: List&lt;IngameObject&gt;
 tempMarker: List&lt;IngameObject&gt;
+inView: List&lt;IngameObject&gt;
 _getInstance(): SelectionControl_
 --
 {get methods}
 areOnlyUnits(): bool
 areOnlyBuildings(): bool
+areSomeUnits(): bool
+areSomeBuildings(): bool
 isOnlyOneFraction(): int (fraction ID, if serveral, then -1)
-isOnlyOne(): IngameObject (null pointer of empty or serveral)
-etc.
 --
 {set methods}
-addItem(IngameObject)
-removeItem(IngameObject)
+addItemMarker(IngameObject)
+removeItemMarker(IngameObject)
+invertItemMarker(IngameObject)
 clearList()
 removeNonunits()
-leaveSameObjectsSelected(IngameObject)
+removeNonbuildings()
+selectSameObjectInView(IngameObject)
+&gt;for e.g. double click
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -251,13 +255,13 @@ leaveSameObjectsSelected(IngameObject)
     <id>Relation</id>
     <coordinates>
       <x>1566</x>
-      <y>426</y>
+      <y>432</y>
       <w>108</w>
-      <h>114</h>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;..
 static ref.</panel_attributes>
-    <additional_attributes>160.0;20.0;10.0;20.0;10.0;170.0</additional_attributes>
+    <additional_attributes>160.0;20.0;10.0;20.0;10.0;160.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -285,43 +289,49 @@ layer=1</panel_attributes>
       <x>1674</x>
       <y>756</y>
       <w>162</w>
-      <h>72</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>SelectReact : MonoBehaviour
 --
+_selection: SelectionControl.getInstance()_
 public connectedObject: IngameObject
 --
 select()
 deselect()
 &gt;turn projection on/off
-&gt;set MinimapProjection</panel_attributes>
+&gt;set MinimapProjection
+
+OnBecameInvisible()
+OnBecameVisible()
+&gt;add/remove to/from selection.inView
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>1422</x>
-      <y>822</y>
+      <y>870</y>
       <w>288</w>
-      <h>540</h>
+      <h>492</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;
 copy</panel_attributes>
-    <additional_attributes>10.0;880.0;460.0;880.0;460.0;10.0</additional_attributes>
+    <additional_attributes>10.0;800.0;460.0;800.0;460.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>1590</x>
-      <y>822</y>
+      <y>870</y>
       <w>114</w>
-      <h>180</h>
+      <h>132</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;
 
 to highest
 parent</panel_attributes>
-    <additional_attributes>170.0;10.0;10.0;280.0</additional_attributes>
+    <additional_attributes>170.0;10.0;10.0;200.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
@@ -1078,13 +1088,13 @@ bg=orange</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1782</x>
-      <y>588</y>
+      <y>636</y>
       <w>60</w>
-      <h>180</h>
+      <h>132</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 commands</panel_attributes>
-    <additional_attributes>10.0;280.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;200.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1120,5 +1130,29 @@ ref.</panel_attributes>
     <panel_attributes>lt=&lt;..
 controls</panel_attributes>
     <additional_attributes>10.0;20.0;380.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1710</x>
+      <y>636</y>
+      <w>48</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;..
+static ref.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1380</x>
+      <y>432</y>
+      <w>204</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=..
+</panel_attributes>
+    <additional_attributes>320.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>

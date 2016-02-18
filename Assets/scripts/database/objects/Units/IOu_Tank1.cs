@@ -14,7 +14,7 @@ namespace Scripts {
 			costs=new long[]{-10,-8,-4,-0};
 			//set ActionMatrix
 			//change MinimapProjection
-			model=(GameObject)Resources.Load("objects/Prefabs/Units/Tank1",typeof(GameObject));
+			model=GameObject.Instantiate((GameObject)Resources.Load("objects/Prefabs/Units/Tank1",typeof(GameObject)));
 			initAfterModel();
 		}
 	}
