@@ -107,13 +107,10 @@ namespace Scripts {
 			remove=false;
 		}
 		
-		void OnCollisionStay(Collision col){
+		void OnTriggerEnter(Collider col){
 			collisionIn(col);
 		}
-		void OnCollisionEnter(Collision col){
-			collisionIn(col);
-		}
-		private void collisionIn(Collision col){
+		private void collisionIn(Collider col){
 			IngameObject search=searchScript(col.gameObject);
 			if(search!=null && !selObj.ContainsKey(search)){
 				if(remove){
@@ -136,7 +133,7 @@ namespace Scripts {
 			}
 		}
 		
-		void OnCollisionExit(Collision col){
+		void OnTriggerExit(Collider col){
 			IngameObject search=searchScript(col.gameObject);
 			if(search!=null && selObj.ContainsValue(col.gameObject)){
 				if(remove){
