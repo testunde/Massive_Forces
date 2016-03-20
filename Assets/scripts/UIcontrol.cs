@@ -7,18 +7,22 @@ public class UIcontrol : MonoBehaviour {
 
 	public Canvas buildingMenu;
 	public Button building1;
-	private ObjectControl ObjScript;
+	private ObjectControl objScript;
 	
 	// Use this for initialization
 	void Start () 
 	{
 		buildingMenu = buildingMenu.GetComponent<Canvas> ();
 		building1 = building1.GetComponent<Button> ();
-		ObjScript = GameObject.Find("Main Camera").GetComponent<ObjectControl>();
+		objScript = GameObject.Find("MainCamera").GetComponent<ObjectControl>();
 	}
 	
 	public void building1_click ()
 	{
-		ObjScript.startBuild("IOb_testBuilding");
+		objScript.startBuild("IOb_testBuilding");
+	}
+	public void unit1_click ()
+	{
+		objScript.placeUnit("IOu_testUnit");		
 	}
 }
