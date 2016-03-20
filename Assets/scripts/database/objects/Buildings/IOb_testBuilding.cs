@@ -10,7 +10,7 @@ namespace Scripts {
 			type="IOb_testBuilding";
 			maxHP=1000;
 			buildTime=10;
-			markerSize=6.2f;
+			markerSize=9.8f;
 			costs=new long[]{-40,-40,-15,-0};
 			//set ActionMatrix
 			//change MinimapProjection

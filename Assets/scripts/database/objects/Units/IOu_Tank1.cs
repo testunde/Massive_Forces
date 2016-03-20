@@ -10,7 +10,7 @@ namespace Scripts {
 			type="IOu_Tank1";
 			maxHP=250;
 			buildTime=2;
-			markerSize=2f;
+			markerSize=2.8f;
 			costs=new long[]{-10,-8,-4,-0};
 			//set ActionMatrix
 			//change MinimapProjection

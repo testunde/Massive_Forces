@@ -7,41 +7,60 @@ namespace Scripts {
 		private static SelectionControl selection;
 		public IngameObject connectedObject;
 		private bool selected=false;
-		private Projector proj;
+		// private Projector proj;
+		private GameObject mark;
+		private Material markerMat;
 		
 		void Start(){
 			selection=SelectionControl.getInstance();
-			createProjector();
+			// createProjector();
+			markerMat=(Material)Resources.Load("materials/SelectionMarkerObj", typeof(Material));
+			createMarker();
 		}
 		
 		public void select(){
 			if(!selected){
-				proj.enabled=true;
+				// proj.enabled=true;
+				mark.GetComponent<MeshRenderer>().enabled=true;
 				selected=true;
 			}
 		}
 		
 		public void deselect(){
 			if(selected){
-				proj.enabled=false;
+				// proj.enabled=false;
+				mark.GetComponent<MeshRenderer>().enabled=false;
 				selected=false;
 			}
 		}
 		
-		private void createProjector(){
-			GameObject projObj=new GameObject();
-			projObj.name="Marker Projector";
-			projObj.transform.parent=gameObject.transform;
-			projObj.transform.localEulerAngles=new Vector3(90f,0f,0f);
-			projObj.transform.localPosition=new Vector3(0f,0f,0f);
-			proj=projObj.AddComponent<Projector>();
-			proj.enabled=false;
-			proj.orthographic=true;
-			proj.orthographicSize=connectedObject.markerSize;
-			proj.ignoreLayers=1<<9;	//ignore the IngameObject's layer
-			proj.nearClipPlane=-16f;
-			proj.farClipPlane=24f;
-			proj.material=(Material)Resources.Load("materials/SelectionMarker");
+		// private void createProjector(){
+			// GameObject projObj=new GameObject();
+			// projObj.name="Marker";
+			// projObj.transform.parent=gameObject.transform;
+			// projObj.transform.localEulerAngles=new Vector3(90f,0f,0f);
+			// projObj.transform.localPosition=new Vector3(0f,0f,0f);
+			// proj=projObj.AddComponent<Projector>();
+			// proj.enabled=false;
+			// proj.orthographic=true;
+			// proj.orthographicSize=connectedObject.markerSize;
+			// proj.ignoreLayers=1<<9;	//ignore the IngameObject's layer
+			// proj.nearClipPlane=-16f;
+			// proj.farClipPlane=24f;
+			// proj.material=(Material)Resources.Load("materials/SelectionMarker");
+		// }
+		
+		private void createMarker(){
+			mark=GameObject.CreatePrimitive(PrimitiveType.Sphere);
+			mark.GetComponent<MeshRenderer>().enabled=false;
+			Destroy(mark.GetComponent<SphereCollider>());
+			mark.name="Marker";
+			mark.transform.parent=gameObject.transform;
+			mark.transform.localEulerAngles=new Vector3(0f,0f,0f);
+			mark.transform.localPosition=new Vector3(0f,0f,0f);
+			mark.GetComponent<Renderer>().material=markerMat;
+			float width=connectedObject.markerSize;
+			mark.transform.localScale=new Vector3(width,width/2f,width);
 		}
 		
 		void OnBecameVisible(){

@@ -112,7 +112,8 @@ namespace Scripts {
 			//manage double click on object to select all same objects in camera view
 			if(inputMod.leftDown){
 				if(dc<interval*.7f){	//you have 0.7 seconds time for the second click
-					selection.selectSameObjectsInView();
+					//deactivated because of failure!
+					// selection.selectSameObjectsInView();
 				}
 				dc=0;
 			}
@@ -196,6 +197,7 @@ namespace Scripts {
 					break;
 				case 1:	//seperat case, so its possible to repeat this state immediately
 					currentUnit=(IO_Unit)Activator.CreateInstance(Type.GetType("Scripts."+targetUnit));
+					currentUnit.createUnit();
 					unitState=2;
 					//set here the coords, so if shift and right-click is hold down it spawns at the mouse pointer
 					currentUnit.setCoords(inputMod.pointer);

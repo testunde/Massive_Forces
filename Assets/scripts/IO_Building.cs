@@ -42,7 +42,7 @@ namespace Scripts {
 			Transform modelTr=model.transform;
 			for(int i=0;i<modelTr.childCount;i++){
 				GameObject child=modelTr.GetChild(i).gameObject;
-				if(child.name!="preview"){
+				if(child.name=="united" || child.name=="Marker"){
 					child.SetActive(true);
 				}else{
 					child.SetActive(false);

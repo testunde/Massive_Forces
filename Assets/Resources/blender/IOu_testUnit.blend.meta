@@ -8,17 +8,23 @@ ModelImporter:
     100000: Icosphere
     100002: //RootNode
     100004: Torus
+    100006: united
     400000: Icosphere
     400002: //RootNode
     400004: Torus
+    400006: united
     2300000: Icosphere
     2300002: Torus
+    2300004: united
     3300000: Icosphere
     3300002: Torus
+    3300004: united
     4300000: Icosphere
     4300002: Torus
+    4300004: united
     6400000: Icosphere
     6400002: Torus
+    6400004: united
     7400000: Default Take
     9500000: //RootNode
   materials:

@@ -13,7 +13,8 @@ namespace Scripts {
 		public Vector3 startPoint;
 		private Vector3 xPoint,xMid;
 		//needed, so that the selection() and deselection() methods don't get called more then one time
-		private Dictionary<IngameObject,GameObject> selObj=new Dictionary<IngameObject,GameObject>();
+		// private Dictionary<IngameObject,GameObject> selObj=new Dictionary<IngameObject,GameObject>();
+		private List<IngameObject> selObj=new List<IngameObject>();
 		public bool add,remove;
 		
 		public void begin(Vector3 coords){
@@ -64,7 +65,7 @@ namespace Scripts {
 		}
 		
 		public void abort(){
-			foreach(IngameObject obj in selObj.Keys){
+			foreach(IngameObject obj in selObj){
 				selection.removeItemMarker(obj);
 			}
 			deactivate();
@@ -88,15 +89,15 @@ namespace Scripts {
 			selection.clearTempList();
 		}
 		
-		private IngameObject searchScript(GameObject obj){
-			IngameObject result=null;
-			SelectReact script=obj.GetComponent<SelectReact>();
-			if(script!=null)
-				result=script.connectedObject;
-			else if(obj.transform.parent!=null)
-				result=searchScript(obj.transform.parent.gameObject);
-			return result;
-		}
+		// private IngameObject searchScript(GameObject obj){
+			// IngameObject result=null;
+			// SelectReact script=obj.GetComponent<SelectReact>();
+			// if(script!=null)
+				// result=script.connectedObject;
+			// else if(obj.transform.parent!=null)
+				// result=searchScript(obj.transform.parent.gameObject);
+			// return result;
+		// }
 		
 		void Start(){
 			selection=SelectionControl.getInstance();
@@ -108,34 +109,39 @@ namespace Scripts {
 		}
 		
 		void OnTriggerEnter(Collider col){
-			collisionIn(col);
-		}
-		private void collisionIn(Collider col){
-			IngameObject search=searchScript(col.gameObject);
-			if(search!=null && !selObj.ContainsKey(search)){
+			//IngameObject search=searchScript(col.gameObject);
+			IngameObject search=null;
+			if(col.gameObject.name=="united")
+				search=col.gameObject.transform.parent.gameObject.GetComponent<SelectReact>().connectedObject;
+			
+			if(search!=null && !selObj.Contains(search)){
 				if(remove){
 					if(selection.tempMarker.Contains(search)){
 						selection.removeItemMarker(search);
-						selObj.Add(search,col.gameObject);
+						selObj.Add(search);
 					}else if(add){
 						selection.invertItemMarker(search);
-						selObj.Add(search,col.gameObject);
+						selObj.Add(search);
 					}
 				}else if(add && !remove){
 					if(!selection.tempMarker.Contains(search)){
-							selObj.Add(search,col.gameObject);
+							selObj.Add(search);
 							selection.addItemMarker(search);
 					}
 				}else{
 					selection.addItemMarker(search);
-					selObj.Add(search,col.gameObject);
+					selObj.Add(search);
 				}
 			}
 		}
 		
 		void OnTriggerExit(Collider col){
-			IngameObject search=searchScript(col.gameObject);
-			if(search!=null && selObj.ContainsValue(col.gameObject)){
+			// IngameObject search=searchScript(col.gameObject);
+			IngameObject search=null;
+			if(col.gameObject.name=="united")
+				search=col.gameObject.transform.parent.gameObject.GetComponent<SelectReact>().connectedObject;
+			
+			if(search!=null && selObj.Contains(search)){
 				if(remove){
 					if(add){
 						selection.invertItemMarker(search);
@@ -143,7 +149,7 @@ namespace Scripts {
 						selection.addItemMarker(search);
 					}
 				}else if(add && !remove){
-					if(selObj.ContainsKey(search)){
+					if(selObj.Contains(search)){
 						selection.removeItemMarker(search);
 					}
 				}else{

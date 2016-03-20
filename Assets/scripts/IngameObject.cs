@@ -5,7 +5,7 @@ using Scripts;
 namespace Scripts {
 	public abstract class IngameObject {
 		protected static Res resources=Res.getInstance();
-		protected static int IDflow=1;
+		protected static int IDflow=1;	//0=terrain
 		public int ID;
 		public string name;
 		public string type;

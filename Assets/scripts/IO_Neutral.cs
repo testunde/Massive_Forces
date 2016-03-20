@@ -7,7 +7,7 @@ namespace Scripts {
 		
 		public IO_Neutral() : base(){
 			fraction=0;
-			//costs double's must be negativ (e.g. for Trees when cut down)
+			//costs must be negativ (e.g. for Trees when cut down)
 		}
 	}
 }

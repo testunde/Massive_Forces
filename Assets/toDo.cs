@@ -8,13 +8,12 @@ game statistics at the end of a game
 
 UML:
 -lags on camera?
--selection: small performance loss
 -moveTo method for IO_Unit
 -makeUnit method (put ActionMatrix on keyboard)
 -selection: click through object? (make Ray from CameraControl public)
 (>use ray to prevent short deselection gap when click on selected object)
 -MinimapProjection
--selection: double click > leaveSameObjectsSelected(...) [methods don't work :( ]
+-selection: double click > leaveSameObjectsSelected(...) [deactivated: methods don't work :( ]
 
 
 Documentation.cs:
