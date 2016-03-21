@@ -34,6 +34,10 @@ namespace Scripts {
 			}
 		}
 		
+		public bool isSelected(){
+			return selected;
+		}
+		
 		// private void createProjector(){
 			// GameObject projObj=new GameObject();
 			// projObj.name="Marker";

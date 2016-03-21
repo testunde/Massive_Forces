@@ -10,6 +10,7 @@ namespace Scripts {
 		public string name;
 		public string type;
 		public GameObject model;
+		public PlaneFollow plane;
 		public int HP,maxHP;
 		public int buildTime,timeRemaining;
 		public int fraction;
@@ -28,6 +29,13 @@ namespace Scripts {
 			selectReact=model.AddComponent<SelectReact>();
 			selectReact.connectedObject=this;
 			SetLayerRecursively(model,9);
+			GameObject planeObj;
+			if(this is IO_Building)
+				planeObj=GameObject.Instantiate((GameObject)Resources.Load("blender/MinimapSquare",typeof(GameObject)));
+			else
+				planeObj=GameObject.Instantiate((GameObject)Resources.Load("blender/MinimapCircle",typeof(GameObject)));
+			plane=planeObj.AddComponent<PlaneFollow>();
+			plane.Init(this);
 		}
 		
 		public virtual void SetLayerRecursively(GameObject obj,int newLayer){
@@ -48,6 +56,7 @@ namespace Scripts {
 		
 		public virtual void deleteModel(){
 			MonoBehaviour.Destroy(model);
+			MonoBehaviour.Destroy(plane.gameObject);
 		}
 	}
 }

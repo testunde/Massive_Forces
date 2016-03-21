@@ -5,14 +5,21 @@ using Scripts;
 namespace Scripts {
 	public class Res {
 		private static Res instance=null;
-		public int f=2;	//amount of fractions with player, but without neutral
+		public int f=3;	//amount of fractions with player- and neutral fraction
 		public int a=4;	//amount of resource types
 		private long[,] res;
 		private long[,] maxRes;
+		private string[] names;
+		private Color[] colors;
 		
 		private Res(){
 			res=new long[f,a];
 			maxRes=new long[f,a];
+			names=new string[]{"Res0","Res1","Res2","Res3"};
+			colors=new Color[f];
+			colors[0]=Color.black;	//neutral fraction has no colors: color.clear for transparent
+			colors[1]=Color.red;	//player colors
+			//colors[...]=...
 			
 			//set start values
 			for(int i=0;i<f;i++){
@@ -67,6 +74,14 @@ namespace Scripts {
 				result=false;
 			}
 			return result;
+		}
+		
+		public string getName(int n){
+			return names[n];
+		}
+		
+		public Color getColor(int n){
+			return colors[n];
 		}
 		
 		//CURRENT VALUES

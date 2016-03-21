@@ -12,6 +12,8 @@ namespace Scripts {
 		private GameObject terrain,cube;
 		//private float x=0f,y=0f,z=0f;
 		private static MouseLook mouseLook = new MouseLook();
+		private int clickCount=0;
+		private PlaneFollow plane;
 		
 		//set y-coord bolow zero! method decrement y by 1 when terrain wasn't hittet
 		public Vector3 getCoordsAtXZ(Vector3 where){
@@ -31,6 +33,11 @@ namespace Scripts {
 			cube.layer=2;	//to the cube ignores the raycast
 			cube.transform.localScale=new Vector3(.3f,.3f,.3f);
 			cube.name="MousePointer";
+			
+			//create marker for minimap
+			GameObject planeObj=GameObject.Instantiate((GameObject)Resources.Load("blender/MinimapRoundArrow",typeof(GameObject)));
+			plane=planeObj.AddComponent<PlaneFollow>();
+			plane.Init(gameObject);
 		}
 		
 		void Update () {
@@ -63,9 +70,10 @@ namespace Scripts {
 				
 				//Input.GetButtonDown("Fire1")once true if hitted
 				//Input.GetMouseButton(0) true of hold down
-				if(Input.GetMouseButton(0)){
+				if(Input.GetMouseButtonDown(0)){
+					clickCount++;
 					cube.transform.position=hit.point;
-					Debug.Log("last click at "+hit.point);
+					Debug.Log("click no. "+clickCount+" at "+hit.point);
 				}
 				// transform the positions to material coordinates
 				/*Renderer renderer = hit.transform.GetComponent<Renderer>();

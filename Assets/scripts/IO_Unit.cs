@@ -13,7 +13,8 @@ namespace Scripts {
 			//later: a* algorithm
 		}
 		
-		public virtual void createUnit(){
+		public virtual void createUnit(int frac){
+			fraction=frac;
 			Transform modelTr=model.transform;
 			for(int i=0;i<modelTr.childCount;i++){
 				GameObject child=modelTr.GetChild(i).gameObject;

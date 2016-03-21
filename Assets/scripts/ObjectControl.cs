@@ -197,7 +197,7 @@ namespace Scripts {
 					break;
 				case 1:	//seperat case, so its possible to repeat this state immediately
 					currentUnit=(IO_Unit)Activator.CreateInstance(Type.GetType("Scripts."+targetUnit));
-					currentUnit.createUnit();
+					currentUnit.createUnit(1);
 					unitState=2;
 					//set here the coords, so if shift and right-click is hold down it spawns at the mouse pointer
 					currentUnit.setCoords(inputMod.pointer);
@@ -210,7 +210,6 @@ namespace Scripts {
 						currentUnit.setCoords(inputMod.pointer);
 					
 					if(inputMod.leftDown&&resources.costsAvailable(1,currentUnit.costs)){
-						currentUnit.fraction=1;
 						units.Add(currentUnit);
 						resources.changeBy(1,currentUnit.costs);	//set resources
 						//repeat if shift is hold while clicked
