@@ -5,11 +5,12 @@ using Scripts;
 
 namespace Scripts {
 	public class MarkerControl : MonoBehaviour {
+		private static InputModul inputMod;
 		private static SelectionControl selection;
 		private Transform markTr;
 		private BoxCollider boxCol;
 		private MeshRenderer meshRender;
-		private float rot,height=24f;
+		private float rot,height=32f;
 		public Vector3 startPoint;
 		private Vector3 xPoint,xMid;
 		//needed, so that the selection() and deselection() methods don't get called more then one time
@@ -100,6 +101,8 @@ namespace Scripts {
 		// }
 		
 		void Start(){
+			inputMod=InputModul.getInstance();
+			height+=inputMod.terrain.transform.position.y;
 			selection=SelectionControl.getInstance();
 			markTr=gameObject.transform;
 			boxCol=gameObject.GetComponent<BoxCollider>();
