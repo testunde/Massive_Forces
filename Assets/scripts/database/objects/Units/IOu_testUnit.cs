@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Scripts;
 
-namespace Scripts {
+namespace Database {
 	public class IOu_testUnit : IO_Unit {
 		
 		public IOu_testUnit() : base(){

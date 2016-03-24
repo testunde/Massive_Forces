@@ -132,7 +132,7 @@ namespace Scripts {
 					}
 					break;
 				case 1:	//seperat case, so its possible to repeat this state immediately
-					currentBuild=(IO_Building)Activator.CreateInstance(Type.GetType("Scripts."+targetBuilding));
+					currentBuild=(IO_Building)Activator.CreateInstance(Type.GetType("Database."+targetBuilding));
 					currentBuild.setPreview(1);
 					buildState=2;
 					//set here the coords, so if shift and right-click is hold down it spawns at the mouse pointer
@@ -196,7 +196,7 @@ namespace Scripts {
 					}
 					break;
 				case 1:	//seperat case, so its possible to repeat this state immediately
-					currentUnit=(IO_Unit)Activator.CreateInstance(Type.GetType("Scripts."+targetUnit));
+					currentUnit=(IO_Unit)Activator.CreateInstance(Type.GetType("Database."+targetUnit));
 					currentUnit.createUnit(1);
 					unitState=2;
 					//set here the coords, so if shift and right-click is hold down it spawns at the mouse pointer

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Scripts;
 
-namespace Scripts {
+namespace Database {
 	public class IOu_Tank1 : IO_Unit {
 		
 		public IOu_Tank1() : base(){

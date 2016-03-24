@@ -2,4 +2,11 @@
 using System.Collections;
 using Scripts;
 
-//a empty type of Action
+namespace Database{
+	public class A_Empty : Action {
+		
+		public A_Empty(){
+			
+		}
+	}
+}

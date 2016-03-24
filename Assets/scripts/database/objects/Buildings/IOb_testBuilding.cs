@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Scripts;
 
-namespace Scripts {
+namespace Database {
 	public class IOb_testBuilding : IO_Building {
 		
 		public IOb_testBuilding() : base(){
