@@ -2,10 +2,10 @@
 using System.Collections;
 using Scripts;
 
-namespace Database{
-	public class A_Empty : Action {
+namespace Scripts{
+	public class A_Command : Action {
 		
-		public A_Empty(){
+		public A_Command(){
 			
 		}
 	}

@@ -49,9 +49,8 @@ namespace Scripts {
 				//#>height control and limit
 				float high=currentHigh;
 				float inputValue=(Input.GetAxis("Mouse ScrollWheel")*Vector3.down).y;
-				if(high>minHigh&&inputValue<0||high<maxHigh&&inputValue>0){	//min/max limit of height
+				if(high>minHigh&&inputValue<0||high<maxHigh&&inputValue>0)	//min & max limit of height
 					high+=inputValue;
-				}
 				//cut overlaps over min/max
 				if(high<minHigh)
 					high=minHigh;

@@ -7,14 +7,17 @@ recycliong of wrecks
 idea of: energy-attached units (so other complex buildings can created with combination of these units)
 quit button: destroy user interface :D
 game statistics at the end of a game
+buildings build itself up, bin it can speed up ith units
 
-UML:
+CORE:
 -lags on camera?
--moveTo method for IO_Unit
--makeUnit method (put ActionMatrix on keyboard until its UI is finished)
 -selection: click through object? (make Ray from CameraControl public)
 (>use ray to prevent short deselection gap when click on selected object)
 -selection: double click > leaveSameObjectsSelected(...) [deactivated: methods don't work :( ]
+-moveTo method for IO_Unit
+-makeUnit method (put ActionMatrix on keyboard until its UI is finished)
+-camera: no 'accerlarate' on cmaera > instant moving (see in project input settings)
+-building: red preview when build gets into Building or Neutral
 
 
 Documentation.cs:
