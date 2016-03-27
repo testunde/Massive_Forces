@@ -5,7 +5,7 @@
     <id>Relation</id>
     <coordinates>
       <x>7</x>
-      <y>406</y>
+      <y>420</y>
       <w>455</w>
       <h>91</h>
     </coordinates>
@@ -18,7 +18,7 @@ everything done until this line</panel_attributes>
     <id>UMLPackage</id>
     <coordinates>
       <x>14</x>
-      <y>357</y>
+      <y>371</y>
       <w>182</w>
       <h>105</h>
     </coordinates>
@@ -32,7 +32,7 @@ bg=orange</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>28</x>
-      <y>385</y>
+      <y>399</y>
       <w>154</w>
       <h>63</h>
     </coordinates>
@@ -44,7 +44,7 @@ layer=1</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>217</x>
-      <y>413</y>
+      <y>427</y>
       <w>126</w>
       <h>49</h>
     </coordinates>
@@ -111,7 +111,7 @@ METHODS:
     <id>UMLPackage</id>
     <coordinates>
       <x>217</x>
-      <y>287</y>
+      <y>301</y>
       <w>231</w>
       <h>112</h>
     </coordinates>
@@ -126,7 +126,7 @@ bg=gray
     <id>UMLClass</id>
     <coordinates>
       <x>231</x>
-      <y>315</y>
+      <y>329</y>
       <w>203</w>
       <h>35</h>
     </coordinates>
@@ -140,7 +140,7 @@ layer=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>231</x>
-      <y>357</y>
+      <y>371</y>
       <w>203</w>
       <h>35</h>
     </coordinates>
@@ -184,8 +184,8 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7</x>
-      <y>182</y>
+      <x>14</x>
+      <y>203</y>
       <w>182</w>
       <h>28</h>
     </coordinates>
@@ -196,20 +196,20 @@ method calls</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7</x>
-      <y>210</y>
+      <x>14</x>
+      <y>231</y>
       <w>182</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-data excahnge</panel_attributes>
+data exchange</panel_attributes>
     <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7</x>
-      <y>238</y>
+      <x>14</x>
+      <y>259</y>
       <w>182</w>
       <h>28</h>
     </coordinates>
@@ -220,8 +220,8 @@ new static instance</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7</x>
-      <y>266</y>
+      <x>14</x>
+      <y>287</y>
       <w>182</w>
       <h>35</h>
     </coordinates>
@@ -233,8 +233,8 @@ ref. / static ref.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7</x>
-      <y>294</y>
+      <x>14</x>
+      <y>315</y>
       <w>182</w>
       <h>35</h>
     </coordinates>
@@ -246,8 +246,8 @@ or MonoBehaviour's</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>7</x>
-      <y>322</y>
+      <x>14</x>
+      <y>343</y>
       <w>182</w>
       <h>28</h>
     </coordinates>
@@ -295,7 +295,21 @@ fg=orange
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;
 fg=orange
-[OLD]</panel_attributes>
+*[ID:OLD]*</panel_attributes>
     <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>14</x>
+      <y>175</y>
+      <w>182</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;
+fg=blue
+all BLUE arrows
+are not available now</panel_attributes>
+    <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
   </element>
 </diagram>

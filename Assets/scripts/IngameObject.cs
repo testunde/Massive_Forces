@@ -3,7 +3,7 @@ using System.Collections;
 using Scripts;
 
 namespace Scripts {
-	public abstract class IngameObject {
+	public abstract class IngameObject : IngameItem{
 		protected static Res resources=Res.getInstance();
 		protected static int IDflow=1;	//0=terrain
 		public int ID;
@@ -12,17 +12,17 @@ namespace Scripts {
 		public GameObject model;
 		public PlaneFollow plane;
 		public int HP,maxHP;
-		public int buildTime,timeRemaining;
 		public int fraction;
 		public long[] costs=new long[resources.a];
 		public float markerSize;
-		public ActionMatrix actions=new ActionMatrix();
+		public ActionMatrix actions;
 		protected MinimapProjection minimap=new MinimapProjection();
 		public SelectReact selectReact;
 		
-		public IngameObject(){
+		public IngameObject() : base(){
 			ID=IDflow;
 			IDflow++;
+			actions=new ActionMatrix(this);
 		}
 		
 		public virtual void initAfterModel(){

@@ -3,10 +3,16 @@ using System.Collections;
 using Scripts;
 
 namespace Scripts{
-	public class A_Create : Action {
+	public abstract class A_Create : Action {
 		
-		public A_Create(){
-			
+		public A_Create(IngameObject obj) : base(obj){
+			this.name="A_Create";
 		}
+		
+		public abstract override void begin();
+		
+		public abstract override void abort();
+		
+		public abstract override void finish();
 	}
 }

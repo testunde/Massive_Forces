@@ -16,8 +16,9 @@ CORE:
 -selection: double click > leaveSameObjectsSelected(...) [deactivated: methods don't work :( ]
 -moveTo method for IO_Unit
 -makeUnit method (put ActionMatrix on keyboard until its UI is finished)
--camera: no 'accerlarate' on cmaera > instant moving (see in project input settings)
+-camera: no 'accelerate' on cmaera > instant moving (see in project input settings)
 -building: red preview when build gets into Building or Neutral
+-production of units: place finished units in direction of the set meeting point
 
 
 Documentation.cs:

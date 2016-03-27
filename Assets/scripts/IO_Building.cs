@@ -4,12 +4,15 @@ using Scripts;
 
 namespace Scripts {
 	public abstract class IO_Building : IngameObject {
+		protected Produceline production;
 		private Material previewMat,previewNoResMat;
 		private GameObject preview;
 		
 		public IO_Building() : base(){
 			previewMat=(Material)Resources.Load("materials/buildingPreview", typeof(Material));
 			previewNoResMat=(Material)Resources.Load("materials/buildingPreviewNoRes", typeof(Material));
+			production=Produceline.getInstance();
+			production.addBuilding(this);
 		}
 		
 		public virtual void setPreview(int frac){
@@ -33,6 +36,7 @@ namespace Scripts {
 		}
 		
 		public virtual void abortBuild(){
+			production.removeBuilding(this);
 			deleteModel();
 		}
 		
