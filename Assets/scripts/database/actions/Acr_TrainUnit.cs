@@ -4,26 +4,55 @@ using Scripts;
 
 namespace Database{
 	public class Acr_TrainUnit : A_Create {
-		private string unitClass;
-		private IO_Unit unit;
+		private Database.IO_Database unitClass;
 		
-		public Acr_TrainUnit(IngameObject obj,string targetUnit) : base(obj){
-			this.unitClass=targetUnit;
-			//unit=(IO_Unit)Activator.CreateInstance(Type.GetType("Database."+targetUnit));
-			//set name
-			//set time
+		public Acr_TrainUnit(string targetUnit) : base(){
+			this.unitClass=(IO_Database)System.Activator.CreateInstance(System.Type.GetType("Database."+targetUnit));
+			this.name="Train "+unitClass.name;
+			this.costs=unitClass.costs;
+			//set icon
+		}
+		
+		public override void setObject(IngameObject obj){
+			base.setObject(obj);
+			this.time=unitClass.buildTime/(float)obj.workerUnits;
 		}
 		
 		public override void begin(){
-			
+			if(resources.costsAvailable(obj.fraction,unitClass.costs)){
+				IO_Unit unit=new IO_Unit();
+				unit.loadType(unitClass);
+				unit.timeRemaining=unitClass.buildTime/(float)obj.workerUnits;
+				unit.createdBy=this;
+				production.addItem(unit);
+				resources.changeBy(obj.fraction,unitClass.costs);
+			}else{
+				Debug.Log("Not enough resources!");
+			}
 		}
 		
-		public override void abort(){
-			
+		public override void abort(IngameItem item){
+			if(item is IO_Unit){
+				IO_Unit unit=(IO_Unit)item;
+				resources.changeBy(obj.fraction,unit.costs,true);
+				unit.deleteModel();
+			}else{
+				Debug.Log("Called "+this.name+".abort() with wrong IO_ class!");
+			}
 		}
 		
-		public override void finish(){
-			
+		public override void finish(IngameItem item){
+			if(item is IO_Unit){
+				IO_Unit unit=(IO_Unit)item;
+				unit.initModel();
+				unit.createUnit(obj.fraction);
+				//set unit in front of its building
+				Vector3 targetCoord=obj.model.transform.position+(new Vector3(obj.markerSize,0f,0f));
+				unit.setCoords(targetCoord);
+				Debug.Log(unit.type+" with ID "+unit.ID+" finished!");
+			}else{
+				Debug.Log("Called "+this.name+".finish() with wrong IO_ class!");
+			}
 		}
 	}
 }

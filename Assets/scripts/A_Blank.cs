@@ -5,7 +5,7 @@ using Scripts;
 namespace Scripts{
 	public abstract class A_Blank : Action {
 		
-		public A_Blank(IngameObject obj) : base(obj){
+		public A_Blank() : base(){
 			this.name="A_Blank";
 		}
 		
@@ -13,11 +13,11 @@ namespace Scripts{
 			
 		}
 		
-		public override void abort(){
+		public override void abort(IngameItem item){
 			
 		}
 		
-		public override void finish(){
+		public override void finish(IngameItem item){
 			
 		}
 	}

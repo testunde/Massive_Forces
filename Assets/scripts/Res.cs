@@ -85,12 +85,19 @@ namespace Scripts {
 		}
 		
 		//CURRENT VALUES
-		public void changeBy(int fraction,long[] amount){
+		public void changeBy(int fraction,long[] amount,bool invert){
 			if(amount.Length==a){
-				for(int i=0;i<a;i++)
-					res[fraction,i]+=amount[i];
+				for(int i=0;i<a;i++){
+					if(invert)
+						res[fraction,i]-=amount[i];
+					else
+						res[fraction,i]+=amount[i];
+				}
 			}
 			limit(fraction);
+		}
+		public void changeBy(int fraction,long[] amount){
+			changeBy(fraction,amount,false);
 		}
 		public void set(int fraction,long[] amount){
 			if(amount.Length==a){

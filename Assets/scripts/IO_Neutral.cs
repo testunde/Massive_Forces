@@ -3,7 +3,7 @@ using System.Collections;
 using Scripts;
 
 namespace Scripts {
-	public abstract class IO_Neutral : IngameObject {
+	public class IO_Neutral : IngameObject {
 		
 		public IO_Neutral() : base(){
 			fraction=0;

@@ -76,5 +76,9 @@ namespace Scripts {
 			Debug.Log("out");
 			selection.inView.Remove(connectedObject);
 		}
+		
+		void Update(){
+			connectedObject.heartbeat(Time.fixedDeltaTime);
+		}
 	}
 }

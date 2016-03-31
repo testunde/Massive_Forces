@@ -102,7 +102,8 @@ namespace Scripts {
 					obj.selectReact.deselect();
 			}
 			selections.Clear();
-			selections.Add(Iobj);
+			if(Iobj!=null)
+				selections.Add(Iobj);
 		}
 		
 		public void clearTempList(){
@@ -162,6 +163,21 @@ namespace Scripts {
 					break;
 				}
 			}
+			return result;
+		}
+		
+		public List<IngameObject> getSelectedObjects(){
+			return new List<IngameObject>(selections);
+		}
+		
+		public int getSelectedCount(){
+			return selections.Count;
+		}
+		
+		public IngameObject getIfOnlyOne(){
+			IngameObject result=null;
+			if(selections.Count==1)
+				result=selections[0];
 			return result;
 		}
 	}

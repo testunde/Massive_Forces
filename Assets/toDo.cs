@@ -7,7 +7,8 @@ recycliong of wrecks
 idea of: energy-attached units (so other complex buildings can created with combination of these units)
 quit button: destroy user interface :D
 game statistics at the end of a game
-buildings build itself up, bin it can speed up ith units
+(buildings build itself up, but it can speed up with units)
+buildings with workers, which collect resources and build buildings
 
 CORE:
 -lags on camera?
@@ -15,10 +16,12 @@ CORE:
 (>use ray to prevent short deselection gap when click on selected object)
 -selection: double click > leaveSameObjectsSelected(...) [deactivated: methods don't work :( ]
 -moveTo method for IO_Unit
--makeUnit method (put ActionMatrix on keyboard until its UI is finished)
+-attack method
+-reaearches & updates
 -camera: no 'accelerate' on cmaera > instant moving (see in project input settings)
 -building: red preview when build gets into Building or Neutral
--production of units: place finished units in direction of the set meeting point
+-meeting point
+ >production of units: place finished units in direction of the set meeting point
 
 
 Documentation.cs:

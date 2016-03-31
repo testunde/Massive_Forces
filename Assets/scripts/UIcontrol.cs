@@ -30,7 +30,7 @@ public class UIcontrol : MonoBehaviour {
 	
 	public void building1_click ()
 	{
-		objScript.startBuild("IOb_testBuilding");
+		//objScript.startBuild("IOb_testBuilding");
 	}
 	public void unit1_click ()
 	{

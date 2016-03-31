@@ -4,10 +4,14 @@ using Scripts;
 
 namespace Scripts {
 	public abstract class IngameItem {
-		public int buildTime=0,timeRemaining;
+		protected static Res resources=Res.getInstance();
+		public string name;
+		public float buildTime=0,timeRemaining;
+		public long[] costs=new long[resources.a];
+		public Action createdBy=null;
+		//public icon=...
 		
 		public IngameItem(){
-			
 		}
 	}
 }

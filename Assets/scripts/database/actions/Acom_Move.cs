@@ -6,7 +6,7 @@ namespace Database{
 	public class Acom_Move : A_Command {
 		private Vector3 target;
 		
-		public Acom_Move(IngameObject obj,Vector3 target) : base(obj){
+		public Acom_Move(Vector3 target) : base(){
 			this.target=target;
 			this.name="move to";
 		}
@@ -15,11 +15,11 @@ namespace Database{
 			
 		}
 		
-		public override void abort(){
+		public override void abort(IngameItem item){
 			
 		}
 		
-		public override void finish(){
+		public override void finish(IngameItem item){
 			
 		}
 	}

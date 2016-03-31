@@ -4,28 +4,41 @@ using Scripts;
 
 namespace Scripts {
 	public abstract class IngameObject : IngameItem{
-		protected static Res resources=Res.getInstance();
 		protected static int IDflow=1;	//0=terrain
 		public int ID;
-		public string name;
 		public string type;
 		public GameObject model;
 		public PlaneFollow plane;
 		public int HP,maxHP;
 		public int fraction;
-		public long[] costs=new long[resources.a];
 		public float markerSize;
 		public ActionMatrix actions;
+		public int workerUnits=0;
 		protected MinimapProjection minimap=new MinimapProjection();
 		public SelectReact selectReact;
 		
 		public IngameObject() : base(){
 			ID=IDflow;
 			IDflow++;
-			actions=new ActionMatrix(this);
 		}
 		
-		public virtual void initAfterModel(){
+		public virtual void loadType(Database.IO_Database type){
+			this.name=type.name;
+			this.type=type.type;
+			this.maxHP=type.maxHP;
+			this.buildTime=type.buildTime;
+			this.markerSize=type.markerSize;
+			this.costs=type.costs;
+			this.actions=new ActionMatrix(this,type.actions);
+			this.workerUnits=type.workerUnits;
+		}
+		
+		public virtual void loadType(string type){
+			loadType((Database.IO_Database)System.Activator.CreateInstance(System.Type.GetType("Database."+type)));
+		}
+		
+		public virtual void initModel(){
+			model=GameObject.Instantiate((GameObject)Resources.Load("blender/"+type,typeof(GameObject)));
 			selectReact=model.AddComponent<SelectReact>();
 			selectReact.connectedObject=this;
 			SetLayerRecursively(model,9);
@@ -57,6 +70,10 @@ namespace Scripts {
 		public virtual void deleteModel(){
 			MonoBehaviour.Destroy(model);
 			MonoBehaviour.Destroy(plane.gameObject);
+		}
+		
+		public virtual void heartbeat(float time){
+			//gets called by an Updates() method of a MonoBehaviour
 		}
 	}
 }

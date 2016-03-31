@@ -5,14 +5,14 @@ using Scripts;
 namespace Scripts{
 	public abstract class A_Update : Action {
 		
-		public A_Update(IngameObject obj) : base(obj){
+		public A_Update() : base(){
 			this.name="A_Update";
 		}
 		
 		public abstract override void begin();
 		
-		public abstract override void abort();
+		public abstract override void abort(IngameItem item);
 		
-		public abstract override void finish();
+		public abstract override void finish(IngameItem item);
 	}
 }

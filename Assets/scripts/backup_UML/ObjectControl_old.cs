@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Scripts;
 
 namespace Scripts {
-	public class ObjectControl : MonoBehaviour {
+	public class ObjectControl_old : MonoBehaviour {
 		private static InputModul inputMod;
 		private static SelectionControl selection;
 		private static Res resources;
@@ -13,16 +13,26 @@ namespace Scripts {
 		private int selectState=0,buildState=0,unitState=0;
 		private float interval;
 		private int sc=0,dc;	//1-second count; double-click count
-		private string targetUnit=null;
+		private string targetBuilding=null,targetUnit=null;
 		private IO_Building currentBuild=null;
 		private IO_Unit currentUnit=null;
 		public List<IngameObject> units=new List<IngameObject>();
 		public List<IngameObject> buildings=new List<IngameObject>();
 		public List<IngameObject> neutrals=new List<IngameObject>();
+		public List<IO_Building> buildQueue=new List<IO_Building>();
 		
-		public void startBuild(IO_Building building){
+		public void startBuild(string building){
 			if(buildState==0)
-				currentBuild=building;
+				targetBuilding=building;
+		}
+		
+		public void buildFinished(int buildingID){
+			foreach(IO_Building building in buildQueue){
+				if(building.ID==buildingID){
+					buildQueue.Remove(building);
+					break;
+				}
+			}
 		}
 		
 		public void placeUnit(string unit){
@@ -51,24 +61,8 @@ namespace Scripts {
 			dc=(int)(interval*2);
 		}
 		
-		private void initBuilding(){
-			IO_Building building=new IO_Building();
-			building.loadType("IOb_testBuilding");
-			building.initModel();
-			building.setCoords(gameObject.GetComponent<CameraControl>().getCoordsAtXZ(new Vector3(5f,-10f,5f)));
-			building.build();
-			building.finishedBuild();
-			building.fraction=1;
-		}
-		
 		void Update(){
 			interval=1/Time.fixedDeltaTime;	//returns the set FixedUpdate in Hz [1/0.02s=50Hz]
-			
-			//for 1-second-interval calls
-			if(sc%(int)(interval*1f)==0){
-				sc-=(int)(interval*1f);
-			}
-			sc++;
 			
 			//abort selection process
 			if(selectState>0&&inputMod.cancel){
@@ -128,63 +122,75 @@ namespace Scripts {
 			if(inputMod.tDown){
 				IngameObject sel=selection.getIfOnlyOne();
 				if(sel!=null){
-					int k=1;
-					//create several units if shift is hold down
-					if(inputMod.shiftHold)
-						k=5;
-					for(int i=0;i<k;i++)
-						sel.actions.getAction(1,0).begin();
-				}
-			}
-			if(inputMod.gDown){
-				IngameObject sel=selection.getIfOnlyOne();
-				if(sel!=null){
-					sel.actions.getAction(1,1).begin();
+					sel.actions.getAction(1,0).begin();
 				}
 			}
 			
 			//test building process with IOb_testBuilding
 			if(inputMod.fDown)
-				initBuilding();
+				startBuild("IOb_testBuilding");
 			
 			//behavior of build process
 			switch(buildState){
 				case 0:	//start building process if building string is set
-					if(currentBuild!=null&&selectState==0&&unitState==0){
+					if(targetBuilding!=null&&selectState==0&&unitState==0){
 						buildState=1;
-						//set here the coords, so if shift and right-click is hold down it spawns at the mouse pointer
-						currentBuild.setCoords(inputMod.pointer);
 						goto case 1;
 					}
 					break;
-				case 1:
+				case 1:	//seperat case, so its possible to repeat this state immediately
+					currentBuild=new IO_Building();
+					currentBuild.loadType(targetBuilding);
+					currentBuild.initModel();
+					currentBuild.setPreview(1);
+					buildState=2;
+					//set here the coords, so if shift and right-click is hold down it spawns at the mouse pointer
+					currentBuild.setCoords(inputMod.pointer);
+					break;
+				case 2:
 					//rotate if right click, else just follow the mouse pointer
 					if(inputMod.rightHold)
 						currentBuild.rotateTo(inputMod.pointer);
 					else
 						currentBuild.setCoords(inputMod.pointer);
 					
-					if(inputMod.leftDown&&currentBuild.createdBy.create(currentBuild)){
+					if(inputMod.leftDown&&resources.costsAvailable(1,currentBuild.costs)){
+						currentBuild.build();
 						buildings.Add(currentBuild);
-						buildState=0;	//set state to 55 as 'is builded' code
-						
+						buildQueue.Add(currentBuild);
+						resources.changeBy(1,currentBuild.costs);	//set resources
 						//repeat if shift is hold while clicked
 						if(inputMod.shiftHold)
-							currentBuild.createdBy.begin();
+							buildState=1;
 						else
-							currentBuild=null;
+							buildState=55;	//set state to 55 as 'is builded' code
 					}else if(inputMod.cancel){
 						//abort building process when pressed esc or mouse2
-						currentBuild.createdBy.abort(currentBuild);
-						currentBuild=null;
-						buildState=0;	//set state to 99 as cancel code
+						currentBuild.abortBuild();
+						buildState=99;	//set state to 99 as cancel code
 					}
 					break;
 				default:	//mostly for state reset
+					targetBuilding=null;
 					currentBuild=null;
 					buildState=0;
 					break;
 			}
+			//count down the needed building time for each building in build process (build build build hahahaha :D )
+			if(sc%(int)(interval*1f)==0){
+				sc-=(int)(interval*1f);
+				//foreach(IO_Building building in buildQueue){
+				for(int i=0;i<buildQueue.Count;i++){
+					IO_Building building=buildQueue[i];
+					if(building.timeRemaining<=0){
+						building.finishedBuild();
+						buildQueue.Remove(building);
+					}else{
+						building.timeRemaining--;
+					}
+				}
+			}
+			sc++;
 			
 			//test unit placing with IOu_testUnit
 			if(inputMod.rDown)

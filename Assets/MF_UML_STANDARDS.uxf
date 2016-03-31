@@ -44,15 +44,16 @@ layer=1</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>217</x>
-      <y>427</y>
+      <y>420</y>
       <w>126</w>
-      <h>49</h>
+      <h>56</h>
     </coordinates>
     <panel_attributes>*link to other UML*
 bg=blue
 fontsize=18
 --
-</panel_attributes>
+-task1
+-task2</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -111,7 +112,7 @@ METHODS:
     <id>UMLPackage</id>
     <coordinates>
       <x>217</x>
-      <y>301</y>
+      <y>294</y>
       <w>231</w>
       <h>112</h>
     </coordinates>
@@ -126,7 +127,7 @@ bg=gray
     <id>UMLClass</id>
     <coordinates>
       <x>231</x>
-      <y>329</y>
+      <y>322</y>
       <w>203</w>
       <h>35</h>
     </coordinates>
@@ -140,7 +141,7 @@ layer=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>231</x>
-      <y>371</y>
+      <y>364</y>
       <w>203</w>
       <h>35</h>
     </coordinates>
@@ -177,7 +178,7 @@ Classes: ExampleClass
 Variables: variableToName
 Methods: thingsToDo()
 
-*mind the capital letters!*
+*remind the capital letters!*
 bg=red</panel_attributes>
     <additional_attributes/>
   </element>

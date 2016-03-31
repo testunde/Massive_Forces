@@ -5,52 +5,35 @@ using Scripts;
 
 namespace Scripts {
 	public class Produceline {
-		private static Produceline instance=null;
-		private Dictionary<IO_Building,List<IngameItem>> items;
+		private LinkedList<IngameItem> items;
 		
-		private Produceline(){
-			items=new Dictionary<IO_Building,List<IngameItem>>();
+		public Produceline(){
+			items=new LinkedList<IngameItem>();
 		}
 		
-		public static Produceline getInstance(){
-			if(instance==null)
-				instance=new Produceline();
-			
-			return instance;
+		public LinkedList<IngameItem> getItems(){
+			return new LinkedList<IngameItem>(items);
 		}
 		
-		public List<IngameItem> getItems(IO_Building building){
-			List<IngameItem> result=null;
-			// if(!(items.TryGetValue(building,out result)))
-				// result=new List<IngameItem>();
-			items.TryGetValue(building,out result);
-			return result;
-		}
-		
-		public void decreaseTime(int by){
-			foreach(List<IngameItem> list in items.Values){
-				foreach(IngameItem ii in list){
-					if(ii.timeRemaining>0){
-						ii.timeRemaining-=by;
-					}else{
-						//callback "it's finished"!
-					}
+		public void decreaseTime(float by){
+			if(items.Count>0){
+				IngameItem ii=items.First.Value;
+				if(ii.timeRemaining>0){
+					ii.timeRemaining-=by;
+				}else{
+					items.RemoveFirst();
+					ii.createdBy.finish(ii);
 				}
 			}
 		}
 		
-		public void addBuilding(IO_Building building){
-			items.Add(building,new List<IngameItem>());
+		public void addItem(IngameItem it){
+			items.AddLast(it);
 		}
 		
-		public void addItem(IO_Building building,IngameItem it){
-			List<IngameItem> list=null;
-			if(items.TryGetValue(building,out list))
-				list.Add(it);
-		}
-		
-		public void removeBuilding(IO_Building building){
-			items.Remove(building);
+		public void removeItem(IngameItem it){
+			items.Remove(it);
+			it.createdBy.abort(it);
 		}
 	}
 }
