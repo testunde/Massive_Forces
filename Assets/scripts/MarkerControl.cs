@@ -117,7 +117,7 @@ namespace Scripts {
 			if(col.gameObject.name=="united")
 				search=col.gameObject.transform.parent.gameObject.GetComponent<SelectReact>().connectedObject;
 			
-			if(search!=null && !selObj.Contains(search)){
+			if(search!=null && search.selectReact.enabled && !selObj.Contains(search)){
 				if(remove){
 					if(selection.tempMarker.Contains(search)){
 						selection.removeItemMarker(search);

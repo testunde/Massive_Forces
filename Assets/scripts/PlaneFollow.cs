@@ -11,6 +11,7 @@ namespace Scripts {
 		private GameObject cam;	//to set this minimap-"dot" for the cam
 		private Material colorMat;
 		private Renderer render;
+		private float offset=0f;
 		
 		void Start(){
 			resources=Res.getInstance();
@@ -22,6 +23,8 @@ namespace Scripts {
 		public void Init(IngameObject obj){
 			cam=null;
 			connectedObject=obj;
+			if(connectedObject.fraction==1)
+				offset=.8f;
 			isBuilding=obj is IO_Building;
 			if(isBuilding)
 				initPlane(6f);
@@ -32,6 +35,7 @@ namespace Scripts {
 		public void Init(GameObject obj){
 			connectedObject=null;
 			cam=obj;
+			offset=1f;
 			initPlane(10f);
 		}
 		private void initPlane(float size){
@@ -68,7 +72,7 @@ namespace Scripts {
 				colorMat.color=Color.blue;
 				transform.localEulerAngles=new Vector3(-90f,cam.transform.localEulerAngles.y+90f,0f);
 			}
-			transform.position=new Vector3(oldPos.x,100f,oldPos.z);
+			transform.position=new Vector3(oldPos.x,100f+offset,oldPos.z);
 		}
 	}
 }

@@ -8,6 +8,7 @@ namespace Scripts {
 		
 		void Start(){
 			inputMod=InputModul.getInstance();
+			inputMod.originalFixedDeltaTime=Time.fixedDeltaTime;
 		}
 		
 		void Update(){
@@ -23,6 +24,7 @@ namespace Scripts {
 			inputMod.rDown=Input.GetKeyDown(KeyCode.R);
 			inputMod.tDown=Input.GetKeyDown(KeyCode.T);
 			inputMod.gDown=Input.GetKeyDown(KeyCode.G);
+			inputMod.hDown=Input.GetKeyDown(KeyCode.H);
 			inputMod.cancel=Input.GetButtonDown("Cancel");
 		}
 	}

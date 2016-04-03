@@ -13,7 +13,7 @@ namespace Scripts {
 			previewNoResMat=(Material)Resources.Load("materials/buildingPreviewNoRes", typeof(Material));
 		}
 		
-		public virtual void setPreview(int frac){
+		public virtual void setPreview(int frac,bool available){
 			//disable all non-preview objects
 			fraction=frac;
 			Transform modelTr=model.transform;
@@ -27,7 +27,11 @@ namespace Scripts {
 				}
 			}
 			//set preview material, depends on available resources
-			if(resources.costsAvailable(fraction,costs))
+			changePreview(available);
+		}
+		
+		public virtual void changePreview(bool available){
+			if(available)
 				preview.GetComponent<Renderer>().material=previewMat;
 			else
 				preview.GetComponent<Renderer>().material=previewNoResMat;
@@ -39,7 +43,6 @@ namespace Scripts {
 		
 		public virtual void build(){
 			//disable preview; enable all building objects
-			timeRemaining=buildTime;
 			Transform modelTr=model.transform;
 			for(int i=0;i<modelTr.childCount;i++){
 				GameObject child=modelTr.GetChild(i).gameObject;
@@ -49,6 +52,7 @@ namespace Scripts {
 					child.SetActive(false);
 				}
 			}
+			actionBeh.enabled=true;
 			//PLAY BUILD ANIMATION
 		}
 		

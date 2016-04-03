@@ -5,6 +5,7 @@ using Scripts;
 namespace Scripts {
 	public class SelectReact : MonoBehaviour {
 		private static SelectionControl selection;
+		private static InputModul inputMod;
 		public IngameObject connectedObject;
 		private bool selected=false;
 		// private Projector proj;
@@ -13,9 +14,15 @@ namespace Scripts {
 		
 		void Start(){
 			selection=SelectionControl.getInstance();
+			inputMod=InputModul.getInstance();
 			// createProjector();
 			markerMat=(Material)Resources.Load("materials/SelectionMarkerObj", typeof(Material));
 			createMarker();
+		}
+		
+		void OnDisable(){
+			if(selected)
+				selection.removeItemMarker(connectedObject);
 		}
 		
 		public void select(){
@@ -68,17 +75,17 @@ namespace Scripts {
 		}
 		
 		void OnBecameVisible(){
-			Debug.Log("in");
+			Debug.Log("in ID "+connectedObject.ID);
 			selection.inView.Add(connectedObject);
 		}
 		
 		void OnBecameInvisible(){
-			Debug.Log("out");
+			Debug.Log("out ID "+connectedObject.ID);
 			selection.inView.Remove(connectedObject);
 		}
 		
-		void Update(){
-			connectedObject.heartbeat(Time.fixedDeltaTime);
+		void FixedUpdate(){
+			connectedObject.heartbeat(inputMod.originalFixedDeltaTime);
 		}
 	}
 }

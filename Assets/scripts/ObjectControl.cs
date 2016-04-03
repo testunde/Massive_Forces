@@ -10,7 +10,7 @@ namespace Scripts {
 		private static SelectionControl selection;
 		private static Res resources;
 		private MarkerControl marker;
-		private int selectState=0,buildState=0,unitState=0;
+		private int selectState=0,buildState=0,unitState=0,initBuildingState=0;
 		private float interval;
 		private int sc=0,dc;	//1-second count; double-click count
 		private string targetUnit=null;
@@ -19,11 +19,6 @@ namespace Scripts {
 		public List<IngameObject> units=new List<IngameObject>();
 		public List<IngameObject> buildings=new List<IngameObject>();
 		public List<IngameObject> neutrals=new List<IngameObject>();
-		
-		public void startBuild(IO_Building building){
-			if(buildState==0)
-				currentBuild=building;
-		}
 		
 		public void placeUnit(string unit){
 			if(unitState==0)
@@ -42,16 +37,12 @@ namespace Scripts {
 			return result;
 		}
 		
-		void Start(){
-			inputMod=InputModul.getInstance();
-			selection=SelectionControl.getInstance();
-			resources=Res.getInstance();
-			marker=GameObject.Find("SelectionMarker").GetComponent<MarkerControl>();
-			interval=1/Time.fixedDeltaTime;
-			dc=(int)(interval*2);
+		public void startBuild(IO_Building building){
+			if(buildState==0)
+				currentBuild=building;
 		}
 		
-		private void initBuilding(){
+		public void initBuilding(){	//set the frist building
 			IO_Building building=new IO_Building();
 			building.loadType("IOb_testBuilding");
 			building.initModel();
@@ -59,10 +50,22 @@ namespace Scripts {
 			building.build();
 			building.finishedBuild();
 			building.fraction=1;
+			buildings.Add(building);
+			initBuildingState=1;
+		}
+		
+		void Start(){
+			inputMod=InputModul.getInstance();
+			selection=SelectionControl.getInstance();
+			resources=Res.getInstance();
+			marker=GameObject.Find("SelectionMarker").GetComponent<MarkerControl>();
+			//to prevent the first click as a double click
+			interval=1/Time.deltaTime;
+			dc=(int)(interval*2);
 		}
 		
 		void Update(){
-			interval=1/Time.fixedDeltaTime;	//returns the set FixedUpdate in Hz [1/0.02s=50Hz]
+			interval=1/Time.deltaTime;//fixedDeltaTime;	//returns the set FixedUpdate in Hz [1/0.02s=50Hz]
 			
 			//for 1-second-interval calls
 			if(sc%(int)(interval*1f)==0){
@@ -142,10 +145,21 @@ namespace Scripts {
 					sel.actions.getAction(1,1).begin();
 				}
 			}
+			if(inputMod.hDown){
+				IngameObject sel=selection.getIfOnlyOne();
+				if(sel!=null){
+					sel.actions.getAction(2,1).begin();
+				}
+			}
 			
-			//test building process with IOb_testBuilding
-			if(inputMod.fDown)
-				initBuilding();
+			//test building process with IOb_testBuilding: start-building
+			if(inputMod.fDown){
+				if(initBuildingState==0)
+					initBuilding();
+				else	//press f again to activate building (it's only a workaround)
+					foreach(IngameObject obj in buildings)
+						obj.actionBeh.enabled=true;
+			}
 			
 			//behavior of build process
 			switch(buildState){
@@ -163,6 +177,9 @@ namespace Scripts {
 						currentBuild.rotateTo(inputMod.pointer);
 					else
 						currentBuild.setCoords(inputMod.pointer);
+					
+					//check if resources are still available and set its respective preview
+					currentBuild.changePreview(resources.costsAvailable(1,currentBuild.costs));
 					
 					if(inputMod.leftDown&&currentBuild.createdBy.create(currentBuild)){
 						buildings.Add(currentBuild);
@@ -217,6 +234,7 @@ namespace Scripts {
 					if(inputMod.leftDown&&resources.costsAvailable(1,currentUnit.costs)){
 						units.Add(currentUnit);
 						resources.changeBy(1,currentUnit.costs);	//set resources
+						currentUnit.actionBeh.enabled=true;
 						//repeat if shift is hold while clicked
 						if(inputMod.shiftHold)
 							unitState=1;

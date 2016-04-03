@@ -7,7 +7,7 @@
       <x>1368</x>
       <y>408</y>
       <w>192</w>
-      <h>186</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>ObjectControl : MonoBehaviour
 --
@@ -24,9 +24,7 @@ UI commands:
 startBuild(String name)
 makeUnit(int IDbuilding, String name): bool
 &gt;returns false if ID was not availbe or no building
-&gt;do Action?
-
-&gt;change resources!</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -57,7 +55,7 @@ Update() ..most things done here
       <x>1446</x>
       <y>1134</y>
       <w>156</w>
-      <h>324</h>
+      <h>336</h>
     </coordinates>
     <panel_attributes>[abstract] IngameObject
 --
@@ -68,6 +66,7 @@ _-IDflow: int_
 -HP,maxHP: int
 -fraction: int (0=neutral;1=player)
 -selectReact: SelectReact
+-actionBeh: ActionBehaviour
 -actions: new ActionMatrix()
 -workerUnits: int
 -minimapPlane: GameObject
@@ -106,7 +105,8 @@ heartbeat(float): void
     <panel_attributes>*MainCamera object*
 fontsize=18
 --
-bg=orange</panel_attributes>
+bg=orange
+layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -129,13 +129,14 @@ list</panel_attributes>
       <x>1458</x>
       <y>930</y>
       <w>138</w>
-      <h>144</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>IO_Building
 --
 -processingLine: Produceline
 --
-setPreview(): void
+setPreview(int fraction,bool): void
+changePreview(bool): void
 abortBuild(): void
 build(): void
 finishedBuild(): void
@@ -177,9 +178,9 @@ animations &amp; methods:
     <id>UMLClass</id>
     <coordinates>
       <x>1620</x>
-      <y>942</y>
+      <y>930</y>
       <w>138</w>
-      <h>114</h>
+      <h>126</h>
     </coordinates>
     <panel_attributes>IO_Neutral
 --
@@ -197,13 +198,13 @@ animations:
     <id>Relation</id>
     <coordinates>
       <x>1518</x>
-      <y>1068</y>
+      <y>1074</y>
       <w>42</w>
-      <h>78</h>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 type of</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -229,15 +230,16 @@ type of</panel_attributes>
 fontsize=18
 --
 bg=gray
-</panel_attributes>
+
+layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1836</x>
+      <x>1878</x>
       <y>420</y>
-      <w>240</w>
+      <w>264</w>
       <h>258</h>
     </coordinates>
     <panel_attributes>_SelectionControl_
@@ -275,12 +277,12 @@ selectSameObjectInView(IngameObject)
     <coordinates>
       <x>1764</x>
       <y>438</y>
-      <w>84</w>
+      <w>126</w>
       <h>114</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;..
 static ref.</panel_attributes>
-    <additional_attributes>120.0;20.0;10.0;20.0;10.0;170.0</additional_attributes>
+    <additional_attributes>190.0;20.0;10.0;20.0;10.0;170.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -297,18 +299,16 @@ key variables: bool
 _inputMod: InputModul.getInstance()_
 --
 Update()
-&gt; checks key inputs
-
-layer=1</panel_attributes>
+&gt; checks key inputs</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1848</x>
-      <y>762</y>
-      <w>162</w>
-      <h>132</h>
+      <x>1872</x>
+      <y>864</y>
+      <w>258</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>SelectReact : MonoBehaviour
 --
@@ -324,47 +324,35 @@ deselect()
 OnBecameInvisible()
 OnBecameVisible()
 &gt;add/remove to/from selection.inView
-</panel_attributes>
+[doesn't work currently]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>1596</x>
-      <y>888</y>
-      <w>288</w>
-      <h>282</h>
+      <y>1146</y>
+      <w>252</w>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>lt=-&gt;&gt;&gt;
-copy</panel_attributes>
-    <additional_attributes>10.0;450.0;460.0;450.0;460.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1872</x>
-      <y>894</y>
-      <w>54</w>
-      <h>738</h>
-    </coordinates>
-    <panel_attributes>lt=&gt;-&gt;&gt;&gt;
-to highest
-    parent
-</panel_attributes>
-    <additional_attributes>10.0;10.0;20.0;40.0;20.0;1210.0</additional_attributes>
+    <panel_attributes>lt=-
+copy the MonoBehaviour's
+to it's Unity Object</panel_attributes>
+    <additional_attributes>10.0;20.0;400.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1830</x>
-      <y>1620</y>
+      <x>1860</x>
+      <y>840</y>
       <w>282</w>
-      <h>228</h>
+      <h>666</h>
     </coordinates>
     <panel_attributes>*Unity IngameObject's*
 fontsize=16
 --
-bg=orange</panel_attributes>
+bg=orange
+layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -376,9 +364,7 @@ bg=orange</panel_attributes>
       <h>30</h>
     </coordinates>
     <panel_attributes>Class of each object
-prefix: IOb_;IOu_;IOn_
-
-layer=1</panel_attributes>
+prefix: IOb_;IOu_;IOn_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -496,15 +482,13 @@ has an</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1356</x>
+      <x>1350</x>
       <y>768</y>
-      <w>144</w>
+      <w>156</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>Actions
-prefix: Abl_;Acom_;Aup_;Are_;Acr
-
-layer=1</panel_attributes>
+prefix: Abl_;Acom_;Aup_;Are_;Acr</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -756,7 +740,7 @@ getColor(int 4): Color
       <w>174</w>
       <h>102</h>
     </coordinates>
-    <panel_attributes>Research System
+    <panel_attributes>Research/Update System
 (seperate for each fraction)
 fg=red
 --
@@ -799,9 +783,9 @@ _getInstance(): InputModul_
     <id>UMLClass</id>
     <coordinates>
       <x>858</x>
-      <y>546</y>
+      <y>540</y>
       <w>156</w>
-      <h>150</h>
+      <h>156</h>
     </coordinates>
     <panel_attributes>ActionMatrix
 --
@@ -954,7 +938,7 @@ set modifiers / factors</panel_attributes>
       <x>972</x>
       <y>1026</y>
       <w>186</w>
-      <h>78</h>
+      <h>84</h>
     </coordinates>
     <panel_attributes>Produceline
 --
@@ -977,7 +961,7 @@ removeItem(IngameItem: void</panel_attributes>
     <panel_attributes>lt=&lt;&lt;-&gt;&gt;
 fg=red
 connect to one class
-(PlayerControl)
+(FractionControl)
 (adjust method names!)</panel_attributes>
     <additional_attributes>10.0;20.0;710.0;20.0</additional_attributes>
   </element>
@@ -1000,7 +984,7 @@ uses</panel_attributes>
     <coordinates>
       <x>1644</x>
       <y>1278</y>
-      <w>222</w>
+      <w>186</w>
       <h>78</h>
     </coordinates>
     <panel_attributes>PlaneFollow : MonoBehaviour
@@ -1017,13 +1001,13 @@ its x- &amp; z-coords in a locked height (y)</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1596</x>
-      <y>1182</y>
-      <w>216</w>
-      <h>66</h>
+      <y>1176</y>
+      <w>174</w>
+      <h>72</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
+    <panel_attributes>lt=-&gt;&gt;&gt;
 create new</panel_attributes>
-    <additional_attributes>270.0;90.0;270.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;20.0;270.0;20.0;270.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1079,20 +1063,21 @@ fg=green</panel_attributes>
     <panel_attributes>*SelectionMarker (cube)*
 fontsize=18
 --
-bg=orange</panel_attributes>
+bg=orange
+layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1956</x>
+      <x>2094</x>
       <y>672</y>
       <w>60</w>
-      <h>102</h>
+      <h>204</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 commands</panel_attributes>
-    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;320.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1132,14 +1117,14 @@ controls</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1884</x>
+      <x>2028</x>
       <y>672</y>
       <w>48</w>
-      <h>102</h>
+      <h>204</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;..
 static ref.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;320.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1158,14 +1143,15 @@ static ref.</panel_attributes>
     <coordinates>
       <x>1632</x>
       <y>1236</y>
-      <w>246</w>
+      <w>210</w>
       <h>132</h>
     </coordinates>
     <panel_attributes>*Plane of each IngameObject*
 (points towards minimap camera)
 fontsize=18
 --
-bg=orange</panel_attributes>
+bg=orange
+layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1183,45 +1169,36 @@ with</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1842</x>
+      <x>1788</x>
       <y>1362</y>
-      <w>42</w>
-      <h>270</h>
+      <w>84</w>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=..&gt;
 follows
 its</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;430.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0;120.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1848</x>
-      <y>1650</y>
-      <w>246</w>
+      <x>1872</x>
+      <y>1314</y>
+      <w>258</w>
       <h>180</h>
     </coordinates>
-    <panel_attributes>ActionBehavior : MonoBehaviour
-layer=1
+    <panel_attributes>ActionBehaviour : MonoBehaviour
 --
 public connectedObject: IngameObject
+-collisions: Dictionary of all IngameObject's which had triggered
 --
-*call connectedObject.heartbeat(time)!!!*
-(currently in SelectReact)</panel_attributes>
+add/remove(IngameObject,collider): void
+
+calls connectedObject.heartbeat(time)
+
+/...for movements and attacking.../
+</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1878</x>
-      <y>1572</y>
-      <w>90</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=-&gt;&gt;&gt;
-with
-fg=blue</panel_attributes>
-    <additional_attributes>10.0;20.0;130.0;20.0;130.0;130.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1268,9 +1245,9 @@ IngameObject)</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1290</x>
-      <y>972</y>
+      <y>960</y>
       <w>486</w>
-      <h>78</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=.
 fg=green
@@ -1281,13 +1258,13 @@ fg=green
     <id>Relation</id>
     <coordinates>
       <x>1152</x>
-      <y>1068</y>
+      <y>1074</y>
       <w>354</w>
-      <h>24</h>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 has a</panel_attributes>
-    <additional_attributes>10.0;20.0;570.0;20.0;570.0;10.0</additional_attributes>
+    <additional_attributes>10.0;40.0;570.0;40.0;570.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1330,15 +1307,15 @@ adds item to produce</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1146</x>
+      <x>1152</x>
       <y>90</y>
-      <w>108</w>
+      <w>102</w>
       <h>972</h>
     </coordinates>
     <panel_attributes>lt=..&gt;
 get items to produce,
 at an IO_Building</panel_attributes>
-    <additional_attributes>10.0;1590.0;160.0;1590.0;160.0;10.0</additional_attributes>
+    <additional_attributes>10.0;1590.0;150.0;1590.0;150.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1352,18 +1329,6 @@ at an IO_Building</panel_attributes>
 fg=green
 </panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1374</x>
-      <y>1404</y>
-      <w>858</w>
-      <h>558</h>
-    </coordinates>
-    <panel_attributes>lt=.
-fg=green</panel_attributes>
-    <additional_attributes>10.0;910.0;200.0;720.0;200.0;370.0;460.0;170.0;1180.0;170.0;1410.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1407,7 +1372,7 @@ type of</panel_attributes>
     </coordinates>
     <panel_attributes>lt=.
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;120.0;610.0;120.0;610.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0;610.0;120.0;610.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1451,7 +1416,8 @@ type of</panel_attributes>
 fontsize=18
 --
 bg=gray
-</panel_attributes>
+
+layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1463,9 +1429,7 @@ bg=gray
       <h>30</h>
     </coordinates>
     <panel_attributes>Class of each Update
-prefix: IIUp_
-
-layer=1</panel_attributes>
+prefix: IIUp_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1477,9 +1441,7 @@ layer=1</panel_attributes>
       <h>30</h>
     </coordinates>
     <panel_attributes>Class of each Research
-prefix: IIRe_
-
-layer=1</panel_attributes>
+prefix: IIRe_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1509,15 +1471,14 @@ type of</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1572</x>
-      <y>1452</y>
+      <x>1596</x>
+      <y>1422</y>
       <w>288</w>
-      <h>258</h>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=..&gt;
-calls heartbeat(time)
-fg=blue</panel_attributes>
-    <additional_attributes>460.0;410.0;10.0;410.0;10.0;10.0</additional_attributes>
+calls heartbeat(time) method</panel_attributes>
+    <additional_attributes>460.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1553,13 +1514,13 @@ all data to load
       <x>1680</x>
       <y>858</y>
       <w>54</w>
-      <h>96</h>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 load
 data from
 Database</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1598,5 +1559,86 @@ fg=green
     <panel_attributes>lt=&lt;&lt;..
 ref.</panel_attributes>
     <additional_attributes>1010.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>414</y>
+      <w>30</w>
+      <h>306</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-&gt;&gt;
+fg=red
+???</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;490.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1830</x>
+      <y>978</y>
+      <w>72</w>
+      <h>348</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>100.0;560.0;100.0;400.0;10.0;400.0;10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1848</x>
+      <y>1332</y>
+      <w>306</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>lt=.
+fg=green
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>2070</x>
+      <y>1020</y>
+      <w>354</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>*collider(s)*
+fontsize=18
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2082</x>
+      <y>1044</y>
+      <w>330</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>CollideReact : MonoBehaviour
+layer=1
+--
+public connectedObject: IngameObject
+actionBeh: ActionBehaviour
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2124</x>
+      <y>1272</y>
+      <w>120</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..
+calls collider-
+methods</panel_attributes>
+    <additional_attributes>10.0;130.0;180.0;130.0;180.0;10.0</additional_attributes>
   </element>
 </diagram>

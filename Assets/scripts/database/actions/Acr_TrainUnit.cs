@@ -49,7 +49,6 @@ namespace Database{
 				//set unit in front of its building
 				Vector3 targetCoord=obj.model.transform.position+(new Vector3(obj.markerSize,0f,0f));
 				unit.setCoords(targetCoord);
-				Debug.Log(unit.type+" with ID "+unit.ID+" finished!");
 			}else{
 				Debug.Log("Called "+this.name+".finish() with wrong IO_ class!");
 			}

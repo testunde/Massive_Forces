@@ -21,24 +21,24 @@ namespace Scripts {
 		}
 		
 		//BASIC SET METHODS
-		public void addItemMarker(IngameObject item){
-			if(!tempMarker.Contains(item)){
-				tempMarker.Add(item);
+		public void addItemMarker(IngameObject obj){
+			if(!tempMarker.Contains(obj)){
+				tempMarker.Add(obj);
 				processSelect();
 			}
 		}
 		
-		public void removeItemMarker(IngameObject item){
-			tempMarker.Remove(item);
-			item.selectReact.deselect();
+		public void removeItemMarker(IngameObject obj){
+			tempMarker.Remove(obj);
+			obj.selectReact.deselect();
 			processSelect();
 		}
 		
-		public void invertItemMarker(IngameObject item){
-			if(tempMarker.Contains(item))
-				removeItemMarker(item);
+		public void invertItemMarker(IngameObject obj){
+			if(tempMarker.Contains(obj))
+				removeItemMarker(obj);
 			else
-				addItemMarker(item);
+				addItemMarker(obj);
 		}
 		
 		//ADVANCED REMOVE METHODS
@@ -81,7 +81,7 @@ namespace Scripts {
 				IngameObject Sobj=selections[0];
 				tempMarker=new List<IngameObject>(inView);
 				Debug.Log(tempMarker.Count);
-				for(int i=tempMarker.Count-1;i>=0;i--){	//#######DONT REMOVE WHEN ITERATE!!! (see above)
+				for(int i=tempMarker.Count-1;i>=0;i--){	//#######DON'T REMOVE WHEN ITERATE!!! (see above)
 					IngameObject obj=tempMarker[i];
 					if(obj.type.Equals(Sobj.type)){
 					//if((Object.ReferenceEquals(obj.GetType(),Sobj.GetType()))){

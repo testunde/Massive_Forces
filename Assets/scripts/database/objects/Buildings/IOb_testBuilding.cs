@@ -15,6 +15,7 @@ namespace Database {
 			//set ActionMatrix
 			actions[1,0]="Acr_TrainUnit,IOu_testUnit";
 			actions[1,1]="Acr_BuildBuilding,IOb_testBuilding";
+			actions[2,1]="Acr_BuildBuilding,IOb_testRoundBuilding";
 			workerUnits=2;
 		}
 	}

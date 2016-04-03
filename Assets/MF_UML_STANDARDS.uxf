@@ -25,7 +25,8 @@ everything done until this line</panel_attributes>
     <panel_attributes>*Unity objects*
 fontsize=18
 --
-bg=orange</panel_attributes>
+bg=orange
+layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -36,8 +37,7 @@ bg=orange</panel_attributes>
       <w>154</w>
       <h>63</h>
     </coordinates>
-    <panel_attributes>classes / MonoBehaviour's
-layer=1</panel_attributes>
+    <panel_attributes>classes / MonoBehaviour's</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -120,7 +120,8 @@ METHODS:
 fontsize=18
 --
 bg=gray
-</panel_attributes>
+
+layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -132,9 +133,7 @@ bg=gray
       <h>35</h>
     </coordinates>
     <panel_attributes>Class of each object
-prefix: IOb_;IOu_;IOn_
-
-layer=1</panel_attributes>
+prefix: IOb_;IOu_;IOn_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -146,9 +145,7 @@ layer=1</panel_attributes>
       <h>35</h>
     </coordinates>
     <panel_attributes>Actions
-prefix: Abl_;Acom_;Aup_;Are_;Acr
-
-layer=1</panel_attributes>
+prefix: Abl_;Acom_;Aup_;Are_;Acr</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

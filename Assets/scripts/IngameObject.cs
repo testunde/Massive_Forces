@@ -16,6 +16,7 @@ namespace Scripts {
 		public int workerUnits=0;
 		protected MinimapProjection minimap=new MinimapProjection();
 		public SelectReact selectReact;
+		public ActionBehaviour actionBeh;
 		
 		public IngameObject() : base(){
 			ID=IDflow;
@@ -39,8 +40,13 @@ namespace Scripts {
 		
 		public virtual void initModel(){
 			model=GameObject.Instantiate((GameObject)Resources.Load("blender/"+type,typeof(GameObject)));
+			
+			//copy and init MonoBehaviour scripts
 			selectReact=model.AddComponent<SelectReact>();
 			selectReact.connectedObject=this;
+			actionBeh=model.AddComponent<ActionBehaviour>();
+			actionBeh.connectedObject=this;
+			
 			SetLayerRecursively(model,9);
 			GameObject planeObj;
 			if(this is IO_Building)

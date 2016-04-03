@@ -19,6 +19,8 @@ namespace Scripts {
 					child.SetActive(false);
 				}
 			}
+			Debug.Log(type+" with ID "+ID+" finished!");
+			actionBeh.enabled=true;
 		}
 		
 		public virtual void moveTo(Vector3 coords){

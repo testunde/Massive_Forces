@@ -24,7 +24,10 @@ namespace Database{
 			building.timeRemaining=buildingClass.buildTime/(float)obj.workerUnits;
 			building.createdBy=this;
 			building.initModel();
-			building.setPreview(obj.fraction);
+			if(resources.costsAvailable(obj.fraction,buildingClass.costs))
+				building.setPreview(obj.fraction,true);
+			else
+				building.setPreview(obj.fraction,false);
 			objCtrl.startBuild(building);
 		}
 		
