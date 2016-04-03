@@ -19,7 +19,6 @@ CORE:
 -moveTo method for IO_Unit
 -attack method
 -researches & updates
--building: red preview when build gets into Building or Neutral
 -meeting point
  >production of units: place finished units in direction of the set meeting point
 

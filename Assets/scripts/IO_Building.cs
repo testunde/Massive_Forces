@@ -7,6 +7,7 @@ namespace Scripts {
 		public Produceline production=new Produceline();
 		private Material previewMat,previewNoResMat;
 		private GameObject preview;
+		public Vector3 meetingPoint;
 		
 		public IO_Building() : base(){
 			previewMat=(Material)Resources.Load("materials/buildingPreview", typeof(Material));
@@ -19,13 +20,21 @@ namespace Scripts {
 			Transform modelTr=model.transform;
 			for(int i=0;i<modelTr.childCount;i++){
 				GameObject child=modelTr.GetChild(i).gameObject;
-				if(child.name!="preview"){
-					child.SetActive(false);
-				}else{
+				if(child.name=="preview"){
 					child.SetActive(true);
-					preview=child;	//get preview model
+					preview=child;	//set preview model reference
+				}else if(child.name.StartsWith("collider")){
+					child.SetActive(true);
+					CollideReact cr=child.GetComponent<CollideReact>();
+					cr.enabled=true;
+				}else{
+					child.SetActive(false);
 				}
 			}
+			// foreach(CollideReact cr in actionBeh.colliders){
+				// cr.enabled=true;
+			// }
+			
 			//set preview material, depends on available resources
 			changePreview(available);
 		}
@@ -42,11 +51,15 @@ namespace Scripts {
 		}
 		
 		public virtual void build(){
+			//set default meetingPoint
+			Vector3 offset=new Vector3(Mathf.Sin(Mathf.Deg2Rad*model.transform.localEulerAngles.y)*markerSize*.64f,0f,
+										Mathf.Cos(Mathf.Deg2Rad*model.transform.localEulerAngles.y)*markerSize*.64f);
+			meetingPoint=model.transform.position+offset;
 			//disable preview; enable all building objects
 			Transform modelTr=model.transform;
 			for(int i=0;i<modelTr.childCount;i++){
 				GameObject child=modelTr.GetChild(i).gameObject;
-				if(child.name=="united" || child.name=="Marker"){
+				if(child.name=="united" || child.name=="Marker" || child.name.StartsWith("collider")){
 					child.SetActive(true);
 				}else{
 					child.SetActive(false);

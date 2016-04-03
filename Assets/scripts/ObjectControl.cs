@@ -10,7 +10,7 @@ namespace Scripts {
 		private static SelectionControl selection;
 		private static Res resources;
 		private MarkerControl marker;
-		private int selectState=0,buildState=0,unitState=0,initBuildingState=0;
+		private int selectState=0,buildState=0,unitState=0;
 		private float interval;
 		private int sc=0,dc;	//1-second count; double-click count
 		private string targetUnit=null;
@@ -51,7 +51,6 @@ namespace Scripts {
 			building.finishedBuild();
 			building.fraction=1;
 			buildings.Add(building);
-			initBuildingState=1;
 		}
 		
 		void Start(){
@@ -151,15 +150,16 @@ namespace Scripts {
 					sel.actions.getAction(2,1).begin();
 				}
 			}
+			if(inputMod.vDown || inputMod.rightDown){
+				IngameObject sel=selection.getIfOnlyOne();
+				if(sel!=null){
+					sel.actions.getAction(0,2).begin();
+				}
+			}
 			
 			//test building process with IOb_testBuilding: start-building
-			if(inputMod.fDown){
-				if(initBuildingState==0)
-					initBuilding();
-				else	//press f again to activate building (it's only a workaround)
-					foreach(IngameObject obj in buildings)
-						obj.actionBeh.enabled=true;
-			}
+			if(inputMod.fDown)
+				initBuilding();
 			
 			//behavior of build process
 			switch(buildState){
@@ -179,7 +179,7 @@ namespace Scripts {
 						currentBuild.setCoords(inputMod.pointer);
 					
 					//check if resources are still available and set its respective preview
-					currentBuild.changePreview(resources.costsAvailable(1,currentBuild.costs));
+					currentBuild.changePreview(resources.costsAvailable(1,currentBuild.costs) && !currentBuild.actionBeh.areNonUnits());
 					
 					if(inputMod.leftDown&&currentBuild.createdBy.create(currentBuild)){
 						buildings.Add(currentBuild);
@@ -192,7 +192,7 @@ namespace Scripts {
 							currentBuild=null;
 					}else if(inputMod.cancel){
 						//abort building process when pressed esc or mouse2
-						currentBuild.createdBy.abort(currentBuild);
+						currentBuild.abortBuild();
 						currentBuild=null;
 						buildState=0;	//set state to 99 as cancel code
 					}
@@ -220,6 +220,7 @@ namespace Scripts {
 					currentUnit.loadType(targetUnit);
 					currentUnit.initModel();
 					currentUnit.createUnit(1);
+					currentUnit.actionBeh.enabled=false;
 					unitState=2;
 					//set here the coords, so if shift and right-click is hold down it spawns at the mouse pointer
 					currentUnit.setCoords(inputMod.pointer);

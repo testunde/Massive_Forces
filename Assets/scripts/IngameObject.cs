@@ -46,6 +46,31 @@ namespace Scripts {
 			selectReact.connectedObject=this;
 			actionBeh=model.AddComponent<ActionBehaviour>();
 			actionBeh.connectedObject=this;
+			actionBeh.selectReact=selectReact;
+			for(int i=0;i<model.transform.childCount;i++){
+				GameObject child=model.transform.GetChild(i).gameObject;
+				if(child.name.StartsWith("collider")){
+					MonoBehaviour.Destroy(child.GetComponent<MeshRenderer>());
+					MeshCollider mc=child.GetComponent<MeshCollider>();
+					mc.convex=true;
+					mc.isTrigger=true;
+					CollideReact collReact=child.AddComponent<CollideReact>();
+					collReact.actionBeh=actionBeh;
+					collReact.connectedObject=this;
+					actionBeh.colliders.Add(collReact);
+					
+					//generate neutral rigidbody
+					Rigidbody rigid=child.AddComponent<Rigidbody>();
+					rigid.angularDrag=0f;
+					rigid.drag=0f;
+					rigid.useGravity=false;
+					rigid.isKinematic=false;
+					rigid.mass=0;	//TODO: if greater than 0, the player bounce extremly if he touch this cube
+					rigid.constraints=RigidbodyConstraints.FreezeAll;
+				}else if(child.name=="united"){
+				}
+			}
+			actionBeh.enabled=false;
 			
 			SetLayerRecursively(model,9);
 			GameObject planeObj;
@@ -79,7 +104,7 @@ namespace Scripts {
 		}
 		
 		public virtual void heartbeat(float time){
-			//gets called by an Updates() method of a MonoBehaviour
+			//gets called by an FixedUpdate() method of a MonoBehaviour
 		}
 	}
 }

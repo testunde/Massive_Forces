@@ -9,7 +9,7 @@ namespace Database {
 			name="testBuilding";
 			type="IOb_testRoundBuilding";
 			maxHP=2000;
-			buildTime=7f;
+			buildTime=8f;
 			markerSize=9.8f;
 			costs=new long[]{-90,-80,-20,-0};
 			//set ActionMatrix

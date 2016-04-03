@@ -24,7 +24,7 @@ namespace Database{
 			building.timeRemaining=buildingClass.buildTime/(float)obj.workerUnits;
 			building.createdBy=this;
 			building.initModel();
-			if(resources.costsAvailable(obj.fraction,buildingClass.costs))
+			if(resources.costsAvailable(obj.fraction,buildingClass.costs) && !building.actionBeh.areNonUnits())
 				building.setPreview(obj.fraction,true);
 			else
 				building.setPreview(obj.fraction,false);
@@ -34,13 +34,13 @@ namespace Database{
 		public override bool create(IngameItem item){
 			if(item is IO_Building){
 				IO_Building building=(IO_Building)item;
-				if(resources.costsAvailable(obj.fraction,buildingClass.costs)){
+				if(resources.costsAvailable(obj.fraction,buildingClass.costs) && !building.actionBeh.areNonUnits()){
 					production.addItem(building);
 					resources.changeBy(obj.fraction,buildingClass.costs);
 					building.build();
 					return true;
 				}else{
-					Debug.Log("Not enough resources!");
+					Debug.Log("Not enough resources or IngameObject blocks build process!");
 				}
 			}else{
 				Debug.Log("Called "+this.name+".create() with wrong IO_ class!");

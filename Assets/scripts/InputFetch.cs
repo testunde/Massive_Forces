@@ -25,6 +25,7 @@ namespace Scripts {
 			inputMod.tDown=Input.GetKeyDown(KeyCode.T);
 			inputMod.gDown=Input.GetKeyDown(KeyCode.G);
 			inputMod.hDown=Input.GetKeyDown(KeyCode.H);
+			inputMod.vDown=Input.GetKeyDown(KeyCode.V);
 			inputMod.cancel=Input.GetButtonDown("Cancel");
 		}
 	}

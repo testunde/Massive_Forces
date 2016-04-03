@@ -84,7 +84,7 @@ setCoords(Vector3): void
 rotateTo(Vector3): void (only y-axis)
 deleteModel(): void
 heartbeat(float): void
-&gt;called by an Update() method
+&gt;called by an FixedUpdate() method
 
 *remember that [4] is the amount*
 *of resource types!*
@@ -332,13 +332,13 @@ OnBecameVisible()
     <coordinates>
       <x>1596</x>
       <y>1146</y>
-      <w>252</w>
+      <w>366</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>lt=-
+    <panel_attributes>lt=-&gt;&gt;&gt;
 copy the MonoBehaviour's
 to it's Unity Object</panel_attributes>
-    <additional_attributes>10.0;20.0;400.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;590.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
@@ -1192,11 +1192,14 @@ its</panel_attributes>
 public connectedObject: IngameObject
 -collisions: Dictionary of all IngameObject's which had triggered
 --
-add/remove(IngameObject,collider): void
+addCollision(IngameObject,collider): void
+removeCollision(IngameObject,collider): void
+areNonUnits(): bool
+&gt;true if Buildings or Neutrals are in collision list
 
 calls connectedObject.heartbeat(time)
 
-/...for movements and attacking.../
+*/...for movements and attacking.../*
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1600,7 +1603,7 @@ fg=green
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>2070</x>
+      <x>1938</x>
       <y>1020</y>
       <w>354</w>
       <h>270</h>
@@ -1614,7 +1617,7 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2082</x>
+      <x>1950</x>
       <y>1044</y>
       <w>330</w>
       <h>234</h>
@@ -1634,11 +1637,24 @@ actionBeh: ActionBehaviour
       <x>2124</x>
       <y>1272</y>
       <w>120</w>
-      <h>96</h>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 calls collider-
 methods</panel_attributes>
-    <additional_attributes>10.0;130.0;180.0;130.0;180.0;10.0</additional_attributes>
+    <additional_attributes>10.0;150.0;180.0;150.0;180.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>1104</y>
+      <w>348</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=..&gt;
+calls decreaseTime(time)
+with heartbeat(time) method</panel_attributes>
+    <additional_attributes>560.0;220.0;10.0;220.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

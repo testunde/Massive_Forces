@@ -47,8 +47,9 @@ namespace Database{
 				unit.initModel();
 				unit.createUnit(obj.fraction);
 				//set unit in front of its building
-				Vector3 targetCoord=obj.model.transform.position+(new Vector3(obj.markerSize,0f,0f));
-				unit.setCoords(targetCoord);
+				Vector3 offset=new Vector3(Mathf.Sin(Mathf.Deg2Rad*obj.model.transform.localEulerAngles.y)*obj.markerSize*.64f,0f,
+											Mathf.Cos(Mathf.Deg2Rad*obj.model.transform.localEulerAngles.y)*obj.markerSize*.64f);
+				unit.setCoords(obj.model.transform.position+offset);
 			}else{
 				Debug.Log("Called "+this.name+".finish() with wrong IO_ class!");
 			}
