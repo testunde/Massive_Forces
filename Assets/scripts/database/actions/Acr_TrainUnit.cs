@@ -8,7 +8,7 @@ namespace Database{
 		
 		public Acr_TrainUnit(string targetUnit) : base(){
 			this.unitClass=(IO_Database)System.Activator.CreateInstance(System.Type.GetType("Database."+targetUnit));
-			this.name="Train "+unitClass.name;
+			this.name="train "+unitClass.name;
 			this.costs=unitClass.costs;
 			//set icon
 		}
@@ -47,9 +47,12 @@ namespace Database{
 				unit.initModel();
 				unit.createUnit(obj.fraction);
 				//set unit in front of its building
-				Vector3 offset=new Vector3(Mathf.Sin(Mathf.Deg2Rad*obj.model.transform.localEulerAngles.y)*obj.markerSize*.64f,0f,
-											Mathf.Cos(Mathf.Deg2Rad*obj.model.transform.localEulerAngles.y)*obj.markerSize*.64f);
+				Vector3 nonY=Vector3.right+Vector3.forward;
+				float factor=(obj.markerSize*.64f)/Vector3.Distance(Vector3.Scale(obj.model.transform.position,nonY),Vector3.Scale(obj.meetingPoint,nonY));
+				Vector3 offset=new Vector3((obj.meetingPoint.x-obj.model.transform.position.x)*factor,0f,
+								(obj.meetingPoint.z-obj.model.transform.position.z)*factor);
 				unit.setCoords(obj.model.transform.position+offset);
+				unit.setTargetPos(obj.meetingPoint);
 			}else{
 				Debug.Log("Called "+this.name+".finish() with wrong IO_ class!");
 			}

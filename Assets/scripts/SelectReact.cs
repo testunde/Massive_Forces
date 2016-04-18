@@ -8,14 +8,15 @@ namespace Scripts {
 		public IngameObject connectedObject;
 		private bool selected=false;
 		// private Projector proj;
-		private GameObject mark;
+		private GameObject selIndicator,targetMark;
 		private Material markerMat;
 		
 		void Start(){
 			selection=SelectionControl.getInstance();
 			// createProjector();
-			markerMat=(Material)Resources.Load("materials/SelectionMarkerObj", typeof(Material));
-			createMarker();
+			if(targetMark==null)
+				createTargetMarker();
+			createSelIndicator();
 		}
 		
 		void OnDisable(){
@@ -26,7 +27,11 @@ namespace Scripts {
 		public void select(){
 			if(!selected){
 				// proj.enabled=true;
-				mark.GetComponent<MeshRenderer>().enabled=true;
+				selIndicator.GetComponent<MeshRenderer>().enabled=true;
+				if(connectedObject.meetingPoint!=null){
+					moveTargetMarkerModel();
+					targetMark.GetComponent<MeshRenderer>().enabled=true;
+				}
 				selected=true;
 			}
 		}
@@ -34,13 +39,20 @@ namespace Scripts {
 		public void deselect(){
 			if(selected){
 				// proj.enabled=false;
-				mark.GetComponent<MeshRenderer>().enabled=false;
+				selIndicator.GetComponent<MeshRenderer>().enabled=false;
+				targetMark.GetComponent<MeshRenderer>().enabled=false;
 				selected=false;
 			}
 		}
 		
 		public bool isSelected(){
 			return selected;
+		}
+		
+		public void moveTargetMarkerModel(){
+			if(targetMark==null)
+				createTargetMarker();
+			targetMark.transform.position=connectedObject.meetingPoint;
 		}
 		
 		// private void createProjector(){
@@ -59,17 +71,26 @@ namespace Scripts {
 			// proj.material=(Material)Resources.Load("materials/SelectionMarker");
 		// }
 		
-		private void createMarker(){
-			mark=GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			mark.GetComponent<MeshRenderer>().enabled=false;
-			Destroy(mark.GetComponent<SphereCollider>());
-			mark.name="Marker";
-			mark.transform.parent=gameObject.transform;
-			mark.transform.localEulerAngles=new Vector3(0f,0f,0f);
-			mark.transform.localPosition=new Vector3(0f,0f,0f);
-			mark.GetComponent<Renderer>().material=markerMat;
+		private void createSelIndicator(){
+			selIndicator=GameObject.CreatePrimitive(PrimitiveType.Sphere);
+			selIndicator.GetComponent<MeshRenderer>().enabled=false;
+			Destroy(selIndicator.GetComponent<SphereCollider>());
+			selIndicator.name="selection indicator";
+			selIndicator.transform.parent=gameObject.transform;
+			selIndicator.transform.localEulerAngles=new Vector3(0f,0f,0f);
+			selIndicator.transform.localPosition=new Vector3(0f,0f,0f);
+			selIndicator.GetComponent<Renderer>().material=markerMat;
 			float width=connectedObject.markerSize;
-			mark.transform.localScale=new Vector3(width,width/2f,width);
+			selIndicator.transform.localScale=new Vector3(width,width/2f,width);
+		}
+		
+		private void createTargetMarker(){
+			targetMark=GameObject.Instantiate((GameObject)Resources.Load("blender/MeetingPoint",typeof(GameObject)));
+			targetMark.GetComponent<MeshRenderer>().enabled=false;
+			Destroy(targetMark.GetComponent<Collider>());
+			targetMark.name="target marker (meeting point) of ID "+connectedObject.ID;
+			markerMat=(Material)Resources.Load("materials/SelectionMarkerObj", typeof(Material));
+			targetMark.GetComponent<Renderer>().material=markerMat;
 		}
 		
 		void OnBecameVisible(){

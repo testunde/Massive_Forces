@@ -14,7 +14,7 @@ namespace Database {
 		public int workerUnits=0;
 		
 		public IO_Database(){
-			actions=new string[ActionMatrix.width,ActionMatrix.heigth];
+			actions=new string[ActionMatrix.width,ActionMatrix.height];
 		}
 	}
 }

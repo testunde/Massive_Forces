@@ -150,10 +150,19 @@ namespace Scripts {
 					sel.actions.getAction(2,1).begin();
 				}
 			}
-			if(inputMod.vDown || inputMod.rightDown){
+			if(inputMod.vDown){
 				IngameObject sel=selection.getIfOnlyOne();
 				if(sel!=null){
-					sel.actions.getAction(0,2).begin();
+					sel.actions.getAction(3,2).begin();
+				}
+			}
+			if(inputMod.rightDown&&buildState==0&&selectState==0&&unitState==0){
+				IngameObject sel=selection.getIfOnlyOne();
+				if(sel!=null){
+					if(sel is IO_Building)
+						((Database.Acom_SetMeetPoint)sel.actions.getAction(3,2)).setPoint(inputMod.pointer);
+					else if(sel is IO_Unit)
+						((Database.Acom_Move)sel.actions.getAction(3,2)).setPoint(inputMod.pointer);
 				}
 			}
 			

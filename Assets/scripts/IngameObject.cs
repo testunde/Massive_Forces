@@ -13,10 +13,12 @@ namespace Scripts {
 		public int fraction;
 		public float markerSize;
 		public ActionMatrix actions;
+		public string[,] standardActions=new string[ActionMatrix.width,ActionMatrix.height];
 		public int workerUnits=0;
 		protected MinimapProjection minimap=new MinimapProjection();
 		public SelectReact selectReact;
 		public ActionBehaviour actionBeh;
+		public Vector3 meetingPoint;
 		
 		public IngameObject() : base(){
 			ID=IDflow;
@@ -30,12 +32,21 @@ namespace Scripts {
 			this.buildTime=type.buildTime;
 			this.markerSize=type.markerSize;
 			this.costs=type.costs;
-			this.actions=new ActionMatrix(this,type.actions);
+			this.actions=new ActionMatrix(this,applyActions(type.actions));
 			this.workerUnits=type.workerUnits;
 		}
-		
 		public virtual void loadType(string type){
 			loadType((Database.IO_Database)System.Activator.CreateInstance(System.Type.GetType("Database."+type)));
+		}
+		private string[,] applyActions(string[,] actions){
+			for(int i=0;i<actions.GetLength(0);i++){
+				for(int j=0;j<actions.GetLength(1);j++){
+					if(actions[i,j]==null){
+						actions[i,j]=standardActions[i,j];
+					}
+				}
+			}
+			return actions;
 		}
 		
 		public virtual void initModel(){
@@ -67,7 +78,6 @@ namespace Scripts {
 					rigid.isKinematic=false;
 					rigid.mass=0;	//TODO: if greater than 0, the player bounce extremly if he touch this cube
 					rigid.constraints=RigidbodyConstraints.FreezeAll;
-				}else if(child.name=="united"){
 				}
 			}
 			actionBeh.enabled=false;
@@ -95,7 +105,14 @@ namespace Scripts {
 		
 		public virtual void rotateTo(Vector3 coords){
 			Vector3 targetRot=new Vector3(coords.x,model.transform.position.y,coords.z);
+			//only rotate with the y axis
 			model.transform.LookAt(targetRot,Vector3.up);
+		}
+		
+		//other tasks for IO_Unit's and IO_Building's
+		public virtual void setTargetPos(Vector3 coords){
+			this.meetingPoint=coords;
+			this.selectReact.moveTargetMarkerModel();
 		}
 		
 		public virtual void deleteModel(){

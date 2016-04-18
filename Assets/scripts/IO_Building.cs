@@ -7,11 +7,11 @@ namespace Scripts {
 		public Produceline production=new Produceline();
 		private Material previewMat,previewNoResMat;
 		private GameObject preview;
-		public Vector3 meetingPoint;
 		
 		public IO_Building() : base(){
 			previewMat=(Material)Resources.Load("materials/buildingPreview", typeof(Material));
 			previewNoResMat=(Material)Resources.Load("materials/buildingPreviewNoRes", typeof(Material));
+			standardActions[3,2]="Acom_SetMeetPoint";
 		}
 		
 		public virtual void setPreview(int frac,bool available){
@@ -31,9 +31,6 @@ namespace Scripts {
 					child.SetActive(false);
 				}
 			}
-			// foreach(CollideReact cr in actionBeh.colliders){
-				// cr.enabled=true;
-			// }
 			
 			//set preview material, depends on available resources
 			changePreview(available);

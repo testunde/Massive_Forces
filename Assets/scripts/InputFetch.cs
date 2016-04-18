@@ -21,10 +21,11 @@ namespace Scripts {
 			inputMod.shiftHold=Input.GetKey(KeyCode.LeftShift);
 			inputMod.ctrlHold=Input.GetKey(KeyCode.LeftControl);
 			inputMod.fDown=Input.GetKeyDown(KeyCode.F);
-			inputMod.rDown=Input.GetKeyDown(KeyCode.R);
-			inputMod.tDown=Input.GetKeyDown(KeyCode.T);
 			inputMod.gDown=Input.GetKeyDown(KeyCode.G);
 			inputMod.hDown=Input.GetKeyDown(KeyCode.H);
+			inputMod.mDown=Input.GetKeyDown(KeyCode.M);
+			inputMod.rDown=Input.GetKeyDown(KeyCode.R);
+			inputMod.tDown=Input.GetKeyDown(KeyCode.T);
 			inputMod.vDown=Input.GetKeyDown(KeyCode.V);
 			inputMod.cancel=Input.GetButtonDown("Cancel");
 		}

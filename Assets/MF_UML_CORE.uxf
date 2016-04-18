@@ -53,9 +53,9 @@ Update() ..most things done here
     <id>UMLClass</id>
     <coordinates>
       <x>1446</x>
-      <y>1134</y>
+      <y>1116</y>
       <w>156</w>
-      <h>336</h>
+      <h>360</h>
     </coordinates>
     <panel_attributes>[abstract] IngameObject
 --
@@ -68,8 +68,10 @@ _-IDflow: int_
 -selectReact: SelectReact
 -actionBeh: ActionBehaviour
 -actions: new ActionMatrix()
+-standardActions: string[,] (for defaults)
 -workerUnits: int
 -minimapPlane: GameObject
+-meetingPOint: Vector3
 --
 IngameObject()
   ID=IDflow
@@ -82,6 +84,7 @@ initModel(): void
 &gt;set the Unity object
 setCoords(Vector3): void
 rotateTo(Vector3): void (only y-axis)
+setTargetPos(Vector3): void
 deleteModel(): void
 heartbeat(float): void
 &gt;called by an FixedUpdate() method
@@ -200,11 +203,11 @@ animations:
       <x>1518</x>
       <y>1074</y>
       <w>42</w>
-      <h>72</h>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 type of</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -308,7 +311,7 @@ Update()
       <x>1872</x>
       <y>864</y>
       <w>258</w>
-      <h>144</h>
+      <h>156</h>
     </coordinates>
     <panel_attributes>SelectReact : MonoBehaviour
 --
@@ -320,6 +323,7 @@ select()
 deselect()
 &gt;turn sphere on/off
 &gt;set MinimapProjection
+moveTargetMarkerModel(): void
 
 OnBecameInvisible()
 OnBecameVisible()
@@ -1147,7 +1151,7 @@ static ref.</panel_attributes>
       <h>132</h>
     </coordinates>
     <panel_attributes>*Plane of each IngameObject*
-(points towards minimap camera)
+(points up to minimap camera)
 fontsize=18
 --
 bg=orange
@@ -1375,7 +1379,7 @@ type of</panel_attributes>
     </coordinates>
     <panel_attributes>lt=.
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;120.0;610.0;120.0;610.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0;610.0;120.0;610.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1604,7 +1608,7 @@ fg=green
     <id>UMLPackage</id>
     <coordinates>
       <x>1938</x>
-      <y>1020</y>
+      <y>1032</y>
       <w>354</w>
       <h>270</h>
     </coordinates>
@@ -1618,7 +1622,7 @@ bg=orange</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1950</x>
-      <y>1044</y>
+      <y>1056</y>
       <w>330</w>
       <h>234</h>
     </coordinates>
@@ -1635,14 +1639,14 @@ actionBeh: ActionBehaviour
     <id>Relation</id>
     <coordinates>
       <x>2124</x>
-      <y>1272</y>
+      <y>1296</y>
       <w>120</w>
-      <h>108</h>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 calls collider-
 methods</panel_attributes>
-    <additional_attributes>10.0;150.0;180.0;150.0;180.0;10.0</additional_attributes>
+    <additional_attributes>10.0;110.0;180.0;110.0;180.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>

@@ -4,12 +4,12 @@ using Scripts;
 
 namespace Scripts {
 	public class ActionMatrix {
-		public static int width=5,heigth=3;
+		public static int width=5,height=3;
 		private IngameObject obj=null;
 		private Action[,] matrix;
 		
 		public ActionMatrix(){
-			matrix=new Action[width,heigth];
+			matrix=new Action[width,height];
 			
 			//fill with Abl_Empty
 			Action empty=new Database.Abl_Empty();
@@ -48,7 +48,7 @@ namespace Scripts {
 		}
 		
 		public Action[,] getMatrixCopy(){
-			Action[,] result=new Action[width,heigth];
+			Action[,] result=new Action[width,height];
 			for(int i=0;i<result.GetLength(0);i++){
 				for(int j=0;j<result.GetLength(1);j++){
 					result[i,j]=matrix[i,j];
@@ -63,7 +63,7 @@ namespace Scripts {
 		
 		public void setMatrix(Action[,] actions){
 			//send a hint if the given matrix is bigger than the defined dimensions
-			if(!(actions.GetLength(0)<=width&&actions.GetLength(1)<=heigth))
+			if(!(actions.GetLength(0)<=width&&actions.GetLength(1)<=height))
 				Debug.Log("ActionMatrix is too big! ["+this.obj.name+"]");
 			
 			for(int i=0;i<actions.GetLength(0);i++){

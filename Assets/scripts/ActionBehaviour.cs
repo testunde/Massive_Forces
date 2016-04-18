@@ -50,6 +50,7 @@ namespace Scripts {
 			}
 		}
 		
+		//check-method for collision
 		public bool areNonUnits(){
 			bool result=false;
 			foreach(IngameObject obj in collisions.Keys){

@@ -6,8 +6,7 @@ namespace Database{
 	public class Acom_Move : A_Command {
 		private Vector3 target;
 		
-		public Acom_Move(Vector3 target) : base(){
-			this.target=target;
+		public Acom_Move() : base(){
 			this.name="move to";
 		}
 		
@@ -16,11 +15,17 @@ namespace Database{
 		}
 		
 		public override void abort(IngameItem item){
-			
+			//remove meeting point
 		}
 		
 		public override void finish(IngameItem item){
-			
+			//remove meeting point
+		}
+		
+		public void setPoint(Vector3 coords){
+			this.target=coords;
+			obj.setTargetPos(coords);
+			begin();
 		}
 	}
 }
