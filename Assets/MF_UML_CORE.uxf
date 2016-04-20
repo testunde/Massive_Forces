@@ -744,7 +744,7 @@ getColor(int 4): Color
       <w>174</w>
       <h>102</h>
     </coordinates>
-    <panel_attributes>Research/Update System
+    <panel_attributes>Research System
 (seperate for each fraction)
 fg=red
 --
@@ -1393,7 +1393,8 @@ type of</panel_attributes>
 --
 
 --
-</panel_attributes>
+
+*for each IO_Building*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1408,7 +1409,8 @@ type of</panel_attributes>
 --
 
 --
-</panel_attributes>
+
+*for each fraction*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1566,19 +1568,6 @@ fg=green
     <panel_attributes>lt=&lt;&lt;..
 ref.</panel_attributes>
     <additional_attributes>1010.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>450</x>
-      <y>414</y>
-      <w>30</w>
-      <h>306</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-&gt;&gt;
-fg=red
-???</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;490.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>

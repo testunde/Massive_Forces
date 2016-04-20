@@ -15,6 +15,7 @@ ModelImporter:
     100014: preview
     100016: united
     100018: collider
+    100020: Base
     400000: Cube
     400002: Cylinder
     400004: Cylinder_001
@@ -25,6 +26,7 @@ ModelImporter:
     400014: preview
     400016: united
     400018: collider
+    400020: Base
     2300000: Cube
     2300002: Cylinder
     2300004: Cylinder_001
@@ -34,6 +36,7 @@ ModelImporter:
     2300012: preview
     2300014: united
     2300016: collider
+    2300018: Base
     3300000: Cube
     3300002: Cylinder
     3300004: Cylinder_001
@@ -43,6 +46,7 @@ ModelImporter:
     3300012: preview
     3300014: united
     3300016: collider
+    3300018: Base
     4300000: Torus
     4300002: Cylinder_003
     4300004: Cylinder_002
@@ -52,6 +56,7 @@ ModelImporter:
     4300012: preview
     4300014: united
     4300016: collider
+    4300018: Base
     6400000: Cube
     6400002: Cylinder
     6400004: Cylinder_001
@@ -61,6 +66,7 @@ ModelImporter:
     6400012: preview
     6400014: united
     6400016: collider
+    6400018: Base
     7400000: Default Take
     9500000: //RootNode
   materials:

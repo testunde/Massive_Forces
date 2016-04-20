@@ -11,32 +11,44 @@ ModelImporter:
     100006: preview
     100008: united
     100010: collider
+    100012: Base
+    100014: Cylinder
     400000: Cone
     400002: Cone_001
     400004: //RootNode
     400006: preview
     400008: united
     400010: collider
+    400012: Base
+    400014: Cylinder
     2300000: Cone
     2300002: Cone_001
     2300004: preview
     2300006: united
     2300008: collider
+    2300010: Base
+    2300012: Cylinder
     3300000: Cone
     3300002: Cone_001
     3300004: preview
     3300006: united
     3300008: collider
+    3300010: Base
+    3300012: Cylinder
     4300000: united
     4300002: preview
     4300004: Cone_001
     4300006: Cone
     4300008: collider
+    4300010: Base
+    4300012: Cylinder
     6400000: Cone
     6400002: Cone_001
     6400004: preview
     6400006: united
     6400008: collider
+    6400010: Base
+    6400012: Cylinder
     7400000: Default Take
     9500000: //RootNode
   materials:

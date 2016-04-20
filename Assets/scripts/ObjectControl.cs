@@ -128,14 +128,15 @@ namespace Scripts {
 			dc++;
 			
 			if(inputMod.tDown){
-				IngameObject sel=selection.getIfOnlyOne();
-				if(sel!=null){
+				if(selection.areOnlyOneType()!=null){
 					int k=1;
 					//create several units if shift is hold down
 					if(inputMod.shiftHold)
 						k=5;
-					for(int i=0;i<k;i++)
-						sel.actions.getAction(1,0).begin();
+					foreach(IngameObject sel in selection.getSelectedObjects()){
+						for(int i=0;i<k;i++)
+							sel.actions.getAction(1,0).begin();
+					}
 				}
 			}
 			if(inputMod.gDown){
@@ -157,12 +158,13 @@ namespace Scripts {
 				}
 			}
 			if(inputMod.rightDown&&buildState==0&&selectState==0&&unitState==0){
-				IngameObject sel=selection.getIfOnlyOne();
-				if(sel!=null){
-					if(sel is IO_Building)
-						((Database.Acom_SetMeetPoint)sel.actions.getAction(3,2)).setPoint(inputMod.pointer);
-					else if(sel is IO_Unit)
-						((Database.Acom_Move)sel.actions.getAction(3,2)).setPoint(inputMod.pointer);
+				if(selection.areOnlyBuildings() || selection.areOnlyUnits()){
+					foreach(IngameObject sel in selection.getSelectedObjects()){
+						if(sel is IO_Building)
+							((Database.Acom_SetMeetPoint)sel.actions.getAction(3,2)).setPoint(inputMod.pointer);
+						else if(sel is IO_Unit)
+							((Database.Acom_Move)sel.actions.getAction(3,2)).setPoint(inputMod.pointer);
+					}
 				}
 			}
 			

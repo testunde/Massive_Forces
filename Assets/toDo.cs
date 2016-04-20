@@ -1,5 +1,6 @@
 ﻿/* to do list & ideas
 
+IDEAS:
 you can choose every unit and change to its FPS view to control it
 routing: a*
 fog of war
@@ -17,11 +18,13 @@ CORE:
 (>use ray to prevent short deselection gap when click on selected object)
 -selection: double click > leaveSameObjectsSelected(...) [deactivated: methods don't work :( ]
 -show current meetingpoint on minimap?
--production of units: replace unit if it gets set into another IO_Building or IO_Neutral
+-production of units:	> replace unit if it gets set into another IO_Building or IO_Neutral
+						> if several equal buildings are selected, its only possible to produce units!
+-set meeting point/move: complete Action classes for use from the ActionMatrix (and not right click)
 -moveTo method for IO_Unit
 -attack method
+-shortcut system (e.g.: ctrl+1)
 -researches & updates
--meeting point: ability to set point if several units/buildings are selected
 
 
 Documentation.cs:

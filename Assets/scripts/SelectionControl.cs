@@ -155,6 +155,20 @@ namespace Scripts {
 			return result;
 		}
 		
+		public string areOnlyOneType(){
+			string type=null;
+			foreach(IngameObject obj in selections){
+				if(type==null)
+					type=obj.type;
+				
+				if(!(obj.type.Equals(type))){
+					type=null;
+					break;
+				}
+			}
+			return type;
+		}
+		
 		public int isOnlyOneFraction(){	//TO USE!
 			int result=selections[0].fraction;
 			foreach(IngameObject obj in selections){
