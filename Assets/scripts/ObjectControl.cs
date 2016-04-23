@@ -8,7 +8,7 @@ namespace Scripts {
 	public class ObjectControl : MonoBehaviour {
 		private static InputModul inputMod;
 		private static SelectionControl selection;
-		private static Res resources;
+		private static FractionControl frCtrl;
 		private MarkerControl marker;
 		private int selectState=0,buildState=0,unitState=0;
 		private float interval;
@@ -56,7 +56,7 @@ namespace Scripts {
 		void Start(){
 			inputMod=InputModul.getInstance();
 			selection=SelectionControl.getInstance();
-			resources=Res.getInstance();
+			frCtrl=FractionControl.getInstance();
 			marker=GameObject.Find("SelectionMarker").GetComponent<MarkerControl>();
 			//to prevent the first click as a double click
 			interval=1/Time.deltaTime;
@@ -127,6 +127,20 @@ namespace Scripts {
 			}
 			dc++;
 			
+			//print current ActionMatrix
+			if(inputMod.cDown){
+				IngameObject sel=selection.getIfOnlyOne();
+				if(sel!=null){
+					for(int i=0;i<ActionMatrix.height;i++){
+						string temp="";
+						for(int j=0;j<ActionMatrix.width;j++){
+							temp+=j+"."+i+">"+sel.actions.getAction(j,i).name+" | ";
+						}
+						Debug.Log(temp);
+					}
+				}
+			}
+			
 			if(inputMod.tDown){
 				if(selection.areOnlyOneType()!=null){
 					int k=1;
@@ -151,10 +165,16 @@ namespace Scripts {
 					sel.actions.getAction(2,1).begin();
 				}
 			}
-			if(inputMod.vDown){
+			if(inputMod.mDown){
 				IngameObject sel=selection.getIfOnlyOne();
 				if(sel!=null){
 					sel.actions.getAction(3,2).begin();
+				}
+			}
+			if(inputMod.vDown){
+				IngameObject sel=selection.getIfOnlyOne();
+				if(sel!=null){
+					sel.actions.getAction(0,2).begin();
 				}
 			}
 			if(inputMod.rightDown&&buildState==0&&selectState==0&&unitState==0){
@@ -190,7 +210,7 @@ namespace Scripts {
 						currentBuild.setCoords(inputMod.pointer);
 					
 					//check if resources are still available and set its respective preview
-					currentBuild.changePreview(resources.costsAvailable(1,currentBuild.costs) && !currentBuild.actionBeh.areNonUnits());
+					currentBuild.changePreview(frCtrl.RSC_costsAvailable(1,currentBuild.costs) && !currentBuild.actionBeh.areNonUnits());
 					
 					if(inputMod.leftDown&&currentBuild.createdBy.create(currentBuild)){
 						buildings.Add(currentBuild);
@@ -243,9 +263,9 @@ namespace Scripts {
 					else
 						currentUnit.setCoords(inputMod.pointer);
 					
-					if(inputMod.leftDown&&resources.costsAvailable(1,currentUnit.costs)){
+					if(inputMod.leftDown&&frCtrl.RSC_costsAvailable(1,currentUnit.costs)){
 						units.Add(currentUnit);
-						resources.changeBy(1,currentUnit.costs);	//set resources
+						frCtrl.RSC_changeBy(1,currentUnit.costs);	//set resources
 						currentUnit.actionBeh.enabled=true;
 						//repeat if shift is hold while clicked
 						if(inputMod.shiftHold)

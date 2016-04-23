@@ -3,11 +3,11 @@ using System.Collections;
 using Scripts;
 
 namespace Scripts{
-	public abstract class A_Research : Action {
-		protected new IO_Building obj=null;	//only IO_Building's can do researches
+	public abstract class A_Upgrade : Action {
+		protected new IO_Building obj=null;	//only IO_Building's can do upgrades
 		
-		public A_Research() : base(){
-			this.name="A_Research";
+		public A_Upgrade() : base(){
+			this.name="A_Upgrade";
 		}
 		
 		//override because obj is now an IO_Building type

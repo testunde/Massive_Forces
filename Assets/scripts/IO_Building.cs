@@ -64,6 +64,7 @@ namespace Scripts {
 			}
 			actionBeh.enabled=true;
 			//PLAY BUILD ANIMATION
+			//add HP
 		}
 		
 		public virtual void finishedBuild(){

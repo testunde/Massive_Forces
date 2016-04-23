@@ -13,7 +13,7 @@ namespace Database {
 			markerSize=9.8f;
 			costs=new long[]{-90,-80,-20,-0};
 			//set ActionMatrix
-			actions[3,2]="Acom_SetMeetPoint";
+			actions[0,2]="Are_DoResearch,IIRe_testResearch";
 			workerUnits=1;
 		}
 	}

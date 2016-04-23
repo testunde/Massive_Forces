@@ -20,11 +20,13 @@ CORE:
 -show current meetingpoint on minimap?
 -production of units:	> replace unit if it gets set into another IO_Building or IO_Neutral
 						> if several equal buildings are selected, its only possible to produce units!
+-building: add HP within build process
 -set meeting point/move: complete Action classes for use from the ActionMatrix (and not right click)
+-meeting point: several movement calls if shift is hold down to do move actions
 -moveTo method for IO_Unit
 -attack method
 -shortcut system (e.g.: ctrl+1)
--researches & updates
+-research system (how to handle/set factors?)
 
 
 Documentation.cs:

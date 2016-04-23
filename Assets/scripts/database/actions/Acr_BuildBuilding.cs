@@ -24,7 +24,7 @@ namespace Database{
 			building.timeRemaining=buildingClass.buildTime/(float)obj.workerUnits;
 			building.createdBy=this;
 			building.initModel();
-			if(resources.costsAvailable(obj.fraction,buildingClass.costs) && !building.actionBeh.areNonUnits())
+			if(frCtrl.RSC_costsAvailable(obj.fraction,buildingClass.costs) && !building.actionBeh.areNonUnits())
 				building.setPreview(obj.fraction,true);
 			else
 				building.setPreview(obj.fraction,false);
@@ -34,9 +34,9 @@ namespace Database{
 		public override bool create(IngameItem item){
 			if(item is IO_Building){
 				IO_Building building=(IO_Building)item;
-				if(resources.costsAvailable(obj.fraction,buildingClass.costs) && !building.actionBeh.areNonUnits()){
+				if(frCtrl.RSC_costsAvailable(obj.fraction,buildingClass.costs) && !building.actionBeh.areNonUnits()){
 					production.addItem(building);
-					resources.changeBy(obj.fraction,buildingClass.costs);
+					frCtrl.RSC_changeBy(obj.fraction,buildingClass.costs);
 					building.build();
 					return true;
 				}else{
@@ -51,7 +51,7 @@ namespace Database{
 		public override void abort(IngameItem item){
 			if(item is IO_Building){
 				IO_Building building=(IO_Building)item;
-				resources.changeBy(obj.fraction,building.costs,true);
+				frCtrl.RSC_changeBy(obj.fraction,building.costs,true);
 				building.abortBuild();
 			}else{
 				Debug.Log("Called "+this.name+".abort() with wrong IO_ class!");

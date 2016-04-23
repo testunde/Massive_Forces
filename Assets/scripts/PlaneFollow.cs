@@ -5,7 +5,7 @@ using Scripts;
 
 namespace Scripts {
 	public class PlaneFollow : MonoBehaviour {
-		private static Res resources;
+		private static FractionControl frCtrl;
 		private IngameObject connectedObject;
 		private bool isBuilding;
 		private GameObject cam;	//to set this minimap-"dot" for the cam
@@ -14,7 +14,7 @@ namespace Scripts {
 		private float offset=0f;
 		
 		void Start(){
-			resources=Res.getInstance();
+			frCtrl=FractionControl.getInstance();
 			colorMat=new Material(Shader.Find("Transparent/Diffuse"));
 			render.material=colorMat;
 		}
@@ -62,7 +62,7 @@ namespace Scripts {
 				if(connectedObject.selectReact.isSelected())	//check if selected
 					colorMat.color=Color.white;
 				else
-					colorMat.color=resources.getColor(connectedObject.fraction);
+					colorMat.color=frCtrl.getColor(connectedObject.fraction);
 				
 				if(isBuilding)
 					transform.localEulerAngles=new Vector3(-90f,connectedObject.model.transform.localEulerAngles.y+90f,0f);

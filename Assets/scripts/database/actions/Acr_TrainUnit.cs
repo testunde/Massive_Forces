@@ -19,13 +19,13 @@ namespace Database{
 		}
 		
 		public override void begin(){
-			if(resources.costsAvailable(obj.fraction,unitClass.costs)){
+			if(frCtrl.RSC_costsAvailable(obj.fraction,unitClass.costs)){
 				IO_Unit unit=new IO_Unit();
 				unit.loadType(unitClass);
 				unit.timeRemaining=unitClass.buildTime/(float)obj.workerUnits;
 				unit.createdBy=this;
 				production.addItem(unit);
-				resources.changeBy(obj.fraction,unitClass.costs);
+				frCtrl.RSC_changeBy(obj.fraction,unitClass.costs);
 			}else{
 				Debug.Log("Not enough resources!");
 			}
@@ -34,7 +34,7 @@ namespace Database{
 		public override void abort(IngameItem item){
 			if(item is IO_Unit){
 				IO_Unit unit=(IO_Unit)item;
-				resources.changeBy(obj.fraction,unit.costs,true);
+				frCtrl.RSC_changeBy(obj.fraction,unit.costs,true);
 				unit.deleteModel();
 			}else{
 				Debug.Log("Called "+this.name+".abort() with wrong IO_ class!");

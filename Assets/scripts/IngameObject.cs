@@ -9,7 +9,7 @@ namespace Scripts {
 		public string type;
 		public GameObject model;
 		public PlaneFollow plane;
-		public int HP,maxHP;
+		public int HP,maxHP,damage;
 		public int fraction;
 		public float markerSize;
 		public ActionMatrix actions;
@@ -29,6 +29,7 @@ namespace Scripts {
 			this.name=type.name;
 			this.type=type.type;
 			this.maxHP=type.maxHP;
+			this.damage=type.damage;
 			this.buildTime=type.buildTime;
 			this.markerSize=type.markerSize;
 			this.costs=type.costs;

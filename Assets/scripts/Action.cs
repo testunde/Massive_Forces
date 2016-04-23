@@ -5,7 +5,7 @@ using Scripts;
 namespace Scripts {
 	public abstract class Action {
 		protected IngameObject obj=null;	//IngameObject which contains this Action
-		protected Res resources;
+		protected FractionControl frCtrl;
 		protected Produceline production=null;
 		protected ObjectControl objCtrl;
 		public string name;
@@ -14,7 +14,7 @@ namespace Scripts {
 		public bool disabled=false;
 		
 		public Action(){
-			this.resources=Res.getInstance();
+			this.frCtrl=FractionControl.getInstance();
 			this.costs=new long[]{0,0,0,0};
 			this.objCtrl=GameObject.Find("MainCamera").GetComponent<ObjectControl>();
 		}

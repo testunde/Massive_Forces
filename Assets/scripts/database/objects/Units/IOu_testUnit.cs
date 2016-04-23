@@ -9,6 +9,7 @@ namespace Database {
 			name="testUnit";
 			type="IOu_testUnit";
 			maxHP=100;
+			damage=10;
 			buildTime=2f;
 			markerSize=1.9f;
 			costs=new long[]{-2,-2,-0,-0};

@@ -20,6 +20,7 @@ namespace Scripts {
 					child.SetActive(false);
 				}
 			}
+			HP=maxHP;
 			Debug.Log(type+" with ID "+ID+" finished!");
 			actionBeh.enabled=true;
 		}

@@ -20,6 +20,7 @@ namespace Scripts {
 			inputMod.rightUp=Input.GetButtonUp("Fire2");
 			inputMod.shiftHold=Input.GetKey(KeyCode.LeftShift);
 			inputMod.ctrlHold=Input.GetKey(KeyCode.LeftControl);
+			inputMod.cDown=Input.GetKeyDown(KeyCode.C);
 			inputMod.fDown=Input.GetKeyDown(KeyCode.F);
 			inputMod.gDown=Input.GetKeyDown(KeyCode.G);
 			inputMod.hDown=Input.GetKeyDown(KeyCode.H);
