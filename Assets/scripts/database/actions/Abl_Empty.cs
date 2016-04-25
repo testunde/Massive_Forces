@@ -7,7 +7,6 @@ namespace Database{
 		
 		public Abl_Empty() : base(){
 			this.name="";
-			this.disabled=true;
 		}
 	}
 }

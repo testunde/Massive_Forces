@@ -6,6 +6,7 @@ namespace Database{
 	public class IIUp_testUpgrade : II_Upgrade {
 		
 		public IIUp_testUpgrade() : base(){
+			this.type="IIUp_testUpgrade";
 			this.name="IIUp_testUpgrade";
 			this.buildTime=3f;
 			this.costs=new long[]{-5,-5,-3,-0};

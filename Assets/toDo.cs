@@ -11,6 +11,8 @@ game statistics at the end of a game
 second selection mode (classic window dragging)
 (buildings build itself up, but it can speed up with worker units)
 buildings with worker units, which collect resources and build buildings
+researches only to new units (but old units can manually be upgraded to new values)
+units have energy, wich can create together a larger unit
 
 CORE:
 -lags on camera?
@@ -26,7 +28,7 @@ CORE:
 -moveTo method for IO_Unit
 -attack method
 -shortcut system (e.g.: ctrl+1)
--research system (how to handle/set factors?)
+-bug: u can do actions while build preview process
 
 
 Documentation.cs:

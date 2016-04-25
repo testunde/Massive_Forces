@@ -11,7 +11,6 @@ namespace Scripts {
 		public string name;
 		public float time=0f;
 		public long[] costs;
-		public bool disabled=false;
 		
 		public Action(){
 			this.frCtrl=FractionControl.getInstance();
@@ -28,7 +27,7 @@ namespace Scripts {
 		//put Action in Produceline when time>0
 		public abstract void begin();
 		
-		//e.g. create Unity objects
+		//e.g. create Unity objects (returns true if succeed, false otherwise)
 		public virtual bool create(IngameItem item){
 			return false;
 		}
@@ -38,5 +37,16 @@ namespace Scripts {
 		
 		//e.g. set modifiers or factors
 		public abstract void finish(IngameItem item);
+		
+		//check if Action is available (e.g. not enough resources available)
+		public virtual bool isAvailable(){
+			return frCtrl.RSC_costsAvailable(obj.fraction,costs);
+		}
+		
+		//check if Action is possible again (e.g. finished researches cannot be done again)
+		//HINT: if this returns false, REPLACE THIS ACTION WITH >>A_EMPTY<< !!
+		public virtual bool isDoable(){ //doable=machbar
+			return true;
+		}
 	}
 }

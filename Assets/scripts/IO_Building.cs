@@ -9,14 +9,14 @@ namespace Scripts {
 		private GameObject preview;
 		
 		public IO_Building() : base(){
+			this.type="IO_Building";
 			previewMat=(Material)Resources.Load("materials/buildingPreview", typeof(Material));
 			previewNoResMat=(Material)Resources.Load("materials/buildingPreviewNoRes", typeof(Material));
 			standardActions[3,2]="Acom_SetMeetPoint";
 		}
 		
-		public virtual void setPreview(int frac,bool available){
+		public virtual void setPreview(bool available){
 			//disable all non-preview objects
-			fraction=frac;
 			Transform modelTr=model.transform;
 			for(int i=0;i<modelTr.childCount;i++){
 				GameObject child=modelTr.GetChild(i).gameObject;

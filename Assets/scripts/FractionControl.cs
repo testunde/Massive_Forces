@@ -13,20 +13,31 @@ namespace Scripts {
 		private long[,] RSC_maxRes;
 		private string[] RSC_names;
 		//REA (researches):
-		public float testUnitHP=0f;
+		public float[] testUnitHP;
 		
 		private FractionControl(){
-			RSC_res=new long[f,RSC_a];
-			RSC_maxRes=new long[f,RSC_a];
-			RSC_names=new string[]{"Res0","Res1","Res2","Res3"};
-			colors=new Color[f];
+			colors=new Color[8+1];	//8 is maximum of possible players
 			colors[0]=Color.black;	//neutral fraction has no colors: color.clear for transparent
 			colors[1]=Color.green;	//player colors...
 			colors[2]=Color.red;
-			//colors[...]=...
+			colors[3]=Color.blue;
+			colors[4]=Color.yellow;
+			colors[5]=new Color(1f,.416f,0f);	//orange
+			colors[6]=Color.magenta;
+			colors[7]=Color.cyan;	//bzw. türkis
+			colors[8]=new Color(.59f,.32f,0f);	//brown
+			
+			//RSC
+			RSC_res=new long[f,RSC_a];
+			RSC_maxRes=new long[f,RSC_a];
+			RSC_names=new string[]{"Res0","Res1","Res2","Res3"};
+			
+			//REA
+			testUnitHP=new float[f];
 			
 			//set start values
 			for(int i=0;i<f;i++){
+				//RSC
 				RSC_res[i,0]=200;
 				RSC_maxRes[i,0]=2000;
 				
@@ -38,6 +49,9 @@ namespace Scripts {
 				
 				RSC_res[i,3]=0;
 				RSC_maxRes[i,3]=500;
+				
+				//REA
+				testUnitHP[i]=1f;
 			}
 		}
 		

@@ -28,7 +28,7 @@ namespace Scripts {
 			if(!selected){
 				// proj.enabled=true;
 				selIndicator.GetComponent<MeshRenderer>().enabled=true;
-				if(connectedObject.meetingPoint!=null){
+				if(connectedObject.meetingPoint!=Vector3.zero){
 					moveTargetMarkerModel();
 					targetMark.GetComponent<MeshRenderer>().enabled=true;
 				}

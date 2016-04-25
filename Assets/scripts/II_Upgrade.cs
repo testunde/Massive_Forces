@@ -4,9 +4,10 @@ using Scripts;
 
 namespace Scripts {
 	public abstract class II_Upgrade : IngameItem{
-		public IO_Building obj;
+		public IngameObject obj;
 		
 		public II_Upgrade() : base(){
+			this.type="II_Upgrade";
 			this.name="II_Upgrade";
 		}
 		

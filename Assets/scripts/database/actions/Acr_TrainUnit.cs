@@ -21,7 +21,7 @@ namespace Database{
 		public override void begin(){
 			if(frCtrl.RSC_costsAvailable(obj.fraction,unitClass.costs)){
 				IO_Unit unit=new IO_Unit();
-				unit.loadType(unitClass);
+				unit.loadType(unitClass,obj.fraction);
 				unit.timeRemaining=unitClass.buildTime/(float)obj.workerUnits;
 				unit.createdBy=this;
 				production.addItem(unit);
@@ -45,7 +45,7 @@ namespace Database{
 			if(item is IO_Unit){
 				IO_Unit unit=(IO_Unit)item;
 				unit.initModel();
-				unit.createUnit(obj.fraction);
+				unit.createUnit();
 				//set unit in front of its building
 				Vector3 nonY=Vector3.right+Vector3.forward;
 				float factor=(obj.markerSize*.64f)/Vector3.Distance(Vector3.Scale(obj.model.transform.position,nonY),Vector3.Scale(obj.meetingPoint,nonY));

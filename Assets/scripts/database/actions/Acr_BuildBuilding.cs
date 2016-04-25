@@ -20,14 +20,14 @@ namespace Database{
 		
 		public override void begin(){
 			IO_Building building=new IO_Building();
-			building.loadType(buildingClass);
+			building.loadType(buildingClass,obj.fraction);
 			building.timeRemaining=buildingClass.buildTime/(float)obj.workerUnits;
 			building.createdBy=this;
 			building.initModel();
 			if(frCtrl.RSC_costsAvailable(obj.fraction,buildingClass.costs) && !building.actionBeh.areNonUnits())
-				building.setPreview(obj.fraction,true);
+				building.setPreview(true);
 			else
-				building.setPreview(obj.fraction,false);
+				building.setPreview(false);
 			objCtrl.startBuild(building);
 		}
 		

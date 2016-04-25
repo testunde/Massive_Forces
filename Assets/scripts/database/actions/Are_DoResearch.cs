@@ -14,14 +14,16 @@ namespace Database{
 		}
 		
 		public override void begin(){
-			this.researchClass.obj=obj;
-			if(frCtrl.RSC_costsAvailable(obj.fraction,researchClass.costs)){
+			if(isDoable() && frCtrl.RSC_costsAvailable(obj.fraction,researchClass.costs)){
 				researchClass.timeRemaining=researchClass.buildTime;
 				researchClass.createdBy=this;
 				production.addItem(researchClass);
 				frCtrl.RSC_changeBy(obj.fraction,researchClass.costs);
 			}else{
-				Debug.Log("Not enough resources!");
+				if(!isDoable())
+					Debug.Log("Research "+name+" already done!");
+				else
+					Debug.Log("Not enough resources!");
 			}
 		}
 		
@@ -37,10 +39,14 @@ namespace Database{
 		public override void finish(IngameItem item){
 			if(item is II_Research){
 				II_Research research=(II_Research)item;
-				research.perform();
+				research.perform(obj.fraction);
 			}else{
 				Debug.Log("Called "+this.name+".finish() with wrong IO_ class!");
 			}
+		}
+		
+		public override bool isDoable(){
+			return !researchClass.isDone();
 		}
 	}
 }

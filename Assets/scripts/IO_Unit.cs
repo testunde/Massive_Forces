@@ -6,11 +6,11 @@ namespace Scripts {
 	public class IO_Unit : IngameObject {
 		
 		public IO_Unit() : base(){
+			this.type="IO_Unit";
 			standardActions[3,2]="Acom_Move";
 		}
 		
-		public virtual void createUnit(int frac){
-			fraction=frac;
+		public virtual void createUnit(){
 			Transform modelTr=model.transform;
 			for(int i=0;i<modelTr.childCount;i++){
 				GameObject child=modelTr.GetChild(i).gameObject;

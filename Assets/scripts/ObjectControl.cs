@@ -44,12 +44,11 @@ namespace Scripts {
 		
 		public void initBuilding(){	//set the frist building
 			IO_Building building=new IO_Building();
-			building.loadType("IOb_testBuilding");
+			building.loadType("IOb_testBuilding",1);
 			building.initModel();
 			building.setCoords(gameObject.GetComponent<CameraControl>().getCoordsAtXZ(new Vector3(5f,-10f,5f)));
 			building.build();
 			building.finishedBuild();
-			building.fraction=1;
 			buildings.Add(building);
 		}
 		
@@ -134,7 +133,14 @@ namespace Scripts {
 					for(int i=0;i<ActionMatrix.height;i++){
 						string temp="";
 						for(int j=0;j<ActionMatrix.width;j++){
-							temp+=j+"."+i+">"+sel.actions.getAction(j,i).name+" | ";
+							Action ac=sel.actions.getAction(j,i);
+							ac.setObject(sel);
+							string STATE="";
+							if(!ac.isAvailable())STATE+="N";
+							STATE+="A ";
+							if(!ac.isDoable())STATE+="N";
+							STATE+="DA";
+							temp+=j+"."+i+">"+ac.name+"["+STATE+"] | ";
 						}
 						Debug.Log(temp);
 					}
@@ -173,7 +179,7 @@ namespace Scripts {
 			}
 			if(inputMod.vDown){
 				IngameObject sel=selection.getIfOnlyOne();
-				if(sel!=null){
+				if(sel!=null && sel.actions.getAction(0,2).isDoable()){
 					sel.actions.getAction(0,2).begin();
 				}
 			}
@@ -248,9 +254,9 @@ namespace Scripts {
 					break;
 				case 1:	//seperat case, so its possible to repeat this state immediately
 					currentUnit=new IO_Unit();
-					currentUnit.loadType(targetUnit);
+					currentUnit.loadType(targetUnit,1);
 					currentUnit.initModel();
-					currentUnit.createUnit(1);
+					currentUnit.createUnit();
 					currentUnit.actionBeh.enabled=false;
 					unitState=2;
 					//set here the coords, so if shift and right-click is hold down it spawns at the mouse pointer

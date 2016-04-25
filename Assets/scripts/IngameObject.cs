@@ -4,16 +4,16 @@ using Scripts;
 
 namespace Scripts {
 	public abstract class IngameObject : IngameItem{
-		protected static int IDflow=1;	//0=terrain
+		protected static int IDflow=0;	//0=terrain
 		public int ID;
-		public string type;
 		public GameObject model;
 		public PlaneFollow plane;
 		public int HP,maxHP,damage;
 		public int fraction;
 		public float markerSize;
+		public float energy=0;
 		public ActionMatrix actions;
-		public string[,] standardActions=new string[ActionMatrix.width,ActionMatrix.height];
+		protected string[,] standardActions=new string[ActionMatrix.width,ActionMatrix.height];
 		public int workerUnits=0;
 		protected MinimapProjection minimap=new MinimapProjection();
 		public SelectReact selectReact;
@@ -21,11 +21,13 @@ namespace Scripts {
 		public Vector3 meetingPoint;
 		
 		public IngameObject() : base(){
-			ID=IDflow;
-			IDflow++;
+			IngameObject.IDflow++;
+			this.ID=IDflow;
+			this.type="IngameObject";
 		}
 		
-		public virtual void loadType(Database.IO_Database type){
+		public virtual void loadType(Database.IO_Database type,int frac){
+			this.fraction=frac;
 			this.name=type.name;
 			this.type=type.type;
 			this.maxHP=type.maxHP;
@@ -35,11 +37,13 @@ namespace Scripts {
 			this.costs=type.costs;
 			this.actions=new ActionMatrix(this,applyActions(type.actions));
 			this.workerUnits=type.workerUnits;
+			applyResearches();
 		}
-		public virtual void loadType(string type){
-			loadType((Database.IO_Database)System.Activator.CreateInstance(System.Type.GetType("Database."+type)));
+		public virtual void loadType(string type,int frac){
+			loadType((Database.IO_Database)System.Activator.CreateInstance(System.Type.GetType("Database."+type)),frac);
 		}
 		private string[,] applyActions(string[,] actions){
+			//so if set standards gets applied
 			for(int i=0;i<actions.GetLength(0);i++){
 				for(int j=0;j<actions.GetLength(1);j++){
 					if(actions[i,j]==null){
@@ -48,6 +52,19 @@ namespace Scripts {
 				}
 			}
 			return actions;
+		}
+		private void applyResearches(){
+			if(this is IO_Building){
+				//set values for all buildings
+			}
+			if(this is IO_Unit){
+				//set values for all units
+			}
+			
+			//set induvidual values
+			if(type.Equals("IOu_testUnit")){
+				maxHP=(int)(maxHP*frCtrl.testUnitHP[fraction]);
+			}
 		}
 		
 		public virtual void initModel(){
