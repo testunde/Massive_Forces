@@ -10,7 +10,7 @@ namespace Scripts {
 		private static SelectionControl selection;
 		private static FractionControl frCtrl;
 		private MarkerControl marker;
-		private int selectState=0,buildState=0,unitState=0;
+		public int selectState=0,buildState=0,unitState=0;
 		private float interval;
 		private int sc=0,dc;	//1-second count; double-click count
 		private string targetUnit=null;
@@ -46,7 +46,7 @@ namespace Scripts {
 			IO_Building building=new IO_Building();
 			building.loadType("IOb_testBuilding",1);
 			building.initModel();
-			building.setCoords(gameObject.GetComponent<CameraControl>().getCoordsAtXZ(new Vector3(5f,-10f,5f)));
+			building.setCoords(inputMod.getCoordsAtXZ(new Vector3(5f,-10f,5f)));
 			building.build();
 			building.finishedBuild();
 			buildings.Add(building);
@@ -186,10 +186,11 @@ namespace Scripts {
 			if(inputMod.rightDown&&buildState==0&&selectState==0&&unitState==0){
 				if(selection.areOnlyBuildings() || selection.areOnlyUnits()){
 					foreach(IngameObject sel in selection.getSelectedObjects()){
-						if(sel is IO_Building)
-							((Database.Acom_SetMeetPoint)sel.actions.getAction(3,2)).setPoint(inputMod.pointer);
-						else if(sel is IO_Unit)
-							((Database.Acom_Move)sel.actions.getAction(3,2)).setPoint(inputMod.pointer);
+						Database.Acom_SetMeetPoint ac=((Database.Acom_SetMeetPoint)sel.actions.getAction(3,2));
+						if(inputMod.shiftHold)
+							ac.addPoint(inputMod.pointer);
+						else
+							ac.setPoint(inputMod.pointer);
 					}
 				}
 			}
@@ -289,6 +290,17 @@ namespace Scripts {
 					currentUnit=null;
 					unitState=0;
 					break;
+			}
+			
+			//shortcut management
+			for(int i=0;i<10;i++){
+				if(inputMod.numDown[i]){
+					if(inputMod.shiftHold){
+						selection.setSCSlot(i);
+					}else{
+						selection.selectSCSlot(i);
+					}
+				}
 			}
 		}
 	}

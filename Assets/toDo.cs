@@ -19,16 +19,16 @@ CORE:
 -selection: click through object? (make Ray from CameraControl public)
 (>use ray to prevent short deselection gap when click on selected object)
 -selection: double click > leaveSameObjectsSelected(...) [deactivated: methods don't work :( ]
+-shortcut system: disable unity's ctrl+1 hotkey to check the shift+1 add-selections
 -show current meetingpoint on minimap?
 -production of units:	> replace unit if it gets set into another IO_Building or IO_Neutral
 						> if several equal buildings are selected, its only possible to produce units!
 -building: add HP within build process
 -set meeting point/move: complete Action classes for use from the ActionMatrix (and not right click)
 -meeting point: several movement calls if shift is hold down to do move actions
--moveTo method for IO_Unit
 -attack method
--shortcut system (e.g.: ctrl+1)
--bug: u can do actions while build preview process
+-moveTo method for IO_Unit
+-distraction when two objects collide (collisions,rigidbody,fixed joint)
 
 
 Documentation.cs:

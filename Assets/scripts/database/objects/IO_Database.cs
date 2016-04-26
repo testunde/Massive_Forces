@@ -8,6 +8,7 @@ namespace Database {
 		public string type;
 		public int maxHP;
 		public int damage=0;
+		public float maxSpeed=0f,accel=0f;
 		public float buildTime;
 		public float markerSize;
 		public long[] costs;

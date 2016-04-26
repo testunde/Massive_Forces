@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Scripts;
 
 namespace Scripts {
@@ -9,6 +10,7 @@ namespace Scripts {
 		public GameObject model;
 		public PlaneFollow plane;
 		public int HP,maxHP,damage;
+		public float maxSpeed,accel;
 		public int fraction;
 		public float markerSize;
 		public float energy=0;
@@ -18,7 +20,7 @@ namespace Scripts {
 		protected MinimapProjection minimap=new MinimapProjection();
 		public SelectReact selectReact;
 		public ActionBehaviour actionBeh;
-		public Vector3 meetingPoint;
+		public Queue<Vector3> meetingPoint=new Queue<Vector3>();
 		
 		public IngameObject() : base(){
 			IngameObject.IDflow++;
@@ -32,6 +34,8 @@ namespace Scripts {
 			this.type=type.type;
 			this.maxHP=type.maxHP;
 			this.damage=type.damage;
+			this.maxSpeed=type.maxSpeed;
+			this.accel=type.accel;
 			this.buildTime=type.buildTime;
 			this.markerSize=type.markerSize;
 			this.costs=type.costs;
@@ -129,8 +133,12 @@ namespace Scripts {
 		
 		//other tasks for IO_Unit's and IO_Building's
 		public virtual void setTargetPos(Vector3 coords){
-			this.meetingPoint=coords;
-			this.selectReact.moveTargetMarkerModel();
+			this.meetingPoint.Clear();
+			addTargetPos(coords);
+		}
+		public virtual void addTargetPos(Vector3 coords){
+			this.meetingPoint.Enqueue(coords);
+			this.selectReact.moveTargetMarkerModel(true);
 		}
 		
 		public virtual void deleteModel(){

@@ -28,10 +28,8 @@ namespace Scripts {
 			if(!selected){
 				// proj.enabled=true;
 				selIndicator.GetComponent<MeshRenderer>().enabled=true;
-				if(connectedObject.meetingPoint!=Vector3.zero){
-					moveTargetMarkerModel();
-					targetMark.GetComponent<MeshRenderer>().enabled=true;
-				}
+				if(connectedObject.meetingPoint.Count>0)
+					moveTargetMarkerModel(true);
 				selected=true;
 			}
 		}
@@ -49,10 +47,14 @@ namespace Scripts {
 			return selected;
 		}
 		
-		public void moveTargetMarkerModel(){
+		public void moveTargetMarkerModel(bool activate){
 			if(targetMark==null)
 				createTargetMarker();
-			targetMark.transform.position=connectedObject.meetingPoint;
+			Vector3 lastMP=Vector3.zero;
+			foreach(Vector3 mp in connectedObject.meetingPoint)
+				lastMP=mp;
+			targetMark.transform.position=lastMP;
+			targetMark.GetComponent<MeshRenderer>().enabled=activate;
 		}
 		
 		// private void createProjector(){

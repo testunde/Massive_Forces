@@ -10,6 +10,8 @@ namespace Database {
 			type="IOu_Tank1";
 			maxHP=250;
 			damage=25;
+			maxSpeed=2.8f;
+			accel=.5f;
 			buildTime=3f;
 			markerSize=2.8f;
 			costs=new long[]{-10,-8,-4,-0};

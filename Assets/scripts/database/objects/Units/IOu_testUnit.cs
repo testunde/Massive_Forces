@@ -10,6 +10,8 @@ namespace Database {
 			type="IOu_testUnit";
 			maxHP=100;
 			damage=10;
+			maxSpeed=6.5f;
+			accel=1f;
 			buildTime=2f;
 			markerSize=1.9f;
 			costs=new long[]{-2,-2,-0,-0};

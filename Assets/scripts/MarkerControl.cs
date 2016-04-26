@@ -22,6 +22,7 @@ namespace Scripts {
 			selObj.Clear();
 			if(!(add||remove)){
 				selection.clearList(null);
+				selection.clearTempList();
 			}else{
 				selection.copyToTemp();
 			}

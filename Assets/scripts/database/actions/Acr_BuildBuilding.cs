@@ -19,16 +19,18 @@ namespace Database{
 		}
 		
 		public override void begin(){
-			IO_Building building=new IO_Building();
-			building.loadType(buildingClass,obj.fraction);
-			building.timeRemaining=buildingClass.buildTime/(float)obj.workerUnits;
-			building.createdBy=this;
-			building.initModel();
-			if(frCtrl.RSC_costsAvailable(obj.fraction,buildingClass.costs) && !building.actionBeh.areNonUnits())
-				building.setPreview(true);
-			else
-				building.setPreview(false);
-			objCtrl.startBuild(building);
+			if(isDoable()){
+				IO_Building building=new IO_Building();
+				building.loadType(buildingClass,obj.fraction);
+				building.timeRemaining=buildingClass.buildTime/(float)obj.workerUnits;
+				building.createdBy=this;
+				building.initModel();
+				if(frCtrl.RSC_costsAvailable(obj.fraction,buildingClass.costs) && !building.actionBeh.areNonUnits())
+					building.setPreview(true);
+				else
+					building.setPreview(false);
+				objCtrl.startBuild(building);
+			}
 		}
 		
 		public override bool create(IngameItem item){
@@ -65,6 +67,10 @@ namespace Database{
 			}else{
 				Debug.Log("Called "+this.name+".finish() with wrong IO_ class!");
 			}
+		}
+		
+		public override bool isDoable(){
+			return objCtrl.buildState==0;
 		}
 	}
 }

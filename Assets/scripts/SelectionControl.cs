@@ -6,11 +6,16 @@ using Scripts;
 namespace Scripts {
 	public class SelectionControl {
 		private static SelectionControl instance=null;
+		private MarkerControl marker;
 		private List<IngameObject> selections=new List<IngameObject>();
 		public List<IngameObject> tempMarker=new List<IngameObject>();
 		public List<IngameObject> inView=new List<IngameObject>();
+		public List<IngameObject>[] shortcuts=new List<IngameObject>[10];
 		
 		private SelectionControl(){
+			marker=GameObject.Find("SelectionMarker").GetComponent<MarkerControl>();
+			for(int i=0;i<shortcuts.Length;i++)
+				shortcuts[i]=new List<IngameObject>();
 		}
 		
 		public static SelectionControl getInstance(){
@@ -24,14 +29,14 @@ namespace Scripts {
 		public void addItemMarker(IngameObject obj){
 			if(!tempMarker.Contains(obj)){
 				tempMarker.Add(obj);
-				processSelect();
+				processSelect(true);
 			}
 		}
 		
 		public void removeItemMarker(IngameObject obj){
 			tempMarker.Remove(obj);
 			obj.selectReact.deselect();
-			processSelect();
+			processSelect(true);
 		}
 		
 		public void invertItemMarker(IngameObject obj){
@@ -42,11 +47,11 @@ namespace Scripts {
 		}
 		
 		//ADVANCED REMOVE METHODS
-		private void processSelect(){
+		private void processSelect(bool check){ //set check true, if unit/building can be selected simutaneously
 			selections=new List<IngameObject>(tempMarker);
-			if(areSomeUnits())
+			if(check && areSomeUnits())
 				removeNonunits();
-			else if(areSomeBuildings())
+			else if(check && areSomeBuildings())
 				removeNonbuildings();
 			
 			foreach(IngameObject obj in selections)
@@ -193,6 +198,32 @@ namespace Scripts {
 			if(selections.Count==1)
 				result=selections[0];
 			return result;
+		}
+		
+		//SHORTCUT METHODS
+		public void setSCSlot(int slot){
+			shortcuts[slot].Clear();
+			foreach(IngameObject io in selections){
+				shortcuts[slot].Add(io);
+			}
+		}
+		
+		public void selectSCSlot(int slot){
+			if(!marker.add){
+				clearList(null);
+				clearTempList();
+			}else{
+				copyToTemp();
+			}
+			foreach(IngameObject io in shortcuts[slot]){
+				if(!tempMarker.Contains(io))
+					tempMarker.Add(io);
+			}
+			processSelect(false);
+		}
+		
+		public List<IngameObject> getSCSlot(int slot){
+			return shortcuts[slot];
 		}
 	}
 }

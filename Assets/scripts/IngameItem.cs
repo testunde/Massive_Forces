@@ -5,6 +5,7 @@ using Scripts;
 namespace Scripts {
 	public abstract class IngameItem {
 		protected static FractionControl frCtrl=FractionControl.getInstance();
+		protected static InputModul inputMod=InputModul.getInstance();
 		public string name;
 		public string type="IngameItem";
 		public float buildTime=0,timeRemaining;

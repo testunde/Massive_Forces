@@ -68,6 +68,13 @@ namespace Scripts {
 		
 		void FixedUpdate(){
 			connectedObject.heartbeat(inputMod.originalFixedDeltaTime);
+			if(connectedObject is IO_Unit){
+				IO_Unit unit=(IO_Unit)connectedObject;
+				if(unit.meetingPoint.Count>0){
+					if(!unit.moveTo(unit.meetingPoint.Peek()))
+						unit.meetingPoint.Dequeue();
+				}
+			}
 		}
 	}
 }

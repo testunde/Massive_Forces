@@ -29,6 +29,18 @@ namespace Scripts {
 			inputMod.tDown=Input.GetKeyDown(KeyCode.T);
 			inputMod.vDown=Input.GetKeyDown(KeyCode.V);
 			inputMod.cancel=Input.GetButtonDown("Cancel");
+			
+			//num keys (not numpad!)
+			inputMod.numDown[0]=Input.GetKeyDown(KeyCode.Alpha0);
+			inputMod.numDown[1]=Input.GetKeyDown(KeyCode.Alpha1);
+			inputMod.numDown[2]=Input.GetKeyDown(KeyCode.Alpha2);
+			inputMod.numDown[3]=Input.GetKeyDown(KeyCode.Alpha3);
+			inputMod.numDown[4]=Input.GetKeyDown(KeyCode.Alpha4);
+			inputMod.numDown[5]=Input.GetKeyDown(KeyCode.Alpha5);
+			inputMod.numDown[6]=Input.GetKeyDown(KeyCode.Alpha6);
+			inputMod.numDown[7]=Input.GetKeyDown(KeyCode.Alpha7);
+			inputMod.numDown[8]=Input.GetKeyDown(KeyCode.Alpha8);
+			inputMod.numDown[9]=Input.GetKeyDown(KeyCode.Alpha9);
 		}
 	}
 }

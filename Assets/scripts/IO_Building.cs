@@ -51,7 +51,8 @@ namespace Scripts {
 			//set default meetingPoint
 			Vector3 offset=new Vector3(Mathf.Sin(Mathf.Deg2Rad*model.transform.localEulerAngles.y)*markerSize*.64f,0f,
 										Mathf.Cos(Mathf.Deg2Rad*model.transform.localEulerAngles.y)*markerSize*.64f);
-			meetingPoint=model.transform.position+offset;
+			meetingPoint.Clear();
+			meetingPoint.Enqueue(model.transform.position+offset);
 			//disable preview; enable all building objects
 			Transform modelTr=model.transform;
 			for(int i=0;i<modelTr.childCount;i++){

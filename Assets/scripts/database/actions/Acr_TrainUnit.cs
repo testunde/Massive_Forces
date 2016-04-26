@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Scripts;
 
 namespace Database{
@@ -48,11 +49,12 @@ namespace Database{
 				unit.createUnit();
 				//set unit in front of its building
 				Vector3 nonY=Vector3.right+Vector3.forward;
-				float factor=(obj.markerSize*.64f)/Vector3.Distance(Vector3.Scale(obj.model.transform.position,nonY),Vector3.Scale(obj.meetingPoint,nonY));
-				Vector3 offset=new Vector3((obj.meetingPoint.x-obj.model.transform.position.x)*factor,0f,
-								(obj.meetingPoint.z-obj.model.transform.position.z)*factor);
+				Vector3 tagetMP=obj.meetingPoint.Peek();
+				float factor=(obj.markerSize*.64f)/Vector3.Distance(Vector3.Scale(obj.model.transform.position,nonY),Vector3.Scale(tagetMP,nonY));
+				Vector3 offset=new Vector3((tagetMP.x-obj.model.transform.position.x)*factor,0f,
+								(tagetMP.z-obj.model.transform.position.z)*factor);
 				unit.setCoords(obj.model.transform.position+offset);
-				unit.setTargetPos(obj.meetingPoint);
+				unit.meetingPoint=new Queue<Vector3>(obj.meetingPoint);
 			}else{
 				Debug.Log("Called "+this.name+".finish() with wrong IO_ class!");
 			}

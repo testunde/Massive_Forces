@@ -15,15 +15,6 @@ namespace Scripts {
 		private int clickCount=0;
 		private PlaneFollow plane;
 		
-		//set y-coord bolow zero! method decrement y by 1 when terrain wasn't hittet
-		public Vector3 getCoordsAtXZ(Vector3 where){
-			RaycastHit height;
-			Vector3 result=where-(new Vector3(0f,1f,0f));
-			if(Physics.Raycast(where,Vector3.up,out height)&&height.transform.Equals(terrain.transform))
-				result=height.point;
-			return result;
-		}
-		
 		void Start () {
 			inputMod=InputModul.getInstance();
 			mainCamera=gameObject;
@@ -42,8 +33,8 @@ namespace Scripts {
 		
 		void Update () {
 			//#>height identifier
-			Vector3 rayPos=new Vector3(camTr.position.x,-15f,camTr.position.z);	//raycast looks up form -15 if a collider is in the x/z coord
-			Vector3 rayPosNew=getCoordsAtXZ(rayPos);
+			Vector3 rayPos=new Vector3(camTr.position.x,-16f,camTr.position.z);	//raycast looks up from -16 if a collider is in the x/z coord
+			Vector3 rayPosNew=inputMod.getCoordsAtXZ(rayPos);
 			//Physics.Raycast NEEDED! to perform the raycast calculations; enters 'if' only if the hitted object was the terrain
 			if(rayPosNew.y>rayPos.y){
 				//#>height control and limit

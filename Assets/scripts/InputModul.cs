@@ -8,6 +8,7 @@ namespace Scripts {
 		public bool leftDown,leftUp,leftHold,rightDown,rightHold,rightUp;	//mouse keys
 		public bool shiftHold,ctrlHold,cancel;	//control keys
 		public bool cDown,fDown,gDown,hDown,mDown,rDown,tDown,vDown;	//alphabetical keys
+		public bool[] numDown=new bool[10];	//number keys (not numpad!)
 		public Vector3 pointer;
 		public float originalFixedDeltaTime;
 		public GameObject terrain;
@@ -22,6 +23,16 @@ namespace Scripts {
 				instance=new InputModul();
 			
 			return instance;
+		}
+		
+		//sets result's y to -16 when terrain wasn't hittet
+		public Vector3 getCoordsAtXZ(Vector3 where){
+			RaycastHit height;
+			Vector3 result=new Vector3(where.x,-16f,where.z);
+			if(Physics.Raycast(result,Vector3.up,out height,Mathf.Infinity,1<<8) &&
+								height.transform.Equals(terrain.transform))
+				result=height.point;
+			return result;
 		}
 	}
 }
