@@ -12,6 +12,7 @@ namespace Scripts {
 		public Vector3 pointer;
 		public float originalFixedDeltaTime;
 		public GameObject terrain;
+		public GraphXYfast graph=new GraphXYfast();
 		
 		private InputModul(){
 			pointer=new Vector3(0f,0f,0f);
@@ -33,6 +34,12 @@ namespace Scripts {
 								height.transform.Equals(terrain.transform))
 				result=height.point;
 			return result;
+		}
+		public Vector3 getCoordsAtXZ(Vector2 where){	//overload
+			return getCoordsAtXZ(new Vector3(where.x,0f,where.y));
+		}
+		public Vector3 getCoordsAtXZ(float x,float y){	//overload
+			return getCoordsAtXZ(new Vector3(x,0f,y));
 		}
 	}
 }

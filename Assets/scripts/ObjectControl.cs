@@ -60,6 +60,7 @@ namespace Scripts {
 			//to prevent the first click as a double click
 			interval=1/Time.deltaTime;
 			dc=(int)(interval*2);
+			inputMod.graph.generate(.5f);
 		}
 		
 		void Update(){

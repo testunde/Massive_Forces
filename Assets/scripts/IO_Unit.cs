@@ -38,14 +38,6 @@ namespace Scripts {
 				return true;
 			}
 			return false;
-			
-			//LATER: a* algorithm
-		}
-		
-		public override void setTargetPos(Vector3 coords){
-			base.setTargetPos(coords);
-			
-			//SET A-STAR ROUTE!
 		}
 	}
 }

@@ -137,7 +137,9 @@ namespace Scripts {
 			addTargetPos(coords);
 		}
 		public virtual void addTargetPos(Vector3 coords){
-			this.meetingPoint.Enqueue(coords);
+			List<Vector3> MPs=inputMod.graph.searchPath(model.transform.position,coords);
+			foreach(Vector3 mp in MPs)
+				this.meetingPoint.Enqueue(mp);
 			this.selectReact.moveTargetMarkerModel(true);
 		}
 		

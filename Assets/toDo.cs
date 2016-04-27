@@ -2,7 +2,6 @@
 
 IDEAS:
 you can choose every unit and change to its FPS view to control it
-routing: a*
 fog of war
 recycliong of wrecks
 idea of: energy-attached units (so other complex buildings can created with combination of these units)
@@ -27,8 +26,9 @@ CORE:
 -set meeting point/move: complete Action classes for use from the ActionMatrix (and not right click)
 -meeting point: several movement calls if shift is hold down to do move actions
 -attack method
--moveTo method for IO_Unit
 -distraction when two objects collide (collisions,rigidbody,fixed joint)
+ >graph: +only generate once at gamestart and remove nodes with each building/neutral process
+		 +performance!
 
 
 Documentation.cs:
