@@ -24,11 +24,11 @@ CORE:
 						> if several equal buildings are selected, its only possible to produce units!
 -building: add HP within build process
 -set meeting point/move: complete Action classes for use from the ActionMatrix (and not right click)
--meeting point: several movement calls if shift is hold down to do move actions
 -attack method
 -distraction when two objects collide (collisions,rigidbody,fixed joint)
  >graph: +only generate once at gamestart and remove nodes with each building/neutral process
 		 +performance!
+		 +calculation as background routine?
 
 
 Documentation.cs:
