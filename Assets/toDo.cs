@@ -26,9 +26,11 @@ CORE:
 -set meeting point/move: complete Action classes for use from the ActionMatrix (and not right click)
 -attack method
 -distraction when two objects collide (collisions,rigidbody,fixed joint)
- >graph: +only generate once at gamestart and remove nodes with each building/neutral process
-		 +performance! (JPS)
-		 +calculation as background routine?
+ >graph: +only generate graph once at gamestart and remove nodes with each building/neutral process
+		 +performance! (JPS?)
+		 +only calulate path one time if several units are selected
+		 +let unit first pre walk a faster calulateable path and calulate a* meanwhile in background
+		 [http://theory.stanford.edu/~amitp/GameProgramming/]
 
 
 Documentation.cs:

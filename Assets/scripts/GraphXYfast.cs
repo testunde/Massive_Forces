@@ -122,7 +122,7 @@ namespace Scripts {
 						break;
 					}
 					close.Add(min);
-					foreach(Tuple<int,int> s in getSuccessorNodes(min,source,target)){
+					foreach(Tuple<int,int> s in getNearbyNodes(min)){//,source,target)){
 						float eCost=h(min,s);
 						if(!(open.Contains(s) || close.Contains(s))){
 							open.Add(s);
@@ -204,6 +204,7 @@ namespace Scripts {
 				if(isValid(jumpPoint))
 					result.Add(jumpPoint);
 			}
+			parents.Clear();
 			return result;
 		}
 		
@@ -347,15 +348,17 @@ namespace Scripts {
 				y2=y1+1;
 			}
 			
-			Vector2[] pPos={nodes[x1,y1],nodes[x2,y1],nodes[x1,y2],nodes[x2,y2]};
-			Tuple<int,int>[] pN={new Tuple<int,int>(x1,y1),new Tuple<int,int>(x2,y1),new Tuple<int,int>(x1,y2),new Tuple<int,int>(x2,y2)};
 			int xFinal=-1,yFinal=-1;
-			float dist=Mathf.Infinity;
-			for(int i=0;i<pPos.Length;i++){
-				if(isValid(pPos[i]) && Vector2.Distance(nPos,pPos[i])<dist){
-					dist=Vector2.Distance(nPos,pPos[i]);
-					xFinal=pN[i].Item1;
-					yFinal=pN[i].Item2;
+			if(isValid(x1,y1) && isValid(x2,y2)){
+				Vector2[] pPos={nodes[x1,y1],nodes[x2,y1],nodes[x1,y2],nodes[x2,y2]};
+				Tuple<int,int>[] pN={new Tuple<int,int>(x1,y1),new Tuple<int,int>(x2,y1),new Tuple<int,int>(x1,y2),new Tuple<int,int>(x2,y2)};
+				float dist=Mathf.Infinity;
+				for(int i=0;i<pPos.Length;i++){
+					if(isValid(pPos[i]) && Vector2.Distance(nPos,pPos[i])<dist){
+						dist=Vector2.Distance(nPos,pPos[i]);
+						xFinal=pN[i].Item1;
+						yFinal=pN[i].Item2;
+					}
 				}
 			}
 			

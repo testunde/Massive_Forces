@@ -137,7 +137,11 @@ namespace Scripts {
 			addTargetPos(coords);
 		}
 		public virtual void addTargetPos(Vector3 coords){
-			List<Vector3> MPs=inputMod.graph.searchPath(model.transform.position,coords);
+			Vector3 startPoint=model.transform.position;
+			//so the last meeting point is used for the source of an additional pathfinding
+			foreach(Vector3 mp in this.meetingPoint)
+				startPoint=mp;
+			List<Vector3> MPs=inputMod.graph.searchPath(startPoint,coords);
 			foreach(Vector3 mp in MPs)
 				this.meetingPoint.Enqueue(mp);
 			this.selectReact.moveTargetMarkerModel(true);
