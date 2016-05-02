@@ -7,6 +7,7 @@ namespace Scripts {
 	public class GraphXYfast {
 		private static InputModul inputMod=InputModul.getInstance();
 		private Vector2[,] nodes;
+		private Dictionary<Tuple<int,int>,Tuple<int,int>> parents=new Dictionary<Tuple<int,int>,Tuple<int,int>>();
 		private List<GameObject> drawing=new List<GameObject>();
 		private float space;
 		private float xMin,yMin;	//..of possible terrain position
@@ -218,37 +219,91 @@ namespace Scripts {
 				return new Tuple<int,int>(-1,-1);
 			
 			Tuple<int,int> nextNode=new Tuple<int,int>(nX,nY);
+			Tuple<int,int> parentNode=new Tuple<int,int>(cX,cY);
 			//if target was found
 			if(target.Equals(nextNode))
-				return nextNode;
+				return setParent_ReturnChild(nextNode,parentNode);
 			
 			//diagonal case
 			if(dX!=0 && dY!=0){
 				if((isValidPos(nX-dX,nY+dY) && !isValidPos(nX-dX,nY)) || (isValidPos(nX+dX,nX-dX) && !isValidPos(nX,nY-dY)))
-					return nextNode;
+					return setParent_ReturnChild(nextNode,parentNode);
 				
 				//check in horizonal and vertical directions for forced neighbors
 				//this is a special case for diagonal direction
 				if(isValid(JPS_jump(nX,nY,dX,0,source,target)) || isValid(JPS_jump(nX,nY,0,dX,source,target)))
-					return nextNode;
+					return setParent_ReturnChild(nextNode,parentNode);
 			}else{
 				//horizonal case
 				if(dX!=0){
 					if((isValidPos(nX+dX,nY+1) && !isValidPos(nX,nY+1)) || (isValidPos(nX+dX,nY-1) && !isValidPos(nX,nY-1)))
-						return nextNode;
+						return setParent_ReturnChild(nextNode,parentNode);
 				}else{	//vertical case
 					if((isValidPos(nX+1,nY+dY) && !isValidPos(nX+1,nY)) || (isValidPos(nX-1,nY+dY) && !isValidPos(nX-1,nY)))
-						return nextNode;
+						return setParent_ReturnChild(nextNode,parentNode);
 				}
 			}
 			
 			//if forced neighbor wasn't found, try next jump point
 			return JPS_jump(nX,nY,dX,dY,source,target);
 		}
+		private Tuple<int,int> setParent_ReturnChild(Tuple<int,int> child,Tuple<int,int> parent){
+			if(parents.ContainsKey(child))
+				parents.Remove(child);
+			parents.Add(child,parent);
+			//for better if-statements
+			return child;
+		}
 		
-		private List<Tuple<int,int>> getNeighbors(Tuple<int,int> n){
-			List<Tuple<int,int> result=new List<Tuple<int,int>>();
+		private List<Tuple<int,int>> getNeighbors(Tuple<int,int> current){
+			List<Tuple<int,int>> result;
+			Tuple<int,int> parent;
 			
+			//directed pruning: can ignore most neighbors, unless forced
+			if(parents.TryGetValue(current,out parent)){
+				result=new List<Tuple<int,int>>();
+				int cX=current.Item1;
+				int cY=current.Item2;
+				int dX=(cX-parent.Item1)/Mathf.Max(Mathf.Abs(cX-parent.Item1),1);
+				int dY=(cY-parent.Item2)/Mathf.Max(Mathf.Abs(cY-parent.Item2),1);
+				
+				//search diagonally
+				if(dX!=0 && dY!=0){
+					if(isValidPos(cX,cY+dY))
+						result.Add(new Tuple<int,int>(cX,cY+dY));
+					if(isValidPos(cX+dX,cY))
+						result.Add(new Tuple<int,int>(cX+dX,cY));
+					
+					if(isValidPos(cX+dX,cY+dY))
+						result.Add(new Tuple<int,int>(cX+dX,cY+dY));
+					
+					if(isValidPos(cX-dX,cY+dY) && isValidPos(cX,cY+dY) && !isValidPos(cX-dX,cY))
+						result.Add(new Tuple<int,int>(cX-dX,cY+dY));
+					if(isValidPos(cX+dX,cY-dY) && isValidPos(cX+dX,cY) && !isValidPos(cX,cY-dY))
+						result.Add(new Tuple<int,int>(cX+dX,cY-dY));
+				}else{	//search horizonally/vertically
+					if(dX==0){
+						if(isValidPos(cX,cY+dY))
+							result.Add(new Tuple<int,int>(cX,cY+dY));
+						
+						if(isValidPos(cX+1,cY+dY) && !isValidPos(cX+1,cY))
+							result.Add(new Tuple<int,int>(cX+1,cY+dY));
+						if(isValidPos(cX-1,cY+dY) && !isValidPos(cX-1,cY))
+							result.Add(new Tuple<int,int>(cX-1,cY+dY));
+					}else{
+						if(isValidPos(cX+dX,cY))
+							result.Add(new Tuple<int,int>(cX+dX,cY));
+						
+						if(isValidPos(cX+dX,cY+1) && !isValidPos(cX,cY+1))
+							result.Add(new Tuple<int,int>(cX+dX,cY+1));
+						if(isValidPos(cX+dX,cY-1) && !isValidPos(cX,cY-1))
+							result.Add(new Tuple<int,int>(cX+dX,cY-1));
+					}
+				}
+			}else{
+				//return all neighbors
+				result=getNearbyNodes(current);
+			}
 			return result;
 		}
 		
@@ -309,7 +364,10 @@ namespace Scripts {
 		
 		//check if vector/tupel coords are valid,
 		private bool isValid(int x,int y){
-			return !(n<0 || y<0);
+			if(x<nodes.GetLength(0) && y<nodes.GetLength(1))
+				return !(x<0 || y<0);
+			else
+				return false;
 		}
 		private bool isValid(Tuple<int,int> n){	//overload
 			return isValid(n.Item1,n.Item2);
@@ -321,7 +379,10 @@ namespace Scripts {
 			return isValid(n.x,n.y);
 		}
 		private bool isValidPos(int x,int y){
-			return isValid(nodes[x,y]);
+			if(isValid(x,y))
+				return isValid(nodes[x,y]);
+			else
+				return false;
 		}
 		
 		public Vector3 getNearestNodePos(Vector3 pos){

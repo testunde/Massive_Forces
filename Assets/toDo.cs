@@ -27,7 +27,7 @@ CORE:
 -attack method
 -distraction when two objects collide (collisions,rigidbody,fixed joint)
  >graph: +only generate once at gamestart and remove nodes with each building/neutral process
-		 +performance!
+		 +performance! (JPS)
 		 +calculation as background routine?
 
 
