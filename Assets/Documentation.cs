@@ -1,4 +1,14 @@
-﻿/* Dokumentation
+﻿/*
+####
+shortcut overview
+####
+
+.
+
+
+####
+begin of documentation (german)
+####
 
 Hinweis:
 Alle mit @ markierten Variablen/Methoden sind public, können also von anderen Skripts genutzt werden!

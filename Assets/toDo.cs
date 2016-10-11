@@ -3,14 +3,14 @@
 IDEAS:
 you can choose every unit and change to its FPS view to control it
 fog of war
-recycliong of wrecks
-idea of: energy-attached units (so other complex buildings can created with combination of these units)
+recycling of wrecks
+idea of: "energy-attached units" (so other complex buildings can created with combination of these units)
 quit button: destroy user interface :D
 game statistics at the end of a game
-second selection mode (classic window dragging)
+second selection mode (classical window dragging)
 (buildings build itself up, but it can speed up with worker units)
 buildings with worker units, which collect resources and build buildings
-researches only to new units (but old units can manually be upgraded to new values)
+researches applies only to new units (but old units can manually be upgraded to new values)
 units have energy, wich can create together a larger unit
 
 CORE:
@@ -35,6 +35,7 @@ CORE:
 
 Documentation.cs:
 -add key/button/shortcut functions
+>overview of current shortcuts with its script-origin
 
 ###COMMIT CLIPBOARD###
 */
