@@ -3,7 +3,18 @@
 shortcut overview
 ####
 
-.
+WASD - move camera
+Mouse - control camera
+
+C - print current ActionMatrix
+F - IOb_testBuilding
+G - action(1,1)
+H - action(2,1)
+M - action(3,2)
+R - IOu_testUnit
+T - action(1,0)
+V - action(0,2)
+
 
 
 ####

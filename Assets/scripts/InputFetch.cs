@@ -30,7 +30,7 @@ namespace Scripts {
 			inputMod.vDown=Input.GetKeyDown(KeyCode.V);
 			inputMod.cancel=Input.GetButtonDown("Cancel");
 			
-			//num keys (not numpad!)
+			//numeral keys (not numpad!)
 			inputMod.numDown[0]=Input.GetKeyDown(KeyCode.Alpha0);
 			inputMod.numDown[1]=Input.GetKeyDown(KeyCode.Alpha1);
 			inputMod.numDown[2]=Input.GetKeyDown(KeyCode.Alpha2);

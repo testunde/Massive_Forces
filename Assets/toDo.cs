@@ -32,10 +32,5 @@ CORE:
 		 +let unit first pre walk a faster calulateable path and calulate a* meanwhile in background
 		 [http://theory.stanford.edu/~amitp/GameProgramming/]
 
-
-Documentation.cs:
--add key/button/shortcut functions
->overview of current shortcuts with its script-origin
-
 ###COMMIT CLIPBOARD###
 */
